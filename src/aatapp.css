@@ -1,16 +1,28 @@
 .aatapp-container {
-  text-align: center;
-}
-
-.aatapp-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+}
+
+.aatapp-appcard {
+  min-height: 94vh;
+  margin: 1rem;
+  align-items: center;
+  text-align: center;
+}
+
+.aatapp-tabview {
+  vertical-align: middle;
+  width: 100%;
+}
+
+.aatapp-tabpanel-content {
+  height: 88vh;
   font-size: calc(10px + 2vmin);
   color: white;
+  background-color: #282c34;
 }
 
 .aatapp-logo {
@@ -32,4 +44,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.p-tabview .p-tabview-panels {
+  padding: 0 !important;
+}
+
+.p-card .p-card-body {
+  padding: 0 !important;
+}
+
+.p-card .p-card-content {
+  padding: 0 !important;
+}
+
+.p-tabview-nav-link {
+  padding-bottom: 5px !important;
 }
