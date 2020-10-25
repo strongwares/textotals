@@ -1,0 +1,6 @@
+attic/*
+node_modules/*
+coverage/*
+build/*
+dist/*
+public/*

@@ -2,18 +2,6 @@
   text-align: center;
 }
 
-.aatapp-logo {
-  height: 40vmin;
-  pointer-events: none;
-  /* background-image: url(./assets/icons/logo.png); */
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .aatapp-logo {
-    animation: app-logo-spin infinite 20s linear;
-  }
-}
-
 .aatapp-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,6 +11,18 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.aatapp-logo {
+  height: 20vmin;
+  pointer-events: none;
+  /* background-image: url(./assets/icons/logo.png); */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aatapp-logo {
+    animation: app-logo-spin infinite 20s linear;
+  }
 }
 
 @keyframes app-logo-spin {

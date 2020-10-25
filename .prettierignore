@@ -1,0 +1,10 @@
+*.html
+node_modules/
+coverage/
+build/
+dist/
+attic/
+.eslintcache
+.eslintrc.json
+.eslintrc
+*~
