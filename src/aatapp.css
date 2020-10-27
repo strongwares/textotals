@@ -21,8 +21,16 @@
 .aatapp-tabpanel-content {
   height: 88vh;
   font-size: calc(10px + 2vmin);
-  color: white;
-  background-color: #282c34;
+  /* color: white; */
+  /* color: #282c34; */
+  /* background-color: #282c34; */
+  background-color: #e5e5f7;
+  opacity: 0.5;
+  background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
+      36px 36px,
+    linear-gradient(225deg, #444cf7 25%, transparent 25%) -18px 0/ 36px 36px,
+    linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 36px 36px,
+    linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 36px 36px;
 }
 
 .aatapp-logo {

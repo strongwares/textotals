@@ -6,9 +6,13 @@
 
 .actions-list {
   flex: 1;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .actions-input {
+  background-color: #e5e5f7;
   flex: 0;
+  width: 100%;
+  min-height: 3rem;
+  border: 2px solid #e5e5f7;
 }

@@ -20,11 +20,19 @@ function App() {
             <ActionsContainer />
           </TabPanel>
 
-          <TabPanel header="&nbsp;&nbsp;Accounts" leftIcon="pi pi-dollar">
+          <TabPanel
+            contentClassName="aatapp-tabpanel-content"
+            header="&nbsp;&nbsp;Accounts"
+            leftIcon="pi pi-folder-open"
+          >
             <AccountsContainer />
           </TabPanel>
 
-          <TabPanel header="&nbsp;&nbsp;Totals" leftIcon="pi pi-chart-line">
+          <TabPanel
+            contentClassName="aatapp-tabpanel-content"
+            header="&nbsp;&nbsp;Totals"
+            leftIcon="pi pi-chart-line"
+          >
             <TotalsContainer />
           </TabPanel>
         </TabView>
