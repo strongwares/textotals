@@ -5,7 +5,10 @@ import './actions.css';
 
 function onNewAction(action) {
   //console.log(`${action}`);
-  parser.newAction(action);
+  const rval = parser.newAction(action);
+  if (!rval.valid) {
+    console.log('invalid');
+  }
 }
 
 function ActionsContainer() {

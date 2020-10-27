@@ -3,11 +3,12 @@ class ActionParser {
     console.log(`newAction: ${action}`);
     const parsed = this.validateActionStr(action);
     console.dir(parsed);
+    return parsed;
   }
 
   validateActionStr(action) {
     let tokens;
-    const rval = {};
+    const rval = { valid: false };
     const actionStr = action.toLowerCase().replace(',', '');
 
     console.log('validateActionStr, checking action: ' + actionStr);
@@ -28,6 +29,7 @@ class ActionParser {
       console.log(tokens);
       rval.op = tokens[1];
       rval.amount = tokens[2];
+      rval.valid = true;
     } else if (groupOpRe.test(actionStr)) {
       tokens = groupOpRe.exec(actionStr);
       console.log('validateActionStr, op group prefix, tokens:');
@@ -35,6 +37,7 @@ class ActionParser {
       rval.group = this._upperCaseEachWordify(tokens[1]);
       rval.op = tokens[2];
       rval.amount = tokens[3];
+      rval.valid = true;
     } else if (linkRe.test(actionStr)) {
       tokens = linkRe.exec(actionStr);
       console.log('validateActionStr, link no group, tokens:');
@@ -42,6 +45,7 @@ class ActionParser {
       console.log(tokens);
       rval.op = tokens[1];
       rval.linkId = tokens[2];
+      rval.valid = true;
     } else if (groupLinkRe.test(actionStr)) {
       tokens = groupLinkRe.exec(actionStr);
       console.log('validateActionStr, link group prefix, tokens:');
@@ -50,6 +54,7 @@ class ActionParser {
       rval.group = this._upperCaseEachWordify(tokens[1]);
       rval.op = tokens[2];
       rval.linkId = tokens[3];
+      rval.valid = true;
     }
     console.log('validateActionStr, rval:');
     console.log(rval);
