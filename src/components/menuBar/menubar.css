@@ -1,6 +1,6 @@
 .menubar-container {
   margin: 0;
-  max-height: 2rem;
-  min-height: 2rem;
-  height: 2rem;
+  max-height: 40px;
+  min-height: 40px;
+  height: 40px;
 }

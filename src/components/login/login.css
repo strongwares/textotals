@@ -1,0 +1,6 @@
+.loginform-container {
+  background-color: #444cf7;
+  height: calc(100vh - 7rem);
+  min-height: calc(100vh - 7rem);
+  border-radius: 1%;
+}
