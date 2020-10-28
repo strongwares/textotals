@@ -1,14 +1,17 @@
 import React from 'react';
 import ActionInput from './ActionInput';
-import parser from '../../lib/ActionParser';
+// import { parseAction } from '../../lib/actionParser';
 import './actions.css';
 
-function onNewAction(action) {
-  //console.log(`${action}`);
-  const rval = parser.newAction(action);
+function onNewAction(actionObj) {
+  console.log('action obj:');
+  console.table(actionObj);
+  /*
+  const rval = parser.actionStrToValidObject(action);
   if (!rval.valid) {
     console.log('invalid');
   }
+  */
 }
 
 function ActionsContainer() {
