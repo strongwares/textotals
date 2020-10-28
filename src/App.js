@@ -3,6 +3,7 @@ import { Card } from 'primereact/card';
 import { TabPanel, TabView } from 'primereact/tabview';
 import AccountsContainer from './components/accounts/AccountsContainer';
 import ActionsContainer from './components/actions/ActionsContainer';
+import MenuBar from './components/menuBar';
 import TotalsContainer from './components/totals/TotalsContainer';
 import './aatapp.css';
 
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="aatapp-container">
       <Card className="aatapp-appcard p-shadow-5">
+        <MenuBar />
         <TabView className="aatapp-tabview">
           <TabPanel
             contentClassName="aatapp-tabpanel-content"

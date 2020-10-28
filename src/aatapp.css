@@ -7,7 +7,6 @@
 }
 
 .aatapp-appcard {
-  min-height: 94vh;
   margin: 1rem;
   align-items: center;
   text-align: center;
@@ -19,11 +18,12 @@
 }
 
 .aatapp-tabpanel-content {
-  height: 88vh;
+  height: calc(100vh - 6rem);
   font-size: calc(10px + 2vmin);
   /* color: white; */
   /* color: #282c34; */
   /* background-color: #282c34; */
+  border: 2px solid blue;
   background-color: #e5e5f7;
   opacity: 0.5;
   background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
@@ -68,4 +68,9 @@
 
 .p-tabview-nav-link {
   padding-bottom: 5px !important;
+}
+
+.p-menubar {
+  padding: 0px !important;
+  margin-left: 5px;
 }
