@@ -12,8 +12,12 @@ import './aatapp.css';
 function App() {
   const [showHelp, setShowHelp] = useState(false);
   const showHelpRef = useRef(showHelp);
+  const [tabNumber, setTabNumber] = useState(0);
+  const tabNumberRef = useRef(tabNumber);
+
   useEffect(() => {
     showHelpRef.current = showHelp;
+    tabNumberRef.current = tabNumber;
   });
 
   const onMenuItemClick = (item) => {
@@ -21,8 +25,12 @@ function App() {
       return;
     }
     if (item === 'help') {
-      setShowHelp(showHelpRef.current);
+      setShowHelp(!showHelpRef.current);
     }
+  };
+
+  const onTabChange = ({ index }) => {
+    setTabNumber(index);
   };
 
   return (
@@ -43,18 +51,22 @@ function App() {
           }}
           visible={showHelp}
         >
-          <HelpOverlay />
+          <HelpOverlay tabNumber={tabNumberRef.current} />
         </Sidebar>
       )}
       <Card className="aatapp-appcard p-shadow-5">
         <MenuBar onItemClick={onMenuItemClick} />
-        <TabView className="aatapp-tabview">
+        <TabView
+          activeIndex={tabNumber}
+          onTabChange={onTabChange}
+          className="aatapp-tabview"
+        >
           <TabPanel
             contentClassName="aatapp-tabpanel-content"
             header="&nbsp;&nbsp;Action"
             leftIcon="pi pi-comments"
           >
-            <ActionsContainer />
+            <ActionsContainer onHelp={() => setShowHelp(true)} />
           </TabPanel>
 
           <TabPanel

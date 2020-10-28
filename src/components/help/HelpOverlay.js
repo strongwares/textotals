@@ -1,7 +1,7 @@
 import React from 'react';
 import './help.css';
 
-const HelpOverlay = () => (
+const HelpOverlay = ({ tabNumber }) => (
   <div
     className="helpoverlay-container"
     style={{
@@ -9,7 +9,7 @@ const HelpOverlay = () => (
       width: '100%',
     }}
   >
-    Hello help
+    <h1>{`Hello help for tab ${tabNumber}`}</h1>
   </div>
 );
 

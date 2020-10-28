@@ -4,7 +4,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { parseAction } from '../../lib/actionParser';
 
-function ActionInput({ onInput = () => {} }) {
+function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
   const [isValid, setIsValid] = useState(true);
   let curVal;
 
@@ -13,6 +13,12 @@ function ActionInput({ onInput = () => {} }) {
     if (!actionStr || actionStr.length === 0) {
       return;
     }
+
+    if (actionStr.toLowerCase() === 'help') {
+      onHelp();
+      return;
+    }
+
     const actionObj = parseAction(actionStr);
     if (!actionObj || !actionObj.isValid) {
       console.log(`invalid input action string: ${actionStr}`);

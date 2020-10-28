@@ -14,11 +14,11 @@ function onNewAction(actionObj) {
   */
 }
 
-function ActionsContainer() {
+function ActionsContainer({ onHelp }) {
   return (
     <div className="actions-container">
       <div className="actions-list"></div>
-      <ActionInput onInput={onNewAction} />
+      <ActionInput onInput={onNewAction} onHelp={onHelp} />
     </div>
   );
 }
