@@ -10,6 +10,7 @@ class MenuBar extends Component {
     this.items = [
       {
         icon: 'pi pi-question-circle',
+        command: () => props.onItemClick('help'),
       },
     ];
   }
