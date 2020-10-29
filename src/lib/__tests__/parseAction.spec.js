@@ -1,4 +1,4 @@
-import { parseAction } from '../actionParser';
+import { parseAction } from '../parseAction';
 
 describe('action parser', function () {
   it('should parse add actions', function () {
