@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PrimeReact from 'primereact/utils';
 import App from './App';
+import { initPersistence } from './lib/action/persistenceUtils';
+import localStoragePersister from './persistence/localStorage/LocalStoragePersister';
 // import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -10,6 +12,8 @@ import 'primeflex/primeflex.css';
 import './index.css';
 
 PrimeReact.ripple = true;
+
+initPersistence(localStoragePersister);
 
 ReactDOM.render(
   <React.StrictMode>

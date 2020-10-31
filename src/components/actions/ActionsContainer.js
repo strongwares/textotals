@@ -1,25 +1,26 @@
 import React, { useContext } from 'react';
 import ActionInput from './ActionInput';
 import AuthContext from '../../auth/context';
-// import { parseAction } from '../../lib/actionParser';
+import handleAction from '../../lib/action/handleAction';
 import './actions.css';
 
-function onNewAction(user, actionObj) {
-  // console.log(`user: ${user.name}, action op: ${actionObj.op}`);
-  /*
-  const rval = parser.actionStrToValidObject(action);
-  if (!rval.valid) {
-    console.log('invalid');
+function onNewAction(userObj, actionObj) {
+  try {
+    handleAction(userObj, actionObj);
+  } catch (error) {
+    console.error(`ActionsContainer error handling action: ${error}`);
   }
-  */
 }
 
 function ActionsContainer({ onHelp }) {
-  const { user } = useContext(AuthContext);
+  const { userObj } = useContext(AuthContext);
   return (
     <div className="actions-container">
       <div className="actions-list"></div>
-      <ActionInput onInput={(a) => onNewAction(user, a)} onHelp={onHelp} />
+      <ActionInput
+        onInput={(actionObj) => onNewAction(userObj, actionObj)}
+        onHelp={onHelp}
+      />
     </div>
   );
 }

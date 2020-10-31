@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { parseAction } from '../../lib/parseAction';
+import parseAction from '../../lib/action/parseAction';
 
 function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
   const [isValid, setIsValid] = useState(true);

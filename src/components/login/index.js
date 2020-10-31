@@ -12,8 +12,7 @@ const LoginForm = () => {
   const [emailValue, setEmail] = useState('');
   const [nameValue, setName] = useState('');
   const onLoginClick = (name, email, password) => {
-    // setUser({ name, email, password });
-    onLogin({ name, email, password });
+    onLogin({ userId: name.replace(' ', '_'), name, email, password });
   };
   return (
     <div className="loginform-container">
