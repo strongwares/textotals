@@ -5,17 +5,15 @@ import { TabPanel, TabView } from 'primereact/tabview';
 import AccountsContainer from './components/accounts/AccountsContainer';
 import ActionsContainer from './components/actions/ActionsContainer';
 import AuthContext from './auth/context';
-import LoginForm from './components/login';
+import authStorage from './auth/storage';
 import HelpOverlay from './components/help/HelpOverlay';
 import MenuBar from './components/menuBar';
 import TotalsContainer from './components/totals/TotalsContainer';
+import WelcomeScreen from './components/welcome';
 import './aatapp.css';
 
-let fakeUser = 1;
-fakeUser = undefined;
-
 function App() {
-  const [user, setUser] = useState(fakeUser);
+  const [user, setUser] = useState();
   const [showHelp, setShowHelp] = useState(false);
   const showHelpRef = useRef(showHelp);
   const [tabNumber, setTabNumber] = useState(0);
@@ -24,7 +22,16 @@ function App() {
   useEffect(() => {
     showHelpRef.current = showHelp;
     tabNumberRef.current = tabNumber;
-  });
+
+    if (!user) {
+      const savedUser = authStorage.getUser();
+      if (savedUser) {
+        setUser(savedUser);
+      }
+    }
+
+    // authStorage.removeToken();
+  }, [showHelp, tabNumber, user]);
 
   const onMenuItemClick = (item) => {
     if (!item) {
@@ -63,8 +70,10 @@ function App() {
         )}
         <Card className="aatapp-appcard p-shadow-5">
           <MenuBar onItemClick={onMenuItemClick} />
-          {!user && <LoginForm />}
-          {user && (
+
+          {!user && <WelcomeScreen />}
+
+          {!!user && (
             <>
               <TabView
                 activeIndex={tabNumber}

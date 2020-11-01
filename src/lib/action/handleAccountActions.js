@@ -20,24 +20,25 @@ import defaults from './defaults';
 const utcdayjs = dayjs.extend(utc);
 
 // May be called recursively updateLinkedAccount
-// When called from there the link target userId
-// and userName will be passed.
+// When called from there the link target user name
+// will be passed as the userName
 function handleAccountActions(inputObj) {
   const {
     actionObj,
-    userId,
     userName,
     curLinkSrc,
     origLinkSrc,
     postHandlingPrefix,
   } = inputObj;
 
-  if (
-    !actionObj ||
-    !actionObj.op ||
-    !actionObj.amount ||
-    !actionObj.actionStr
-  ) {
+  const {
+    actionStr,
+    accountGroup = defaults.accountGroup,
+    amount: origAmount,
+    op,
+  } = actionObj;
+
+  if (!op || !origAmount || !actionStr) {
     console.error('handleAccountActions: invalid actionObj');
     console.table(actionObj);
     throw new Error(
@@ -47,26 +48,19 @@ function handleAccountActions(inputObj) {
 
   // This is one of the objects that will be persisted:
   const action = {
-    userId,
+    userName,
     timestampMs: new Date().getTime(),
-    actionStr: actionObj.actionStr,
-    amount: actionObj.amount,
-    op: actionObj.op,
-    appBrand: actionObj.appBrand || defaults.appBrand,
-    appName: actionObj.appName || defaults.appName,
-    accountGroup: actionObj.accountGroup || defaults.accountGroup,
+    actionStr,
+    amount: origAmount,
+    op,
+    accountGroup,
     acct: '',
   };
 
-  let origAmount = action.amount;
   let amount = 100 * origAmount;
 
   // Get the account data that we're going to update:
-  let accountItem = findAccountItem({
-    appName: action.appName,
-    accountGroup: action.accountGroup,
-    userId,
-  });
+  let accountItem = findAccountItem({ accountGroup, userName });
   let accountItemId = null;
   if (!accountItem) {
     accountItem = createAccountItemShell(action);
@@ -78,9 +72,8 @@ function handleAccountActions(inputObj) {
   const theTime = utcdayjs.utc();
 
   let categoryItem = findCategoryItem({
-    appName: action.appName,
-    accountGroup: action.accountGroup,
-    userId: action.userId,
+    userName,
+    accountGroup,
     year: theTime.format('YYYY'),
     month: theTime.format('MMM'),
   });
@@ -109,7 +102,7 @@ function handleAccountActions(inputObj) {
   let defaultToAccount = toAccount;
   let category = '';
 
-  const updateObj = { updateDate: new Date().getTime() };
+  const updateObj = {};
   const categoryUpdateObj = {};
 
   if (action.op === 'add') {
@@ -132,8 +125,8 @@ function handleAccountActions(inputObj) {
     num = newTotal / 100;
     makesIt = ' [ makes ';
 
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
 
     makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
@@ -176,8 +169,8 @@ function handleAccountActions(inputObj) {
     num = newTotal / 100;
     makesIt = ' [ makes ';
 
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group}  `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup}  `;
     }
 
     makesIt += `${fromAccount}: ${num.toFixed(2)} ] `;
@@ -190,8 +183,6 @@ function handleAccountActions(inputObj) {
         ', new total ' +
         num.toFixed(2)
     );
-
-    categoryUpdateObj.updateDate = new Date().getTime();
 
     catKey = `spendCategory.${category}`;
 
@@ -210,7 +201,7 @@ function handleAccountActions(inputObj) {
     console.log('spend action account update object:');
     console.log(updateObj);
 
-    updateAccountItem(accountItemId, { $set: updateObj });
+    updateAccountItem(accountItemId, updateObj);
 
     console.log('spend action totals category update object:');
     console.log(categoryUpdateObj);
@@ -218,7 +209,7 @@ function handleAccountActions(inputObj) {
     action.acct = fromAccount;
     action.cat = category;
 
-    updateCategoryItem(categoryItemId, { $set: categoryUpdateObj });
+    updateCategoryItem(categoryItemId, categoryUpdateObj);
   } else if (action.op === 'move') {
     toAccount = actionObj.toAccount || defaultToAccount;
     fromAccount = actionObj.fromAccount || mainAccount;
@@ -239,8 +230,8 @@ function handleAccountActions(inputObj) {
     num = newTotal / 100;
 
     makesIt = ' [ makes ';
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
 
     makesIt += `${fromAccount}: ${num.toFixed(2)}`;
@@ -271,8 +262,8 @@ function handleAccountActions(inputObj) {
 
     makesIt += ', ';
 
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
     makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
 
@@ -290,7 +281,7 @@ function handleAccountActions(inputObj) {
     action.acct = fromAccount;
     action.acct2 = toAccount;
 
-    updateAccountItem(accountItemId, { $set: updateObj });
+    updateAccountItem(accountItemId, updateObj);
   } else if (action.op === 'give') {
     toAccount = actionObj.toAccount || defaults.giveAccount;
 
@@ -313,8 +304,8 @@ function handleAccountActions(inputObj) {
 
     makesIt = ' [ makes ';
 
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
     makesIt += `${fromAccount}: ${num.toFixed(2)} ]`;
 
@@ -359,8 +350,8 @@ function handleAccountActions(inputObj) {
     action.acct = fromAccount;
     action.cat = toAccount;
 
-    updateAccountItem(accountItemId, { $set: updateObj });
-    updateCategoryItem(categoryItemId, { $set: categoryUpdateObj });
+    updateAccountItem(accountItemId, updateObj);
+    updateCategoryItem(categoryItemId, categoryUpdateObj);
   } else if (action.op === 'set') {
     fromAccount = '';
 
@@ -370,8 +361,8 @@ function handleAccountActions(inputObj) {
     num = newTotal / 100;
 
     makesIt = ' [ makes ';
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
     makesIt += `${toAccount} ${num.toFixed(2)} ] `;
 
@@ -392,7 +383,7 @@ function handleAccountActions(inputObj) {
 
     action.acct = toAccount;
 
-    updateAccountItem(accountItemId, { $set: updateObj });
+    updateAccountItem(accountItemId, updateObj);
   } else if (action.op === 'adjust') {
     fromAccount = '';
 
@@ -415,8 +406,8 @@ function handleAccountActions(inputObj) {
 
     makesIt = ' [ makes ';
 
-    if (!!actionObj.group) {
-      makesIt += `${actionObj.group} `;
+    if (!!accountGroup) {
+      makesIt += `${accountGroup} `;
     }
     makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
 
@@ -431,7 +422,7 @@ function handleAccountActions(inputObj) {
 
     action.acct = toAccount;
 
-    updateAccountItem(accountItemId, { $set: updateObj });
+    updateAccountItem(accountItemId, updateObj);
   } else {
     console.error(action.actionStr + ' not supported');
     throw new Error(`Unsupported action: ${action.actionStr}`);
@@ -441,7 +432,7 @@ function handleAccountActions(inputObj) {
     action,
     actionObj,
     userName,
-    actionObj.accountGroup,
+    accountGroup,
     action.op,
     origAmount,
     category,
@@ -471,7 +462,7 @@ function handleAccountActions(inputObj) {
 function updateLinkedAccount(
   action,
   actionObj,
-  actionUserName,
+  userName,
   accountGroup,
   op,
   amount,
@@ -482,8 +473,8 @@ function updateLinkedAccount(
   origLinkSrc
 ) {
   console.log(
-    'updateLinkedAccount, actionUserName: ' +
-      actionUserName +
+    'updateLinkedAccount, userName: ' +
+      userName +
       ', accountGroup: ' +
       accountGroup +
       ', op: ' +
@@ -505,21 +496,15 @@ function updateLinkedAccount(
   // And need to skip any link confs that match the curLinkSrc or origLinkSrc,
   // meaning that I don't want to send a link action to the account that was the
   // original source of the action.
-  var outLinks = findLinkItems(
-    {
-      userId: action.userId,
-      appName: action.appName,
-      accountGroup: action.accountGroup,
-      $or: [
-        { fromAccount: { $eq: 'all' } },
-        { fromAccount: { $eq: fromAcct } },
-        { fromAccount: { $eq: toAcct } },
-      ],
-    },
-    {
-      reactive: false,
-    }
-  );
+  var outLinks = findLinkItems({
+    userName,
+    accountGroup,
+    $or: [
+      { fromAccount: { $eq: 'all' } },
+      { fromAccount: { $eq: fromAcct } },
+      { fromAccount: { $eq: toAcct } },
+    ],
+  });
 
   if (!outLinks) {
     console.log('handleTotalsOutLinking, no out links');
@@ -528,26 +513,20 @@ function updateLinkedAccount(
 
   // Visit each account that I have an outgoing link to:
   outLinks.forEach(function (linkConf) {
-    /*
-         console.log("doOneTotalsOutLink, actionUserName: " + actionUserName + 
-                ", group: " + group +
-                ", op: " + op +
-                ", amount: " + amount + ", category: " + category +
-                ", fromAccount: " + fromAcct +
-                ", toAccount: " + toAcct + ", linkConf:");
-         console.log(linkConf);
-         */
+    const { linkId } = linkConf;
+    console.log(
+      `doOneTotalsOutLink, userName: ${userName}, linkConf linkId: ${linkId}, linkConf:`
+    );
+    console.table(linkConf);
 
-    console.log('doOneTotalsOutLink, linkId: ' + linkConf.linkId);
-
-    if (linkConf.linkId === origLinkSrc) {
+    if (linkId === origLinkSrc) {
       console.log(
         'doOneTotalsOutLink, skipping send-to linkId, it was the origLinkSrc: ' +
           origLinkSrc
       );
       return;
     }
-    if (linkConf.linkId === curLinkSrc) {
+    if (linkId === curLinkSrc) {
       console.log(
         'doOneTotalsOutLink, skipping send-to linkId, it was the curLinkSrc: ' +
           curLinkSrc
@@ -574,7 +553,7 @@ function updateLinkedAccount(
          reactive: false
          } );
          */
-    let targetUser = findUser({ userName: linkConf.linkId });
+    let targetUser = findUser({ userName: linkId });
 
     if (!targetUser) {
       console.log(
@@ -603,19 +582,14 @@ function updateLinkedAccount(
                 ", toAcct: " + toAcct);
          */
 
-    // The value of the "group" variable is the group prefix that was set on the original action message.
-    // The value of the action.group is either that group prefix from the original message or the default group setting.
-    // Keeping both values allows flexibility in what is passed in the downstream link sequence
-
-    // The userId and username that is executing this action may not be the same as the current
-    // Meteor user since we are recursively calling doActionInsert with the userId of
-    // the link target. So we look for link configs whose linkId is the username of the
-    // userId executing the action:
+    // The userName that is executing this action may not be the same as the current
+    // app user since we are recursively calling doActionInsert with the userName of
+    // the link target. So we look for link configs whose linkId is the userName of the
+    // userName executing the action:
     let targetLinkConf = findLinkItem({
-      userId: targetUser.id,
-      appName: action.appName,
-      accountGroup: action.accountGroup,
-      linkId: actionUserName,
+      userName: targetUser.userName,
+      accountGroup,
+      linkId: userName,
       $or: [
         { toAccount: { $eq: 'all' } },
         { toAccount: { $eq: fromAcct } },
@@ -625,8 +599,8 @@ function updateLinkedAccount(
 
     if (!targetLinkConf) {
       console.error(
-        'doOneTotalsOutLink: target link item not found, actionUserName: ' +
-          actionUserName +
+        'doOneTotalsOutLink: target link item not found, action userName: ' +
+          userName +
           ', linkId: ' +
           linkConf.linkId +
           ', target user: '
@@ -658,7 +632,7 @@ function updateLinkedAccount(
         actionObj,
         fromAcct,
         toAcct,
-        actionUserName,
+        userName,
         origLinkSrc
       );
     }
@@ -676,7 +650,7 @@ function updateLinkedAccount(
         category,
         fromAcct,
         toAcct,
-        actionUserName,
+        userName,
         origLinkSrc
       );
     } else {
@@ -713,7 +687,7 @@ function doOneOutJointLink(
   handleAccountActions(
     genAccountActionsInput(
       actionObj,
-      targetLinkConf.userId,
+      targetLinkConf.userN,
       srcLinkConf.linkId,
       curLinkSrc,
       origLinkSrc,
@@ -822,7 +796,6 @@ function doOneOut2WayLink(
 // args
 function genAccountActionsInput(
   actionObj,
-  userId,
   userName,
   curLinkSrc,
   origLinkSrc,
@@ -830,7 +803,6 @@ function genAccountActionsInput(
 ) {
   return {
     actionObj,
-    userId,
     userName,
     curLinkSrc,
     origLinkSrc,

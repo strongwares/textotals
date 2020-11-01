@@ -1,4 +1,4 @@
-.loginform-container {
+.registerform-container {
   height: 100%;
   border-radius: 1%;
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.loginform-inputgroup {
+.registerform-inputgroup {
   margin: 25px 0px 20px 0px;
   min-width: 300px !important;
 }

@@ -1,25 +1,18 @@
 import { useContext } from 'react';
-// import jwtDecode from 'jwt-decode';
 import AuthContext from './context';
-// import authStorage from './storage';
+import authStorage from './storage';
 
 const useAuth = () => {
   const { user, setUser } = useContext(AuthContext);
 
-  // const onLogIn = (authToken) => {
-  const onLogin = (user) => {
-    // const loggedInUser = FAKE ? authToken : jwtDecode(authToken);
-    setUser(user);
-    /*
-    authStorage.storeToken(
-      FAKE ? JSON.stringify(loggedInUser) : authToken,
-    );
-    */
+  const onLogin = (userObj) => {
+    setUser(userObj);
+    authStorage.storeToken(JSON.stringify(userObj));
   };
 
   const onLogout = () => {
     setUser(null);
-    // authStorage.removeToken();
+    authStorage.removeToken();
   };
 
   return { onLogout, onLogin, user };

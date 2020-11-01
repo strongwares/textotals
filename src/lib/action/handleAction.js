@@ -3,14 +3,13 @@ import handleAccountActions, {
 } from './handleAccountActions';
 import { handleLinkAction, handleUnlinkAction } from './handleLinkActions';
 
-function handleAction(userObj, actionObj) {
-  const { userId, name } = userObj;
+function handleAction(name, actionObj) {
   // to enable testing
   let rval;
   if (actionObj.op === 'link') {
-    rval = handleLinkAction(actionObj, userId, name);
+    rval = handleLinkAction(actionObj, name);
   } else if (actionObj.op === 'unlink') {
-    rval = handleUnlinkAction(actionObj, userId, name);
+    rval = handleUnlinkAction(actionObj, name);
   } else {
     // This can be called recursively when a linked account is updated
     // orig:
@@ -32,7 +31,7 @@ function handleAction(userObj, actionObj) {
     }
     */
     rval = handleAccountActions(
-      genAccountActionsInput(actionObj, userId, name, name, name)
+      genAccountActionsInput(actionObj, name, name, name)
     );
   }
   return rval;

@@ -1,6 +1,6 @@
 import handleAction from '../handleAction';
 import persister from '../../../persistence/inMemory/InMemoryPersister';
-import { initPersistence } from '../../../lib/action/persistenceUtils';
+import { initPersistence } from '../../../lib/persistenceUtils';
 import { upperCaseEachWordify } from '../utils';
 import defaults from '../defaults';
 
@@ -17,18 +17,15 @@ describe('test action handler', function () {
       isValid: true,
     };
 
-    const userObj = {
-      userId: 'fred_jones',
-      name: 'Fred Jones',
-    };
+    const name = 'fred';
 
-    const action = handleAction(userObj, actionObj);
-    const { userId, actionStr, amount, op } = action;
+    const action = handleAction(name, actionObj);
+    const { userName, actionStr, amount, op } = action;
     expect(op).toBe('add');
     expect(amount).toBe(100);
     expect(actionStr).toBe(
       `add 100 [ makes ${upperCaseEachWordify(defaults.mainAccount)}: 100.00 ] `
     );
-    expect(userId).toBe(userObj.userId);
+    expect(userName).toBe(name);
   });
 });

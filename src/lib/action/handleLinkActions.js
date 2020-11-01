@@ -39,7 +39,7 @@ function doSpendingCategorySync(syncObj, linkSelector) {
   insertCategoryItem(myCatItem);
 }
 
-function getTargetAccountBalances(userName, userId, linkSelector) {
+function getTargetAccountBalances(userName, linkSelector) {
   console.log('getTargetAccountBalances, linkSelector: ');
   console.table(linkSelector);
 
@@ -52,9 +52,8 @@ function getTargetAccountBalances(userName, userId, linkSelector) {
   const mainAccount = upperCaseEachWordify(defaults.mainAccount);
 
   let myAccountItem = findAccountItem({
-    appName: linkSelector.appName,
+    userName,
     accountGroup: linkSelector.accountGroup,
-    userId,
   });
 
   const rval = {
@@ -112,8 +111,7 @@ function getTargetAccountBalances(userName, userId, linkSelector) {
   rval.userName = targetUser.userName;
 
   const targetLinkConfToMe = findLinkItem({
-    userId: targetUser.id,
-    appName: linkSelector.appName,
+    userName: targetUser.userName,
     accountGroup: linkSelector.accountGroup,
     linkId: userName,
     $or: [
@@ -137,9 +135,8 @@ function getTargetAccountBalances(userName, userId, linkSelector) {
 
   // Now get the link target user's account balance:
   const targetAccountItem = findAccountItem({
-    appName: linkSelector.appName,
+    userName: targetUser.userName,
     accountGroup: linkSelector.accountGroup,
-    userId: targetUser.id,
   });
 
   if (!targetAccountItem) {
@@ -218,9 +215,8 @@ function getTargetAccountBalances(userName, userId, linkSelector) {
 
     // Now setup sync for spending categories:
     const theirSpendingCategoryItem = findCategoryItem({
-      appName: linkSelector.appName,
+      userName: targetUser.userName,
       accountGroup: linkSelector.accountGroup,
-      userId: targetUser.id,
     });
 
     if (!theirSpendingCategoryItem) {
@@ -291,7 +287,7 @@ function getTargetAccountBalances(userName, userId, linkSelector) {
   return rval;
 }
 
-function handleUnlinkAction(actionObj, userId, userName) {
+function handleUnlinkAction(actionObj, userName) {
   console.log('tearDownTotalsAccountLink actionObj:');
   console.dir(actionObj);
 
@@ -316,11 +312,9 @@ function handleUnlinkAction(actionObj, userId, userName) {
   }
   */
   const action = {
-    userId,
+    userName,
     timestampMs: new Date().getTime(),
     actionStr: actionObj.actionStr,
-    appBrand: actionObj.appBrand || defaults.appBrand,
-    appName: actionObj.appName || defaults.appName,
     accountGroup: actionObj.accountGroup || defaults.accountGroup,
   };
 
@@ -332,19 +326,18 @@ function handleUnlinkAction(actionObj, userId, userName) {
 
   // Use the group that was the prefix on the action string to override the
   // default value for group that was set on the action
-  if (!!actionObj.appGroup) {
-    console.log('tearDownTotalsAccountLink, group: ' + actionObj.appGroup);
-    action.appGroup = actionObj.appGroup;
+  if (!!actionObj.accountGroup) {
+    console.log('tearDownTotalsAccountLink, group: ' + actionObj.accountGroup);
+    action.accountGroup = actionObj.accountGroup;
   }
 
   const linkSelector = {
-    appName: action.appName,
-    appGroup: action.appGroup,
-    userId: action.userId,
+    userName: action.userName,
+    accountGroup: action.accountGroup,
     linkId: actionObj.linkId,
   };
 
-  const linkItem = findLinkItem(linkSelector, { reactive: false });
+  const linkItem = findLinkItem(linkSelector);
   if (!linkItem) {
     console.error(
       'tearDownTotalsAccountLink link to ' + actionObj.linkId + ' not found'
@@ -357,13 +350,11 @@ function handleUnlinkAction(actionObj, userId, userName) {
   insertAction(action);
 }
 
-function handleLinkAction(actionObj, userId, userName) {
+function handleLinkAction(actionObj, userName) {
   const action = {
-    userId,
+    userName,
     timestampMs: new Date().getTime(),
     actionStr: actionObj.actionStr,
-    appBrand: actionObj.appBrand || defaults.appBrand,
-    appName: actionObj.appName || defaults.appName,
     accountGroup: actionObj.accountGroup || defaults.accountGroup,
   };
 
@@ -430,9 +421,8 @@ function handleLinkAction(actionObj, userId, userName) {
   }
 
   const linkSelector = {
-    appName: action.appName,
+    userName: action.userName,
     accountGroup: action.accountGroup,
-    userId: action.userId,
     linkId: actionObj.linkId,
     fromAccount: fromAcct,
     toAccount: toAcct,
@@ -452,7 +442,7 @@ function handleLinkAction(actionObj, userId, userName) {
   // Before creating link, need to establish initial sync between two user's accounts:
   // Need to copy all accounts and spending categories from target account,
   // not just the main balance
-  const rval = getTargetAccountBalances(userName, userId, linkSelector);
+  const rval = getTargetAccountBalances(userName, linkSelector);
 
   console.log('setUpTotalsAccountLink target account balances: ');
   console.table(rval);
@@ -521,7 +511,6 @@ function handleLinkAction(actionObj, userId, userName) {
               accountGroup: actionObj.accountGroup || '',
               category: '',
             },
-            userId,
             userName,
             actionObj.linkId,
             actionObj.linkId,

@@ -4,9 +4,9 @@ import AuthContext from '../../auth/context';
 import handleAction from '../../lib/action/handleAction';
 import './actions.css';
 
-function onNewAction(userObj, actionObj) {
+function onNewAction({ name }, actionObj) {
   try {
-    handleAction(userObj, actionObj);
+    handleAction(name, actionObj);
   } catch (error) {
     console.error(`ActionsContainer error handling action: ${error}`);
   }
