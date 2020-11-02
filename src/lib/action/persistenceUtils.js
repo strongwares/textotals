@@ -4,32 +4,31 @@ function initActionPersistence(myPersister) {
   persister = myPersister;
 }
 
-function createAccountItemShell(action) {
+function createAccountItemShell({ accountGroup, userName }) {
   return {
-    accountGroup: action.accountGroup,
-    userName: action.userName,
-    timestampMs: new Date().getTime(),
-    account: {},
-    accountDate: {},
+    accountGroup,
+    userName,
   };
 }
 
-function createCategoryItemShell(action, theTime) {
+function createCategoryItemShell({ accountGroup, month, userName, year }) {
   return {
-    accountGroup: action.accountGroup,
-    userName: action.userName,
-    timestampMs: new Date().getTime(),
-    spendCategory: {},
-    giveAccount: {},
-    year: theTime.format('YYYY'),
-    month: theTime.format('MMM'),
+    accountGroup,
+    userName,
+    year,
+    month,
   };
 }
 
-function createLinkItemShell(linkId, fromAccount, toAccount, action) {
+function createLinkItemShell(
+  linkId,
+  fromAccount,
+  toAccount,
+  { accountGroup, userName }
+) {
   return {
-    accountGroup: action.accountGroup,
-    userName: action.userName,
+    accountGroup,
+    userName,
     linkTimestampMs: new Date().getTime(),
     linkId,
     fromAccount,
@@ -37,8 +36,8 @@ function createLinkItemShell(linkId, fromAccount, toAccount, action) {
   };
 }
 
-function insertAction(action) {
-  return persister.insertAction(action);
+function addAction(action) {
+  return persister.addAction(action);
 }
 
 // *********************
@@ -47,8 +46,8 @@ function findAccountItem(query) {
   return persister.findAccountItem(query);
 }
 
-function insertAccountItem(item) {
-  return persister.insertAccountItem(item);
+function addAccountItem(item) {
+  return persister.addAccountItem(item);
 }
 
 function updateAccountItem(itemId, updateObj) {
@@ -61,8 +60,8 @@ function findCategoryItem(query) {
   return persister.findCategoryItem(query);
 }
 
-function insertCategoryItem(item) {
-  return persister.insertCategoryItem(item);
+function addCategoryItem(item) {
+  return persister.addCategoryItem(item);
 }
 
 function updateCategoryItem(itemId, updateObj) {
@@ -78,7 +77,7 @@ function findLinkItem(filter, options) {}
 function findLinkItems(filter, options) {}
 
 // TODO
-function insertLinkItem(item) {}
+function addLinkItem(item) {}
 
 // TODO
 function removeLinkItem(options) {}
@@ -87,25 +86,20 @@ function findUser(query) {
   return persister.findUser(query);
 }
 
-function insertUser(userObj) {
-  return persister.insertUser(userObj);
-}
-
 export {
+  addAction,
+  addAccountItem,
+  addCategoryItem,
+  addLinkItem,
   createAccountItemShell,
   createCategoryItemShell,
   createLinkItemShell,
   initActionPersistence,
-  insertAction,
-  insertUser,
   findAccountItem,
   findCategoryItem,
   findLinkItem,
   findLinkItems,
   findUser,
-  insertAccountItem,
-  insertCategoryItem,
-  insertLinkItem,
   removeLinkItem,
   updateAccountItem,
   updateCategoryItem,

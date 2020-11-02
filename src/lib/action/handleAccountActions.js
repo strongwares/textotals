@@ -2,16 +2,16 @@ import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { upperCaseEachWordify } from './utils';
 import {
+  addAction,
+  addAccountItem,
+  addCategoryItem,
   createAccountItemShell,
   createCategoryItemShell,
-  insertAction,
   findAccountItem,
   findCategoryItem,
   findLinkItem,
   findLinkItems,
   findUser,
-  insertAccountItem,
-  insertCategoryItem,
   updateAccountItem,
   updateCategoryItem,
 } from './persistenceUtils';
@@ -31,12 +31,11 @@ function handleAccountActions(inputObj) {
     postHandlingPrefix,
   } = inputObj;
 
-  const {
-    actionStr,
-    accountGroup = defaults.accountGroup,
-    amount: origAmount,
-    op,
-  } = actionObj;
+  const { actionStr, amount: origAmount, op } = actionObj;
+
+  const accountGroup = upperCaseEachWordify(
+    actionObj.accountGroup || defaults.accountGroup
+  );
 
   if (!op || !origAmount || !actionStr) {
     console.error('handleAccountActions: invalid actionObj');
@@ -49,128 +48,87 @@ function handleAccountActions(inputObj) {
   // This is one of the objects that will be persisted:
   const action = {
     userName,
+    accountGroup,
     timestampMs: new Date().getTime(),
     actionStr,
     amount: origAmount,
     op,
-    accountGroup,
-    acct: '',
   };
 
   let amount = 100 * origAmount;
 
   // Get the account data that we're going to update:
-  let accountItem = findAccountItem({ accountGroup, userName });
-  let accountItemId = null;
+  let query = { accountGroup, userName };
+  let accountItem = findAccountItem(query);
   if (!accountItem) {
-    accountItem = createAccountItemShell(action);
-    accountItemId = insertAccountItem(accountItem);
-  } else {
-    accountItemId = accountItem.id;
+    accountItem = addAccountItem(createAccountItemShell(query));
   }
 
   const theTime = utcdayjs.utc();
 
-  let categoryItem = findCategoryItem({
-    userName,
-    accountGroup,
-    year: theTime.format('YYYY'),
-    month: theTime.format('MMM'),
-  });
-
-  let categoryItemId = null;
-  if (action.op === 'spend' || action.op === 'give') {
-    if (!categoryItem) {
-      categoryItem = createCategoryItemShell(action, theTime);
-      categoryItemId = insertCategoryItem(categoryItem);
-    } else {
-      categoryItemId = categoryItem.id;
-    }
-  }
-
   let makesIt;
   let num;
-  let acctKey;
-  let acctDateKey;
   let newTotal;
 
-  let toAccount = upperCaseEachWordify(defaults.toAccount);
-  let mainAccount = upperCaseEachWordify(defaults.mainAccount);
-  let defaultCategory = upperCaseEachWordify(defaults.spendCategory);
-
-  let fromAccount = mainAccount;
-  let defaultToAccount = toAccount;
   let category = '';
+  let toAccount = defaults.toAccount;
+  let fromAccount = defaults.fromAccount;
 
-  const updateObj = {};
-  const categoryUpdateObj = {};
+  const updateObj = { ...query };
 
   if (action.op === 'add') {
     fromAccount = '';
 
-    toAccount = actionObj.toAccount || mainAccount;
+    toAccount = upperCaseEachWordify(
+      actionObj.toAccount || defaults.mainAccount
+    );
 
-    acctKey = `account.${toAccount}`;
-    acctDateKey = `accountDate.${toAccount}`;
-
-    if (accountItem.account.hasOwnProperty(toAccount)) {
-      newTotal = accountItem.account[toAccount] + amount;
+    if (accountItem.hasOwnProperty(toAccount)) {
+      newTotal = accountItem[toAccount].total + amount;
     } else {
       newTotal = amount;
     }
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
+    updateObj.account = toAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
     makesIt = ' [ makes ';
 
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
 
-    makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
+    makesIt += `${toAccount}: ${num} ] `;
 
     console.log(
-      'add ' +
-        amount +
-        ' to account ' +
-        toAccount +
-        ', new total ' +
-        num.toFixed(2)
+      'add ' + amount + ' to account ' + toAccount + ', new total ' + num
     );
 
-    console.log('add action account update object:');
-    console.log(updateObj);
-
-    action.acct = toAccount;
-
-    updateAccountItem(accountItemId, updateObj);
+    action.toAccount = toAccount;
   } else if (action.op === 'spend') {
-    let catKey;
-
     toAccount = '';
 
-    fromAccount = actionObj.fromAccount || mainAccount;
-    category = actionObj.category || defaultCategory;
+    fromAccount = upperCaseEachWordify(
+      actionObj.fromAccount || defaults.mainAccount
+    );
 
-    if (accountItem.account.hasOwnProperty(fromAccount)) {
-      newTotal = accountItem.account[fromAccount] - amount;
+    if (accountItem.hasOwnProperty(fromAccount)) {
+      newTotal = accountItem[fromAccount].total - amount;
     } else {
       newTotal = 0 - amount;
     }
 
-    acctKey = `account.${fromAccount}`;
-    acctDateKey = `accountDate.${fromAccount}`;
-
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
+    updateObj.account = fromAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
     num = newTotal / 100;
     makesIt = ' [ makes ';
 
     if (!!accountGroup) {
-      makesIt += `${accountGroup}  `;
+      makesIt += `${accountGroup} `;
     }
 
     makesIt += `${fromAccount}: ${num.toFixed(2)} ] `;
@@ -184,245 +142,216 @@ function handleAccountActions(inputObj) {
         num.toFixed(2)
     );
 
-    catKey = `spendCategory.${category}`;
+    // Get the category data that we're going to update:
+    const catQuery = {
+      ...query,
+      year: theTime.format('YYYY'),
+      month: theTime.format('MMM'),
+    };
+    let categoryItem = findCategoryItem(catQuery);
+    if (!categoryItem) {
+      categoryItem = addCategoryItem(createCategoryItemShell(catQuery));
+    }
+
+    category = upperCaseEachWordify(
+      actionObj.category || defaults.spendCategory
+    );
 
     if (categoryItem.spendCategory.hasOwnProperty(category)) {
-      newTotal = categoryItem.spendCategory[category] + amount;
+      newTotal = categoryItem.spendCategory[category].total + amount;
     } else {
       newTotal = amount;
     }
 
-    categoryUpdateObj[catKey] = newTotal;
+    const categoryUpdateObj = { ...catQuery };
+    categoryUpdateObj.spendCategory = category;
+    categoryUpdateObj.total = newTotal;
+    updateCategoryItem(categoryUpdateObj);
 
     console.log(
       'spend ' + amount + ' on category ' + category + ', new total ' + newTotal
     );
 
-    console.log('spend action account update object:');
-    console.log(updateObj);
-
-    updateAccountItem(accountItemId, updateObj);
-
-    console.log('spend action totals category update object:');
-    console.log(categoryUpdateObj);
-
-    action.acct = fromAccount;
-    action.cat = category;
-
-    updateCategoryItem(categoryItemId, categoryUpdateObj);
+    action.fromAccount = fromAccount;
+    action.category = category;
   } else if (action.op === 'move') {
-    toAccount = actionObj.toAccount || defaultToAccount;
-    fromAccount = actionObj.fromAccount || mainAccount;
+    fromAccount = upperCaseEachWordify(
+      actionObj.fromAccount || defaults.mainAccount
+    );
 
     // Handle fromAccount
-    acctKey = `account.${fromAccount}`;
-    acctDateKey = `accountDate.${fromAccount}`;
-
-    if (accountItem.account.hasOwnProperty(fromAccount)) {
-      newTotal = accountItem.account[fromAccount] - amount;
+    if (accountItem.hasOwnProperty(fromAccount)) {
+      newTotal = accountItem[fromAccount].total - amount;
     } else {
       newTotal = 0 - amount;
     }
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
+    updateObj.account = fromAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
 
     makesIt = ' [ makes ';
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
 
-    makesIt += `${fromAccount}: ${num.toFixed(2)}`;
+    makesIt += `${fromAccount}: ${num}`;
 
     console.log(
-      'move ' +
-        amount +
-        ' from account ' +
-        fromAccount +
-        ', new total ' +
-        num.toFixed(2)
+      'move ' + amount + ' from account ' + fromAccount + ', new total ' + num
     );
 
     // Handle toAccount
-    acctKey = `account.${toAccount}`;
-    acctDateKey = `accountDate.${toAccount}`;
+    toAccount = upperCaseEachWordify(
+      actionObj.toAccount || defaults.mainAccount
+    );
 
-    if (accountItem.account.hasOwnProperty(toAccount)) {
-      newTotal = accountItem.account[toAccount] + amount;
+    if (accountItem.hasOwnProperty(toAccount)) {
+      newTotal = accountItem[toAccount].total + amount;
     } else {
       newTotal = amount;
     }
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
+    updateObj.account = toAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
 
     makesIt += ', ';
 
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
-    makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
+    makesIt += `${toAccount}: ${num} ] `;
 
     console.log(
-      'move ' +
-        amount +
-        ' to account ' +
-        toAccount +
-        ', new total ' +
-        num.toFixed(2)
+      'move ' + amount + ' to account ' + toAccount + ', new total ' + num
     );
-    console.log('move action account update object:');
-    console.log(updateObj);
 
-    action.acct = fromAccount;
-    action.acct2 = toAccount;
-
-    updateAccountItem(accountItemId, updateObj);
+    action.fromAccount = fromAccount;
+    action.toAccount = toAccount;
   } else if (action.op === 'give') {
-    toAccount = actionObj.toAccount || defaults.giveAccount;
-
-    fromAccount = actionObj.fromAccount || mainAccount;
-
     // Handle fromAccount
-    if (accountItem.account.hasOwnProperty(fromAccount)) {
-      newTotal = accountItem.account[fromAccount] - amount;
+    fromAccount = upperCaseEachWordify(
+      actionObj.fromAccount || defaults.mainAccount
+    );
+
+    if (accountItem.hasOwnProperty(fromAccount)) {
+      newTotal = accountItem[fromAccount].total - amount;
     } else {
       newTotal = 0 - amount;
     }
 
-    acctKey = `account.${fromAccount}`;
-    acctDateKey = `accountDate.${fromAccount}`;
+    updateObj.account = fromAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
-
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
 
     makesIt = ' [ makes ';
 
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
-    makesIt += `${fromAccount}: ${num.toFixed(2)} ]`;
+    makesIt += `${fromAccount}: ${num} ]`;
 
     console.log(
-      'give ' +
-        amount +
-        ' from account ' +
-        fromAccount +
-        ', new total ' +
-        num.toFixed(2)
+      'give ' + amount + ' from account ' + fromAccount + ', new total ' + num
     );
 
-    // Handle toAccount
-    if (categoryItem.giveAccount.hasOwnProperty(toAccount)) {
-      newTotal = categoryItem.giveAccount[toAccount] + amount;
+    // Handle the give to category that we're going to update:
+    const catQuery = {
+      ...query,
+      year: theTime.format('YYYY'),
+      month: theTime.format('MMM'),
+    };
+    let categoryItem = findCategoryItem(catQuery);
+    if (!categoryItem) {
+      categoryItem = addCategoryItem(createCategoryItemShell(catQuery));
+    }
+
+    // Handle toAccount which is a category, not one of my own account names
+    category = upperCaseEachWordify(
+      actionObj.toAccount || defaults.giveAccount
+    );
+
+    if (categoryItem.giveCategory.hasOwnProperty(category)) {
+      newTotal = categoryItem.giveCategory[category].total + amount;
     } else {
       newTotal = amount;
     }
 
-    acctKey = `giveAccount.${toAccount}`;
-    categoryUpdateObj[acctKey] = newTotal;
+    const categoryUpdateObj = { ...catQuery };
+    categoryUpdateObj.giveCategory = category;
+    categoryUpdateObj.total = newTotal;
+    updateCategoryItem(categoryUpdateObj);
 
-    categoryUpdateObj.updateDate = new Date().getTime();
+    num = (newTotal / 100).toFixed(2);
 
-    num = newTotal / 100;
+    console.log('give ' + amount + ' to ' + category + ', new total ' + num);
 
-    console.log(
-      'give ' +
-        amount +
-        ' to account ' +
-        toAccount +
-        ', new total ' +
-        num.toFixed(2)
-    );
-
-    console.log('give action account update object:');
-    console.log(updateObj);
-
-    console.log('give action totals category update object:');
-    console.log(categoryUpdateObj);
-
-    action.acct = fromAccount;
-    action.cat = toAccount;
-
-    updateAccountItem(accountItemId, updateObj);
-    updateCategoryItem(categoryItemId, categoryUpdateObj);
+    action.fromAccount = fromAccount;
+    action.category = category;
   } else if (action.op === 'set') {
     fromAccount = '';
 
-    toAccount = actionObj.toAccount || mainAccount;
+    toAccount = upperCaseEachWordify(
+      actionObj.toAccount || defaults.mainAccount
+    );
 
     newTotal = amount;
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
 
     makesIt = ' [ makes ';
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
-    makesIt += `${toAccount} ${num.toFixed(2)} ] `;
+    makesIt += `${toAccount} ${num} ] `;
 
     console.log(
-      'set ' +
-        amount +
-        ' on account ' +
-        toAccount +
-        ', new value ' +
-        num.toFixed(2)
+      'set ' + amount + ' on account ' + toAccount + ', new value ' + num
     );
 
-    acctKey = `account.${toAccount}`;
-    acctDateKey = `accountDate.${toAccount}`;
+    updateObj.account = toAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
-
-    action.acct = toAccount;
-
-    updateAccountItem(accountItemId, updateObj);
+    action.toAccount = toAccount;
   } else if (action.op === 'adjust') {
     fromAccount = '';
 
-    toAccount = actionObj.toAccount || mainAccount;
+    toAccount = upperCaseEachWordify(
+      actionObj.toAccount || defaults.mainAccount
+    );
 
     // Handle toAccount
-    if (accountItem.account.hasOwnProperty(toAccount)) {
-      newTotal = accountItem.account[toAccount] + amount;
+    if (accountItem.hasOwnProperty(toAccount)) {
+      newTotal = accountItem[toAccount].total + amount;
     } else {
       newTotal = amount;
     }
 
-    acctKey = `account.${toAccount}`;
-    acctDateKey = `accountDate.${toAccount}`;
+    updateObj.account = toAccount;
+    updateObj.total = newTotal;
+    updateAccountItem(updateObj);
 
-    updateObj[acctKey] = newTotal;
-    updateObj[acctDateKey] = new Date().getTime();
-
-    num = newTotal / 100;
+    num = (newTotal / 100).toFixed(2);
 
     makesIt = ' [ makes ';
 
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
-    makesIt += `${toAccount}: ${num.toFixed(2)} ] `;
+    makesIt += `${toAccount}: ${num} ] `;
 
     console.log(
-      'adjust ' +
-        amount +
-        ' on account ' +
-        toAccount +
-        ', new total ' +
-        num.toFixed(2)
+      'adjust ' + amount + ' on account ' + toAccount + ', new total ' + num
     );
 
-    action.acct = toAccount;
-
-    updateAccountItem(accountItemId, updateObj);
+    action.toAccount = toAccount;
   } else {
     console.error(action.actionStr + ' not supported');
     throw new Error(`Unsupported action: ${action.actionStr}`);
@@ -433,7 +362,7 @@ function handleAccountActions(inputObj) {
     actionObj,
     userName,
     accountGroup,
-    action.op,
+    op,
     origAmount,
     category,
     fromAccount,
@@ -453,7 +382,7 @@ function handleAccountActions(inputObj) {
   );
   console.log(action);
 
-  insertAction(action);
+  addAction(action);
 
   // Support testing:
   return action;

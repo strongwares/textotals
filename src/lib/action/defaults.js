@@ -1,10 +1,10 @@
 const appDefaults = {
-  accountGroup: '', // The account group: personal, main, etc.
-  giveAccount: 'Church',
+  accountGroup: undefined, // The account group: personal, main, etc.
   mainAccount: 'Main',
   fromAccount: 'Main',
-  spendCategory: 'Stuff',
   toAccount: 'Savings',
+  spendCategory: 'Stuff',
+  giveAccount: 'Church',
 };
 
 export default appDefaults;
