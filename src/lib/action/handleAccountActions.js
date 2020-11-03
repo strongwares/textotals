@@ -157,8 +157,8 @@ function handleAccountActions(inputObj) {
       actionObj.category || defaults.spendCategory
     );
 
-    if (categoryItem.spendCategory.hasOwnProperty(category)) {
-      newTotal = categoryItem.spendCategory[category].total + amount;
+    if (categoryItem.spend.hasOwnProperty(category)) {
+      newTotal = categoryItem.spend[category].total + amount;
     } else {
       newTotal = amount;
     }
@@ -278,8 +278,8 @@ function handleAccountActions(inputObj) {
       actionObj.toAccount || defaults.giveAccount
     );
 
-    if (categoryItem.giveCategory.hasOwnProperty(category)) {
-      newTotal = categoryItem.giveCategory[category].total + amount;
+    if (categoryItem.give.hasOwnProperty(category)) {
+      newTotal = categoryItem.give[category].total + amount;
     } else {
       newTotal = amount;
     }

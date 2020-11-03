@@ -84,6 +84,7 @@ class InMemoryPersister {
     theAccount.total = total;
     theAccount.timestampMs = new Date().getTime();
 
+    /*
     console.log(
       `\n*************\nInMemoryPersister updateAccountItem, updateObj:`
     );
@@ -92,6 +93,7 @@ class InMemoryPersister {
       `\n*************\nInMemoryPersister updateAccountItem, accounts:`
     );
     console.dir(this.accounts);
+    */
 
     return theAccount;
   }
@@ -150,7 +152,7 @@ class InMemoryPersister {
       );
     }
 
-    accGroupCatsYears[month] = { spendCategory: {}, giveCategory: {} };
+    accGroupCatsYears[month] = { spend: {}, give: {} };
     return accGroupCatsYears[month];
   }
 
@@ -199,18 +201,18 @@ class InMemoryPersister {
     }
     let theCategory;
     if (spendCategory) {
-      theCategory = accGroupCatsYearsMonth.spendCategory[spendCategory];
+      theCategory = accGroupCatsYearsMonth.spend[spendCategory];
       if (!theCategory) {
-        accGroupCatsYearsMonth.spendCategory[spendCategory] = {};
-        theCategory = accGroupCatsYearsMonth.spendCategory[spendCategory];
+        accGroupCatsYearsMonth.spend[spendCategory] = {};
+        theCategory = accGroupCatsYearsMonth.spend[spendCategory];
       }
       theCategory.total = total;
       theCategory.timestampMs = new Date().getTime();
     } else if (giveCategory) {
-      theCategory = accGroupCatsYearsMonth.giveCategory[giveCategory];
+      theCategory = accGroupCatsYearsMonth.give[giveCategory];
       if (!theCategory) {
-        accGroupCatsYearsMonth.giveCategory[giveCategory] = {};
-        theCategory = accGroupCatsYearsMonth.giveCategory[giveCategory];
+        accGroupCatsYearsMonth.give[giveCategory] = {};
+        theCategory = accGroupCatsYearsMonth.give[giveCategory];
       }
       theCategory.total = total;
       theCategory.timestampMs = new Date().getTime();
@@ -248,7 +250,7 @@ class InMemoryPersister {
   }
 
   loginUser(userName, password) {
-    console.log(`InMemoryPersister loginUser ${userName}`);
+    // console.log(`InMemoryPersister loginUser ${userName}`);
 
     const response = { ok: true, data: {} };
     const userObj = this.users[userName];
@@ -269,8 +271,8 @@ class InMemoryPersister {
   }
 
   registerUser(userObj) {
-    console.log('InMemoryPersister register user, obj:');
-    console.dir(userObj);
+    // console.log('InMemoryPersister register user, obj:');
+    // console.dir(userObj);
     const response = { ok: true, data: {} };
     const { userName } = userObj;
     if (this.users[userName]) {

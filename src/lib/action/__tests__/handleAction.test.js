@@ -180,10 +180,8 @@ describe('test action handler', function () {
       year: theTime.format('YYYY'),
       month: theTime.format('MMM'),
     });
-    const { spendCategory } = categoryItem;
-    expect(spendCategory[upperCaseEachWordify(categoryIn)].total).toBe(
-      amountIn * 100
-    );
+    const { spend } = categoryItem;
+    expect(spend[upperCaseEachWordify(categoryIn)].total).toBe(amountIn * 100);
   });
 
   it('should handle add to GroupX Main', function () {
@@ -192,7 +190,7 @@ describe('test action handler', function () {
     const amountIn = 100;
     const accountGroupIn = 'Group X';
     const actionObj = {
-      actionStr: `${opIn} ${amountIn}`,
+      actionStr: `${accountGroupIn} ${opIn} ${amountIn}`,
       op: opIn,
       amount: amountIn,
       accountGroup: accountGroupIn,
@@ -222,7 +220,7 @@ describe('test action handler', function () {
     const amountIn = 50.55;
     const accountGroupIn = 'Group X';
     const actionObj = {
-      actionStr: `${opIn} ${amountIn}`,
+      actionStr: `${accountGroupIn} ${opIn} ${amountIn}`,
       op: opIn,
       accountGroup: accountGroupIn,
       amount: amountIn,
@@ -262,8 +260,8 @@ describe('test action handler', function () {
       year: theTime.format('YYYY'),
       month: theTime.format('MMM'),
     });
-    const { spendCategory } = categoryItem;
-    expect(spendCategory[upperCaseEachWordify(defaultCategory)].total).toBe(
+    const { spend } = categoryItem;
+    expect(spend[upperCaseEachWordify(defaultCategory)].total).toBe(
       amountIn * 100
     );
   });

@@ -1,14 +1,14 @@
 import { upperCaseEachWordify } from './utils';
 import {
+  addAction,
+  addCategoryItem,
+  addLinkItem,
   createCategoryItemShell,
   createLinkItemShell,
-  insertAction,
   findAccountItem,
   findCategoryItem,
   findLinkItem,
   findUser,
-  insertCategoryItem,
-  insertLinkItem,
   removeLinkItem,
 } from './persistenceUtils';
 import defaults from './defaults';
@@ -18,16 +18,16 @@ import handleAccountActions, {
 
 function doSpendingCategorySync(syncObj, linkSelector) {
   var myCatItem = createCategoryItemShell(linkSelector);
-  var lst = Object.getOwnPropertyNames(syncObj.spendCategory);
+  var lst = Object.getOwnPropertyNames(syncObj.spend);
   if (lst.length > 0) {
     lst.forEach(function (k, idx, array) {
-      myCatItem.spendCategory[k] = syncObj.spendCategory[k];
+      myCatItem.spend[k] = syncObj.spend[k];
     });
   }
-  lst = Object.getOwnPropertyNames(syncObj.giveAccount);
+  lst = Object.getOwnPropertyNames(syncObj.give);
   if (lst.length > 0) {
     lst.forEach(function (k, idx, array) {
-      myCatItem.giveAccount[k] = syncObj.giveAccount[k];
+      myCatItem.give[k] = syncObj.give[k];
     });
   }
   lst = Object.getOwnPropertyNames(syncObj.ccCategory);
@@ -36,7 +36,7 @@ function doSpendingCategorySync(syncObj, linkSelector) {
       myCatItem.ccCategory[k] = syncObj.ccCategory[k];
     });
   }
-  insertCategoryItem(myCatItem);
+  addCategoryItem(myCatItem);
 }
 
 function getTargetAccountBalances(userName, linkSelector) {
@@ -59,8 +59,8 @@ function getTargetAccountBalances(userName, linkSelector) {
   const rval = {
     userName: '',
     account: {},
-    spendCategory: {},
-    giveAccount: {},
+    spend: {},
+    give: {},
   };
 
   let myBalance = 0;
@@ -74,7 +74,7 @@ function getTargetAccountBalances(userName, linkSelector) {
     } else if (myAccountItem.account.hasOwnProperty(linkSelector.fromAccount)) {
       fromAccount = linkSelector.fromAccount;
     } else {
-      console.log(
+      console.error(
         'getTargetAccountBalances, from account not found: ' + fromAccount
       );
       //throw new Meteor.Error(500, "You have no account named " + fromAccount);
@@ -127,7 +127,7 @@ function getTargetAccountBalances(userName, linkSelector) {
         linkSelector.linkId +
         ', target user: '
     );
-    console.log(targetUser);
+    // console.log(targetUser);
     // TOO
     // sendTotalsNotification('That account has not set up a link to you yet');
     return rval;
@@ -224,18 +224,16 @@ function getTargetAccountBalances(userName, linkSelector) {
         "getTargetAccountBalances, failed to find target user account's spending category item"
       );
     } else {
-      let lst = Object.getOwnPropertyNames(
-        theirSpendingCategoryItem.spendCategory
-      );
+      let lst = Object.getOwnPropertyNames(theirSpendingCategoryItem.spend);
       if (lst.length > 0) {
         lst.forEach(function (k, idx, array) {
-          rval.spendCategory[k] = theirSpendingCategoryItem.spendCategory[k];
+          rval.spend[k] = theirSpendingCategoryItem.spend[k];
         });
       }
-      lst = Object.getOwnPropertyNames(theirSpendingCategoryItem.giveAccount);
+      lst = Object.getOwnPropertyNames(theirSpendingCategoryItem.give);
       if (lst.length > 0) {
         lst.forEach(function (k, idx, array) {
-          rval.giveAccount[k] = theirSpendingCategoryItem.giveAccount[k];
+          rval.give[k] = theirSpendingCategoryItem.give[k];
         });
       }
     }
@@ -347,7 +345,7 @@ function handleUnlinkAction(actionObj, userName) {
 
   removeLinkItem(linkItem.id);
 
-  insertAction(action);
+  addAction(action);
 }
 
 function handleLinkAction(actionObj, userName) {
@@ -451,12 +449,12 @@ function handleLinkAction(actionObj, userName) {
 
   linkItem = createLinkItemShell(actionObj.linkId, fromAcct, toAcct, action);
 
-  insertLinkItem(linkItem);
+  addLinkItem(linkItem);
 
   console.log('setUpTotalsAccountLink new link item:');
   console.log(linkItem);
 
-  insertAction(action);
+  addAction(action);
 
   const syncAccts = Object.getOwnPropertyNames(rval.account);
   if (syncAccts.length > 0) {
