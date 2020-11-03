@@ -181,7 +181,7 @@ describe('test action handler', function () {
       month: theTime.format('MMM'),
     });
     const { spend } = categoryItem;
-    expect(spend[upperCaseEachWordify(categoryIn)].total).toBe(amountIn * 100);
+    expect(spend[upperCaseEachWordify(categoryIn)].total).toBe(amountIn);
   });
 
   it('should handle add to GroupX Main', function () {
@@ -261,8 +261,6 @@ describe('test action handler', function () {
       month: theTime.format('MMM'),
     });
     const { spend } = categoryItem;
-    expect(spend[upperCaseEachWordify(defaultCategory)].total).toBe(
-      amountIn * 100
-    );
+    expect(spend[upperCaseEachWordify(defaultCategory)].total).toBe(amountIn);
   });
 });
