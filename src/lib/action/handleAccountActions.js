@@ -274,7 +274,8 @@ function handleAccountActions(inputObj) {
       categoryItem = addCategoryItem(createCategoryItemShell(catQuery));
     }
 
-    // Handle toAccount which is a category, not one of my own account names
+    // The give to category was parsed into toAccount,
+    // its not one of my own account names.
     category = upperCaseEachWordify(
       actionObj.toAccount || defaults.giveAccount
     );
@@ -377,10 +378,12 @@ function handleAccountActions(inputObj) {
 
   action.actionStr += makesIt;
 
+  /*
   console.log(
     'handleAccountActions: after doing account action, now inserting:'
   );
   console.log(action);
+  */
 
   addAction(action);
 
@@ -401,6 +404,7 @@ function updateLinkedAccount(
   curLinkSrc,
   origLinkSrc
 ) {
+  /*
   console.log(
     'updateLinkedAccount, userName: ' +
       userName +
@@ -418,6 +422,7 @@ function updateLinkedAccount(
       toAcct,
     ', curLinkSrc: ' + curLinkSrc + ', origLinkSrc: ' + origLinkSrc
   );
+  */
 
   // First find all the out link configs I have that match the current action's accounts.
   // If it is joint, then the link config will be all all
@@ -428,11 +433,7 @@ function updateLinkedAccount(
   var outLinks = findLinkItems({
     userName,
     accountGroup,
-    $or: [
-      { fromAccount: { $eq: 'all' } },
-      { fromAccount: { $eq: fromAcct } },
-      { fromAccount: { $eq: toAcct } },
-    ],
+    fromAccount: ['all', fromAcct, toAcct],
   });
 
   if (!outLinks) {
