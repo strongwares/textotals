@@ -41,11 +41,11 @@ function handleAccountActions(inputObj) {
     );
   }
 
+  const defaultAccountGroup = defaults.accountGroup;
   const accountGroup = upperCaseEachWordify(
-    actionObj.accountGroup || defaults.accountGroup
+    actionObj.accountGroup || defaultAccountGroup
   );
 
-  // This is one of the objects that will be persisted:
   const action = {
     userName,
     accountGroup,
@@ -71,6 +71,10 @@ function handleAccountActions(inputObj) {
 
   const updateObj = { ...query };
 
+  const theTime = utcdayjs.utc();
+  const year = theTime.format('YYYY');
+  const month = theTime.format('MMM');
+
   if (action.op === 'add') {
     fromAccount = '';
 
@@ -88,13 +92,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ' [ makes ';
-
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-
-    makesIt += `${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -120,13 +118,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ' [ makes ';
-
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-
-    makesIt += `${fromAccount}: ${total.toFixed(2)} ] `;
+    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -140,11 +132,10 @@ function handleAccountActions(inputObj) {
     */
 
     // Get the category data that we're going to update:
-    const theTime = utcdayjs.utc();
     const catQuery = {
       ...query,
-      year: theTime.format('YYYY'),
-      month: theTime.format('MMM'),
+      year,
+      month,
     };
     let categoryItem = findCategoryItem(catQuery);
     if (!categoryItem) {
@@ -190,12 +181,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ' [ makes ';
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-
-    makesIt += `${fromAccount}: ${total.toFixed(2)}`;
+    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)}`;
 
     /*
     console.log(
@@ -218,12 +204,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt += ', ';
-
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-    makesIt += `${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt += `, ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -249,12 +230,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ' [ makes ';
-
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-    makesIt += `${fromAccount}: ${total.toFixed(2)} ]`;
+    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)} ]`;
 
     /*
     console.log(
@@ -263,11 +239,10 @@ function handleAccountActions(inputObj) {
     */
 
     // Handle the give to category that we're going to update:
-    const theTime = utcdayjs.utc();
     const catQuery = {
       ...query,
-      year: theTime.format('YYYY'),
-      month: theTime.format('MMM'),
+      year,
+      month,
     };
     let categoryItem = findCategoryItem(catQuery);
     if (!categoryItem) {
@@ -304,11 +279,7 @@ function handleAccountActions(inputObj) {
 
     total = amount;
 
-    makesIt = ' [ makes ';
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-    makesIt += `${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -339,12 +310,7 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ' [ makes ';
-
-    if (!!accountGroup) {
-      makesIt += `${accountGroup} `;
-    }
-    makesIt += `${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -385,7 +351,7 @@ function handleAccountActions(inputObj) {
   console.log(action);
   */
 
-  addAction(action);
+  addAction({ action, year, month });
 
   // Support testing:
   return action;

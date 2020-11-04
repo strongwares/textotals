@@ -1,7 +1,5 @@
 import { findUser } from '../../lib/action/persistenceUtils';
 
-const DEFAULT_ACCOUNT_GROUP = 'Personal';
-
 const FAKE = 1;
 const FAKE_USER = {
   userName: 'test',
@@ -15,6 +13,7 @@ class InMemoryPersister {
     this.users = {};
     this.accounts = {};
     this.categories = {};
+    this.actions = {};
     if (FAKE) {
       this.users[FAKE_USER.userName] = FAKE_USER;
       this.accounts[FAKE_USER.userName] = {};
@@ -29,7 +28,7 @@ class InMemoryPersister {
     // console.table(query);
     // query is basically: userName, accountGroup
     // need: name -> accountGroup -> data
-    const { accountGroup = DEFAULT_ACCOUNT_GROUP, userName } = query;
+    const { accountGroup, userName } = query;
     const accountGroups = this.accounts[userName];
     return accountGroups ? accountGroups[accountGroup] : undefined;
   }
@@ -37,7 +36,7 @@ class InMemoryPersister {
   addAccountItem(item) {
     // console.log('\n************\nInMemoryPersister addAccountItem, item:');
     // console.table(item);
-    const { accountGroup = DEFAULT_ACCOUNT_GROUP, userName } = item;
+    const { accountGroup, userName } = item;
     const accountGroups = this.accounts[userName];
     if (!accountGroups) {
       throw new Error(`addAccountItem: user ${userName} accounts not found`);
@@ -60,12 +59,7 @@ class InMemoryPersister {
     console.table(updateObj);
     */
 
-    const {
-      account,
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      total,
-      userName,
-    } = updateObj;
+    const { account, accountGroup, total, userName } = updateObj;
     const accountGroups = this.accounts[userName];
     if (!accountGroups) {
       throw new Error(`User ${userName} accounts not found`);
@@ -103,12 +97,7 @@ class InMemoryPersister {
   findCategoryItem(query) {
     // console.log('InMemoryPersister findCategoryItem query:');
     // console.dir(query);
-    const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      month,
-      userName,
-      year,
-    } = query;
+    const { accountGroup, month, userName, year } = query;
     const categoryGroups = this.categories[userName];
     if (categoryGroups) {
       const accGroupCats = categoryGroups[accountGroup];
@@ -123,12 +112,7 @@ class InMemoryPersister {
   addCategoryItem(item) {
     // console.log('InMemoryPersister addCategoryItem, item:');
     // console.dir(item);
-    const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      month,
-      userName,
-      year,
-    } = item;
+    const { accountGroup, month, userName, year } = item;
     const categories = this.categories[userName];
     if (!categories) {
       throw new Error(`User ${userName} account categories not found`);
@@ -165,7 +149,7 @@ class InMemoryPersister {
     */
 
     const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
+      accountGroup,
       giveCategory,
       month,
       spendCategory,
@@ -234,9 +218,35 @@ class InMemoryPersister {
 
   // *********************
   // Action support
-  addAction(action) {
+  addAction(actionObj) {
+    const { action, year, month } = actionObj;
     // console.log('InMemoryPersister addAction, action:');
     // console.dir(action);
+    const { accountGroup, userName } = action;
+    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    let actions = this.actions[key];
+    if (!actions) {
+      this.actions[key] = [];
+      actions = this.actions[key];
+    }
+    actions.push(action);
+
+    // console.log(`addAction key: ${key}:`);
+    // console.table(action);
+  }
+
+  getLastActions(query) {
+    const { accountGroup, numActions = 1, userName, year, month } = query;
+
+    let rval;
+
+    const key = `${userName}-${accountGroup}-${year}-${month}`;
+
+    const actions = this.actions[key];
+    if (actions) {
+      rval = actions.slice(0 - numActions);
+    }
+    return rval;
   }
 
   // *********************

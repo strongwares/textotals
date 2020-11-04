@@ -1,5 +1,5 @@
 const appDefaults = {
-  accountGroup: undefined, // The account group: personal, main, etc.
+  accountGroup: 'Personal',
   mainAccount: 'Main',
   fromAccount: 'Main',
   toAccount: 'Savings',

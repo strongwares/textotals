@@ -6,15 +6,22 @@ import { initPersistence } from '../../../lib/persistenceUtils';
 import {
   findAccountItem,
   findCategoryItem,
+  getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
 import { upperCaseEachWordify } from '../utils';
 import defaults from '../defaults';
 
 let utcdayjs;
+let theTime;
+let year;
+let month;
 
 beforeAll(() => {
   utcdayjs = dayjs.extend(utc);
+  theTime = utcdayjs.utc();
+  year = theTime.format('YYYY');
+  month = theTime.format('MMM');
   initPersistence(persister);
   registerUser({ userName: 'fred', email: 'f@f.com', password: '1' });
 });
@@ -27,6 +34,8 @@ let defaultGroupDefaultSpendCategory = 0;
 let defaultGroupFoodCategory = 0;
 let groupXMain = 0;
 let groupXDefaultSpendCategory = 0;
+
+const defaultGroup = defaults.accountGroup;
 
 describe('test action handler', function () {
   it('should handle set main 500', function () {
@@ -45,7 +54,6 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
     // when no account is specified on "set" action string, then default is main
     const defaultAccount = upperCaseEachWordify(defaults.mainAccount);
 
@@ -55,13 +63,22 @@ describe('test action handler', function () {
     expect(toAccount).toBe(defaultAccount);
     expect(accountGroup).toBe(defaultGroup);
 
-    const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
+    const what = `${accountGroup} ${toAccount}`;
     const makesIt = `[ makes ${what}: ${defaultGroupMain.toFixed(2)} ] `;
 
     expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
     expect(persistedAccountItem[toAccount].total).toBe(defaultGroupMain);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle set savings 500', function () {
@@ -97,6 +114,15 @@ describe('test action handler', function () {
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
     expect(persistedAccountItem[toAccount].total).toBe(defaultGroupSavings);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle add 100 to Main', function () {
@@ -168,6 +194,15 @@ describe('test action handler', function () {
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
     expect(persistedAccountItem[toAccount].total).toBe(defaultGroupSavings);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle add 100.99 to my savings', function () {
@@ -203,6 +238,15 @@ describe('test action handler', function () {
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
     expect(persistedAccountItem[toAccount].total).toBe(defaultGroupMySavings);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle spend 50 from Main', function () {
@@ -262,6 +306,15 @@ describe('test action handler', function () {
     expect(spend[upperCaseEachWordify(category)].total).toBe(
       defaultGroupDefaultSpendCategory
     );
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle spend 25 from Main on food', function () {
@@ -323,6 +376,15 @@ describe('test action handler', function () {
     expect(spend[upperCaseEachWordify(category)].total).toBe(
       defaultGroupFoodCategory
     );
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle move 100.09 to savings from Main', function () {
@@ -362,15 +424,23 @@ describe('test action handler', function () {
     expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
     expect(accountGroup).toBe(defaultGroup);
 
-    const what = !!accountGroup ? `${accountGroup} ` : '';
-    const makesIt = `[ makes ${what}${fromAccount}: ${defaultGroupMain.toFixed(
+    const makesIt = `[ makes ${accountGroup} ${fromAccount}: ${defaultGroupMain.toFixed(
       2
-    )}, ${toAccount}: ${defaultGroupSavings.toFixed(2)} ] `;
+    )}, ${accountGroup} ${toAccount}: ${defaultGroupSavings.toFixed(2)} ] `;
     expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
     expect(accountItem[fromAccount].total).toBe(defaultGroupMain);
     expect(accountItem[toAccount].total).toBe(defaultGroupSavings);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle set Group X main 500', function () {
@@ -407,6 +477,15 @@ describe('test action handler', function () {
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
     expect(persistedAccountItem[toAccount].total).toBe(groupXMain);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle add 100 to GroupX Main', function () {
@@ -442,6 +521,15 @@ describe('test action handler', function () {
 
     const accountItem = findAccountItem({ accountGroup, userName });
     expect(accountItem[toAccount].total).toBe(groupXMain);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 
   it('should handle spend 50.55 from Group X Main', function () {
@@ -500,5 +588,14 @@ describe('test action handler', function () {
     expect(spend[upperCaseEachWordify(category)].total).toBe(
       groupXDefaultSpendCategory
     );
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
   });
 });

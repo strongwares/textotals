@@ -99,7 +99,36 @@ class LocalStoragePersister {
 
   // *********************
   // Actions:
-  addAction(action) {}
+  addAction(actionObj) {
+    const { action, year, month } = actionObj;
+    const { accountGroup, userName } = action;
+    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    let actions = this.actions[key];
+    if (!actions) {
+      this.actions[key] = [];
+      actions = this.actions[key];
+    }
+    actions.push(action);
+  }
+
+  getLastActions(query) {
+    const {
+      accountGroup = DEFAULT_ACCOUNT_GROUP,
+      numActions = 1,
+      userName,
+      year,
+      month,
+    } = query;
+
+    let rval;
+
+    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    const actions = this.actions[key];
+    if (actions) {
+      rval = actions.slice(0 - numActions);
+    }
+    return rval;
+  }
 
   // *********************
   // Categories:

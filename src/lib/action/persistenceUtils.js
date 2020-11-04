@@ -36,8 +36,12 @@ function createLinkItemShell(
   };
 }
 
-function addAction(action) {
-  return persister.addAction(action);
+function addAction(actionObj) {
+  return persister.addAction(actionObj);
+}
+
+function getLastActions(query) {
+  return persister.getLastActions(query);
 }
 
 // *********************
@@ -94,12 +98,13 @@ export {
   createAccountItemShell,
   createCategoryItemShell,
   createLinkItemShell,
-  initActionPersistence,
   findAccountItem,
   findCategoryItem,
+  getLastActions,
   findLinkItem,
   findLinkItems,
   findUser,
+  initActionPersistence,
   removeLinkItem,
   updateAccountItem,
   updateCategoryItem,
