@@ -1,5 +1,3 @@
-import { findUser } from '../../lib/action/persistenceUtils';
-
 const FAKE = 1;
 const FAKE_USER = {
   userName: 'test',
@@ -252,8 +250,6 @@ class InMemoryPersister {
   // *********************
   // User support
   findUser(query) {
-    console.log('InMemoryPersister findUser, query:');
-    console.dir(query);
     const { userName } = query;
     if (userName) {
       return this.users[userName];

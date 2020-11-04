@@ -24,7 +24,7 @@ class LocalStoragePersister {
     //            spend[category]: { total, timestampMs }
 
     if (FAKE) {
-      const users = this.getStorageItem(KEY_USERS);
+      const users = this.getStorageItem(USERS_KEY);
       if (!users) {
         console.log('LocalStoragePersister adding users and fake user');
         this.setStorageItem(USERS_KEY, { [FAKE_USER.userName]: FAKE_USER });
@@ -103,12 +103,12 @@ class LocalStoragePersister {
     const { action, year, month } = actionObj;
     const { accountGroup, userName } = action;
     const key = `${userName}-${accountGroup}-${year}-${month}`;
-    let actions = this.actions[key];
+    let actions = this.getStorageItem(key);
     if (!actions) {
-      this.actions[key] = [];
-      actions = this.actions[key];
+      actions = [];
     }
     actions.push(action);
+    this.setStorageItem(key, actions);
   }
 
   getLastActions(query) {
@@ -123,7 +123,7 @@ class LocalStoragePersister {
     let rval;
 
     const key = `${userName}-${accountGroup}-${year}-${month}`;
-    const actions = this.actions[key];
+    const actions = this.getStorageItem(key);
     if (actions) {
       rval = actions.slice(0 - numActions);
     }
@@ -141,7 +141,8 @@ class LocalStoragePersister {
     } = item;
 
     const key = `${userName}-${accountGroup}-categories-${year}-${month}`;
-    const accGroupCatsYearMonth = this.getStorageItem(key);
+
+    let accGroupCatsYearMonth = this.getStorageItem(key);
 
     if (!accGroupCatsYearMonth) {
       accGroupCatsYearMonth = { spend: {}, give: {} };
