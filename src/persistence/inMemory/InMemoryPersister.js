@@ -218,6 +218,7 @@ class InMemoryPersister {
       theCategory.timestampMs = new Date().getTime();
     }
 
+    /*
     console.log(
       `\n*************\nInMemoryPersister updateCategoryItem, updateObj:`
     );
@@ -226,6 +227,7 @@ class InMemoryPersister {
       `\n*************\nInMemoryPersister updateCategoryItem, categories:`
     );
     console.dir(this.categories);
+    */
 
     return theCategory;
   }
@@ -233,8 +235,8 @@ class InMemoryPersister {
   // *********************
   // Action support
   addAction(action) {
-    console.log('InMemoryPersister addAction, action:');
-    console.dir(action);
+    // console.log('InMemoryPersister addAction, action:');
+    // console.dir(action);
   }
 
   // *********************

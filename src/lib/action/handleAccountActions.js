@@ -33,10 +33,6 @@ function handleAccountActions(inputObj) {
 
   const { actionStr, amount, op } = actionObj;
 
-  const accountGroup = upperCaseEachWordify(
-    actionObj.accountGroup || defaults.accountGroup
-  );
-
   if (!op || !amount || !actionStr) {
     console.error('handleAccountActions: invalid actionObj');
     console.table(actionObj);
@@ -44,6 +40,10 @@ function handleAccountActions(inputObj) {
       'handleAccountActions: unable to handle action, invalid object'
     );
   }
+
+  const accountGroup = upperCaseEachWordify(
+    actionObj.accountGroup || defaults.accountGroup
+  );
 
   // This is one of the objects that will be persisted:
   const action = {
@@ -61,8 +61,6 @@ function handleAccountActions(inputObj) {
   if (!accountItem) {
     accountItem = addAccountItem(createAccountItemShell(query));
   }
-
-  const theTime = utcdayjs.utc();
 
   let makesIt;
   let total;
@@ -142,6 +140,7 @@ function handleAccountActions(inputObj) {
     */
 
     // Get the category data that we're going to update:
+    const theTime = utcdayjs.utc();
     const catQuery = {
       ...query,
       year: theTime.format('YYYY'),
@@ -264,6 +263,7 @@ function handleAccountActions(inputObj) {
     */
 
     // Handle the give to category that we're going to update:
+    const theTime = utcdayjs.utc();
     const catQuery = {
       ...query,
       year: theTime.format('YYYY'),
@@ -308,7 +308,7 @@ function handleAccountActions(inputObj) {
     if (!!accountGroup) {
       makesIt += `${accountGroup} `;
     }
-    makesIt += `${toAccount} ${total.toFixed(2)} ] `;
+    makesIt += `${toAccount}: ${total.toFixed(2)} ] `;
 
     /*
     console.log(
@@ -437,7 +437,7 @@ function updateLinkedAccount(
   });
 
   if (!outLinks) {
-    console.log('handleTotalsOutLinking, no out links');
+    // console.log('handleTotalsOutLinking, no out links');
     return;
   }
 
