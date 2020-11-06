@@ -101,31 +101,38 @@ class LocalStoragePersister {
   // Actions:
   addAction(actionObj) {
     const { action, year, month } = actionObj;
-    const { accountGroup, userName } = action;
-    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    const { userName } = action;
+    const key = `${userName}-${year}-${month}`;
     let actions = this.getStorageItem(key);
     if (!actions) {
       actions = [];
     }
-    actions.push(action);
+    actions.unshift(action);
     this.setStorageItem(key, actions);
   }
 
+  getActions(query) {
+    const { userName, year, month } = query;
+
+    let rval = [];
+
+    const key = `${userName}-${year}-${month}`;
+    const actions = this.getStorageItem(key);
+    if (actions) {
+      rval = actions.slice();
+    }
+    return rval;
+  }
+
   getLastActions(query) {
-    const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      numActions = 1,
-      userName,
-      year,
-      month,
-    } = query;
+    const { numActions = 1, userName, year, month } = query;
 
     let rval;
 
-    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    const key = `${userName}-${year}-${month}`;
     const actions = this.getStorageItem(key);
     if (actions) {
-      rval = actions.slice(0 - numActions);
+      rval = actions.slice(0, numActions);
     }
     return rval;
   }

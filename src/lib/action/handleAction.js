@@ -4,7 +4,6 @@ import handleAccountActions, {
 import { handleLinkAction, handleUnlinkAction } from './handleLinkActions';
 
 function handleAction(name, actionObj) {
-  // to enable testing
   let rval;
   if (actionObj.op === 'link') {
     rval = handleLinkAction(actionObj, name);

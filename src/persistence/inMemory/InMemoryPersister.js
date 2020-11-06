@@ -220,29 +220,43 @@ class InMemoryPersister {
     const { action, year, month } = actionObj;
     // console.log('InMemoryPersister addAction, action:');
     // console.dir(action);
-    const { accountGroup, userName } = action;
-    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    const { userName } = action;
+    const key = `${userName}-${year}-${month}`;
     let actions = this.actions[key];
     if (!actions) {
       this.actions[key] = [];
       actions = this.actions[key];
     }
-    actions.push(action);
+    actions.unshift(action);
 
     // console.log(`addAction key: ${key}:`);
     // console.table(action);
   }
 
-  getLastActions(query) {
-    const { accountGroup, numActions = 1, userName, year, month } = query;
+  getActions(query) {
+    const { userName, year, month } = query;
 
-    let rval;
+    let rval = [];
 
-    const key = `${userName}-${accountGroup}-${year}-${month}`;
+    const key = `${userName}-${year}-${month}`;
 
     const actions = this.actions[key];
     if (actions) {
-      rval = actions.slice(0 - numActions);
+      rval = actions.slice();
+    }
+    return rval;
+  }
+
+  getLastActions(query) {
+    const { numActions = 1, userName, year, month } = query;
+
+    let rval;
+
+    const key = `${userName}-${year}-${month}`;
+
+    const actions = this.actions[key];
+    if (actions) {
+      rval = actions.slice(0, numActions);
     }
     return rval;
   }

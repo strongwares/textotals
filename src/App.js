@@ -56,9 +56,9 @@ function App() {
             style={{
               alignItems: 'center',
               backgroundColor: '#444cf755',
-              height: 'calc(100vh - 11rem)',
+              height: 'calc(100vh - 9.5rem)',
               justifyContent: 'center',
-              marginTop: '6rem',
+              marginTop: '5.5rem',
               maxWidth: '327px',
               marginLeft: 'calc(50vw - 164px)',
               zIndex: 1000,
@@ -68,6 +68,7 @@ function App() {
             <HelpOverlay tabNumber={tabNumberRef.current} />
           </Sidebar>
         )}
+
         <Card className="aatapp-appcard p-shadow-5">
           <MenuBar onItemClick={onMenuItemClick} />
 
@@ -85,7 +86,10 @@ function App() {
                   header="&nbsp;&nbsp;Action"
                   leftIcon="pi pi-comments"
                 >
-                  <ActionsContainer onHelp={() => setShowHelp(true)} />
+                  <ActionsContainer
+                    user={user}
+                    onHelp={() => setShowHelp(true)}
+                  />
                 </TabPanel>
 
                 <TabPanel

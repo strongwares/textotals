@@ -44,6 +44,10 @@ function getLastActions(query) {
   return persister.getLastActions(query);
 }
 
+function getActions(query) {
+  return persister.getActions(query);
+}
+
 // *********************
 // Account item support
 function findAccountItem(query) {
@@ -100,6 +104,7 @@ export {
   createLinkItemShell,
   findAccountItem,
   findCategoryItem,
+  getActions,
   getLastActions,
   findLinkItem,
   findLinkItems,

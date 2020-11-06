@@ -6,7 +6,7 @@ import parseAction from '../../lib/action/parseAction';
 
 function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
   const [isValid, setIsValid] = useState(true);
-  let curVal;
+  const [curValue, setValue] = useState('');
 
   const validateAndSubmitAction = (action) => {
     const actionStr = action && action.trim();
@@ -26,11 +26,12 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
     } else {
       setIsValid(true);
       onInput(actionObj);
+      setValue('');
     }
   };
 
   const onClick = () => {
-    validateAndSubmitAction(curVal);
+    validateAndSubmitAction(curValue);
   };
 
   const onChange = (e) => {
@@ -38,18 +39,18 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
     const { value } = target;
     if (
       (!value || value.length === 0) &&
-      curVal &&
-      curVal.length > 0 &&
+      curValue &&
+      curValue.length > 0 &&
       !isValid
     ) {
       setIsValid(true);
     }
-    curVal = value;
+    setValue(value);
   };
 
   const onKeyPress = ({ key }) => {
     if (key === 'Enter') {
-      validateAndSubmitAction(curVal);
+      validateAndSubmitAction(curValue);
     }
   };
 
@@ -58,12 +59,13 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
       <div className="p-inputgroup actions-input">
         <InputText
           autoFocus
-          className="p-inputtext-md p-d-block"
+          className="p-inputtext-sm p-d-block"
           id="actionInput"
-          placeholder="Enter action to take or 'help'"
+          placeholder="Enter action to take or type 'help'"
           onChange={onChange}
           onKeyPress={onKeyPress}
           type="text"
+          value={curValue}
         />
         <Button onClick={onClick} icon="pi pi-plus-circle" />
       </div>

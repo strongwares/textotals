@@ -31,7 +31,8 @@ function handleAccountActions(inputObj) {
     postHandlingPrefix,
   } = inputObj;
 
-  const { actionStr, amount, op } = actionObj;
+  const { actionStr, op } = actionObj;
+  const amount = +actionObj.amount;
 
   if (!op || !amount || !actionStr) {
     console.error('handleAccountActions: invalid actionObj');
@@ -63,7 +64,7 @@ function handleAccountActions(inputObj) {
   }
 
   let makesIt;
-  let total;
+  let total = 0;
 
   let category = '';
   let toAccount = defaults.toAccount;
