@@ -13,9 +13,7 @@ class InMemoryPersister {
     this.categories = {};
     this.actions = {};
     if (FAKE) {
-      this.users[FAKE_USER.userName] = FAKE_USER;
-      this.accounts[FAKE_USER.userName] = {};
-      this.categories[FAKE_USER.userName] = {};
+      this.registerUser(FAKE_USER);
     }
   }
 
@@ -309,6 +307,7 @@ class InMemoryPersister {
       response.data.text = this.users[userName];
 
       this.accounts[userName] = {};
+      this.actions[userName] = [];
       this.categories[userName] = {};
     }
     return response;

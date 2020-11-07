@@ -1,5 +1,3 @@
-const DEFAULT_ACCOUNT_GROUP = 'Personal';
-
 const FAKE = 1;
 const FAKE_USER = {
   userName: 'test',
@@ -9,6 +7,9 @@ const FAKE_USER = {
 
 let storage = window.localStorage;
 const USERS_KEY = 'users';
+const ACCOUNTS_KEY = 'accounts';
+const CATEGORIES_KEY = 'categories';
+const ACTIONS_KEY = 'actions';
 
 class LocalStoragePersister {
   constructor() {
@@ -23,27 +24,21 @@ class LocalStoragePersister {
     //            give[category]: { total, timestampMs }
     //            spend[category]: { total, timestampMs }
 
+    this.setStorageItem(USERS_KEY, {});
+    this.setStorageItem(ACCOUNTS_KEY, {});
+    this.setStorageItem(CATEGORIES_KEY, {});
+    this.setStorageItem(ACTIONS_KEY, {});
+
     if (FAKE) {
-      const users = this.getStorageItem(USERS_KEY);
-      if (!users) {
-        console.log('LocalStoragePersister adding users and fake user');
-        this.setStorageItem(USERS_KEY, { [FAKE_USER.userName]: FAKE_USER });
-      } else {
-        if (!users[FAKE_USER.userName]) {
-          console.log('LocalStoragePersister adding faker user to users');
-          users[FAKE_USER.userName] = FAKE_USER;
-          this.setStorageItem(USERS_KEY, users);
-        } else {
-          console.log('LocalStoragePersister fake user already exists');
-        }
-      }
+      this.registerUser(FAKE_USER);
     }
   }
 
   // *********************
+  // *********************
   // Accounts:
   addAccountItem(item) {
-    const { accountGroup = DEFAULT_ACCOUNT_GROUP, userName } = item;
+    const { accountGroup, userName } = item;
     const key = `${userName}-${accountGroup}-accounts`;
     let accountsInGroup = this.getStorageItem(key);
     if (!accountsInGroup) {
@@ -54,18 +49,13 @@ class LocalStoragePersister {
   }
 
   findAccountItem(query) {
-    const { accountGroup = DEFAULT_ACCOUNT_GROUP, userName } = query;
+    const { accountGroup, userName } = query;
     const key = `${userName}-${accountGroup}-accounts`;
     return this.getStorageItem(key);
   }
 
   updateAccountItem(updateObj) {
-    const {
-      account,
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      total,
-      userName,
-    } = updateObj;
+    const { account, accountGroup, total, userName } = updateObj;
 
     const key = `${userName}-${accountGroup}-accounts`;
     let accountsInGroup = this.getStorageItem(key);
@@ -82,17 +72,6 @@ class LocalStoragePersister {
     theAccount.timestampMs = new Date().getTime();
 
     this.setStorageItem(key, accountsInGroup);
-
-    /*
-    console.log(
-      `\n*************\nInMemoryPersister updateAccountItem, updateObj:`
-    );
-    console.table(updateObj);
-    console.log(
-      `\n*************\nInMemoryPersister updateAccountItem, accounts:`
-    );
-    console.dir(this.accounts);
-    */
 
     return theAccount;
   }
@@ -140,12 +119,7 @@ class LocalStoragePersister {
   // *********************
   // Categories:
   addCategoryItem(item) {
-    const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      month,
-      userName,
-      year,
-    } = item;
+    const { accountGroup, month, userName, year } = item;
 
     const key = `${userName}-${accountGroup}-categories-${year}-${month}`;
 
@@ -160,12 +134,7 @@ class LocalStoragePersister {
   }
 
   findCategoryItem(query) {
-    const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
-      month,
-      userName,
-      year,
-    } = query;
+    const { accountGroup, month, userName, year } = query;
 
     const key = `${userName}-${accountGroup}-categories-${year}-${month}`;
     return this.getStorageItem(key);
@@ -173,7 +142,7 @@ class LocalStoragePersister {
 
   updateCategoryItem(updateObj) {
     const {
-      accountGroup = DEFAULT_ACCOUNT_GROUP,
+      accountGroup,
       giveCategory,
       month,
       spendCategory,
@@ -238,7 +207,7 @@ class LocalStoragePersister {
         response.ok = false;
         response.data.error = 'Invalid password';
       } else {
-        response.data.text = this.users[userName];
+        response.data.text = users[userName];
       }
     }
     return response;
@@ -258,7 +227,19 @@ class LocalStoragePersister {
         id: new Date().getTime(),
       };
       this.setStorageItem(USERS_KEY, users);
-      response.data.text = this.users[userName];
+      response.data.text = users[userName];
+
+      const accounts = this.getStorageItem(ACCOUNTS_KEY);
+      accounts[userName] = {};
+      this.setStorageItem(ACCOUNTS_KEY, accounts);
+
+      const actions = this.getStorageItem(ACTIONS_KEY);
+      accounts[userName] = {};
+      this.setStorageItem(ACTIONS_KEY, actions);
+
+      const categories = this.getStorageItem(CATEGORIES_KEY);
+      categories[userName] = {};
+      this.setStorageItem(CATEGORIES_KEY, categories);
     }
     return response;
   }

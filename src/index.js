@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import PrimeReact from 'primereact/utils';
 import App from './App';
 import { initPersistence } from './lib/persistenceUtils';
-// import localStoragePersister from './persistence/localStorage/LocalStoragePersister';
-import inMemoryPersister from './persistence/inMemory/InMemoryPersister';
+import localStoragePersister from './persistence/localStorage/LocalStoragePersister';
+// import inMemoryPersister from './persistence/inMemory/InMemoryPersister';
 // import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -14,8 +14,8 @@ import './index.css';
 
 PrimeReact.ripple = true;
 
-// initPersistence(localStoragePersister);
-initPersistence(inMemoryPersister);
+initPersistence(localStoragePersister);
+// initPersistence(inMemoryPersister);
 
 // <React.StrictMode></React.StrictMode>
 ReactDOM.render(
