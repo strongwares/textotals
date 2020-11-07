@@ -29,16 +29,16 @@ const RegisterForm = ({ onClose }) => {
       return;
     }
 
-    console.log('register result:');
-    console.table(response.data.text);
+    // console.log('register result:');
+    // console.table(response.data.text);
 
     if (registerError) {
       setRegisterError(undefined);
     }
 
     response = await loginUser(userObj.userName, userObj.password);
-    console.log('register login result:');
-    console.table(response.data.text);
+    // console.log('register login result:');
+    // console.table(response.data.text);
     onLogin(response.data.text);
   }
 

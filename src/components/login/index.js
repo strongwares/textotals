@@ -24,8 +24,8 @@ const LoginForm = ({ onClose }) => {
       return;
     }
 
-    console.log('login result:');
-    console.table(response.data);
+    // console.log('login result:');
+    // console.table(response.data);
 
     if (loginError) {
       setLoginError(undefined);

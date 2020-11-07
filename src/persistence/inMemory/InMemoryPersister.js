@@ -19,16 +19,6 @@ class InMemoryPersister {
 
   // *********************
   // Account item support
-  findAccountItem(query) {
-    // console.log('\n**********\nInMemoryPersister findAccountItem, query:');
-    // console.table(query);
-    // query is basically: userName, accountGroup
-    // need: name -> accountGroup -> data
-    const { accountGroup, userName } = query;
-    const accountGroups = this.accounts[userName];
-    return accountGroups ? accountGroups[accountGroup] : undefined;
-  }
-
   addAccountItem(item) {
     // console.log('\n************\nInMemoryPersister addAccountItem, item:');
     // console.table(item);
@@ -39,12 +29,22 @@ class InMemoryPersister {
     }
     if (accountGroups[accountGroup]) {
       throw new Error(
-        `addAccountItem: ser ${userName} account group ${accountGroup} already exists`
+        `addAccountItem: user ${userName} account group ${accountGroup} already exists`
       );
     }
 
     accountGroups[accountGroup] = {};
     return accountGroups[accountGroup];
+  }
+
+  findAccountItem(query) {
+    // console.log('\n**********\nInMemoryPersister findAccountItem, query:');
+    // console.table(query);
+    // query is basically: userName, accountGroup
+    // need: name -> accountGroup -> data
+    const { accountGroup, userName } = query;
+    const accountGroups = this.accounts[userName];
+    return accountGroups ? accountGroups[accountGroup] : undefined;
   }
 
   updateAccountItem(updateObj) {
@@ -90,20 +90,6 @@ class InMemoryPersister {
 
   // *********************
   // Account category support
-  findCategoryItem(query) {
-    // console.log('InMemoryPersister findCategoryItem query:');
-    // console.dir(query);
-    const { accountGroup, month, userName, year } = query;
-    const categoryGroups = this.categories[userName];
-    if (categoryGroups) {
-      const accGroupCats = categoryGroups[accountGroup];
-      if (accGroupCats) {
-        const accGroupCatsYears = accGroupCats[year];
-        return accGroupCatsYears ? accGroupCatsYears[month] : undefined;
-      }
-    }
-    return undefined;
-  }
 
   addCategoryItem(item) {
     // console.log('InMemoryPersister addCategoryItem, item:');
@@ -134,6 +120,21 @@ class InMemoryPersister {
 
     accGroupCatsYears[month] = { spend: {}, give: {} };
     return accGroupCatsYears[month];
+  }
+
+  findCategoryItem(query) {
+    // console.log('InMemoryPersister findCategoryItem query:');
+    // console.dir(query);
+    const { accountGroup, month, userName, year } = query;
+    const categoryGroups = this.categories[userName];
+    if (categoryGroups) {
+      const accGroupCats = categoryGroups[accountGroup];
+      if (accGroupCats) {
+        const accGroupCatsYears = accGroupCats[year];
+        return accGroupCatsYears ? accGroupCatsYears[month] : undefined;
+      }
+    }
+    return undefined;
   }
 
   updateCategoryItem(updateObj) {
@@ -248,7 +249,7 @@ class InMemoryPersister {
   getLastActions(query) {
     const { numActions = 1, userName, year, month } = query;
 
-    let rval;
+    let rval = [];
 
     const key = `${userName}-${year}-${month}`;
 
