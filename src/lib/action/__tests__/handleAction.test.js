@@ -12,6 +12,9 @@ import { registerUser } from '../../../lib/user/persistenceUtils';
 import { upperCaseEachWordify } from '../utils';
 import defaults from '../defaults';
 
+const TOTALS_SEP = '::';
+const ACCOUNT_SEP = ':::';
+
 let utcdayjs;
 let theTime;
 let year;
@@ -59,17 +62,17 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(defaultAccount);
     expect(accountGroup).toBe(defaultGroup);
 
     const what = `${accountGroup} ${toAccount}`;
-    const makesIt = `[ makes ${what}: ${defaultGroupMain.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMain.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
-    expect(persistedAccountItem[toAccount].total).toBe(defaultGroupMain);
+    expect(persistedAccountItem[toAccount].total).toBe(defaultGroupMain * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -103,17 +106,19 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
-    const makesIt = `[ makes ${what}: ${defaultGroupSavings.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupSavings.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
-    expect(persistedAccountItem[toAccount].total).toBe(defaultGroupSavings);
+    expect(persistedAccountItem[toAccount].total).toBe(
+      defaultGroupSavings * 100
+    );
 
     const lastActions = getLastActions({
       accountGroup,
@@ -146,19 +151,19 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(defaultToAccount);
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup
       ? `${accountGroup} ${defaultToAccount}`
       : defaultToAccount;
-    const makesIt = `[ makes ${what}: ${defaultGroupMain.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMain.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[toAccount].total).toBe(defaultGroupMain);
+    expect(accountItem[toAccount].total).toBe(defaultGroupMain * 100);
   });
 
   it('should handle add 100.5 to savings', function () {
@@ -183,17 +188,19 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
-    const makesIt = `[ makes ${what}: ${defaultGroupSavings.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupSavings.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
-    expect(persistedAccountItem[toAccount].total).toBe(defaultGroupSavings);
+    expect(persistedAccountItem[toAccount].total).toBe(
+      defaultGroupSavings * 100
+    );
 
     const lastActions = getLastActions({
       accountGroup,
@@ -227,17 +234,19 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
-    const makesIt = `[ makes ${what}: ${defaultGroupMySavings.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMySavings.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
-    expect(persistedAccountItem[toAccount].total).toBe(defaultGroupMySavings);
+    expect(persistedAccountItem[toAccount].total).toBe(
+      defaultGroupMySavings * 100
+    );
 
     const lastActions = getLastActions({
       accountGroup,
@@ -281,7 +290,7 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(fromAccount).toBe(defaultFromAccount);
     expect(accountGroup).toBe(defaultGroup);
     expect(category).toBe(defaultSpendCategory);
@@ -289,11 +298,11 @@ describe('test action handler', function () {
     const what = !!accountGroup
       ? `${accountGroup} ${fromAccount}`
       : fromAccount;
-    const makesIt = `[ makes ${what}: ${defaultGroupMain.toFixed(2)} ] `;
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMain.toFixed(2)}`;
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[fromAccount].total).toBe(defaultGroupMain);
+    expect(accountItem[fromAccount].total).toBe(defaultGroupMain * 100);
 
     const theTime = utcdayjs.utc();
     const categoryItem = findCategoryItem({
@@ -304,7 +313,7 @@ describe('test action handler', function () {
     });
     const { spend } = categoryItem;
     expect(spend[upperCaseEachWordify(category)].total).toBe(
-      defaultGroupDefaultSpendCategory
+      defaultGroupDefaultSpendCategory * 100
     );
 
     const lastActions = getLastActions({
@@ -350,7 +359,7 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(fromAccount).toBe(defaultFromAccount);
     expect(accountGroup).toBe(defaultGroup);
     expect(category).toBe(upperCaseEachWordify(categoryIn));
@@ -359,11 +368,11 @@ describe('test action handler', function () {
       ? `${accountGroup} ${fromAccount}`
       : fromAccount;
 
-    const makesIt = `[ makes ${what}: ${defaultGroupMain.toFixed(2)} ] `;
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMain.toFixed(2)}`;
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[fromAccount].total).toBe(defaultGroupMain);
+    expect(accountItem[fromAccount].total).toBe(defaultGroupMain * 100);
 
     const theTime = utcdayjs.utc();
     const categoryItem = findCategoryItem({
@@ -374,7 +383,7 @@ describe('test action handler', function () {
     });
     const { spend } = categoryItem;
     expect(spend[upperCaseEachWordify(category)].total).toBe(
-      defaultGroupFoodCategory
+      defaultGroupFoodCategory * 100
     );
 
     const lastActions = getLastActions({
@@ -419,19 +428,21 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(fromAccount).toBe(defaultFromAccount);
     expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
     expect(accountGroup).toBe(defaultGroup);
 
-    const makesIt = `[ makes ${accountGroup} ${fromAccount}: ${defaultGroupMain.toFixed(
+    const makesIt = `${TOTALS_SEP}${accountGroup} ${fromAccount}: ${defaultGroupMain.toFixed(
       2
-    )}, ${accountGroup} ${toAccount}: ${defaultGroupSavings.toFixed(2)} ] `;
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    )}${ACCOUNT_SEP}${accountGroup} ${toAccount}: ${defaultGroupSavings.toFixed(
+      2
+    )}`;
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[fromAccount].total).toBe(defaultGroupMain);
-    expect(accountItem[toAccount].total).toBe(defaultGroupSavings);
+    expect(accountItem[fromAccount].total).toBe(defaultGroupMain * 100);
+    expect(accountItem[toAccount].total).toBe(defaultGroupSavings * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -466,17 +477,17 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(defaultAccount);
     expect(accountGroup).toBe(upperCaseEachWordify(accountGroupIn));
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
-    const makesIt = `[ makes ${what}: ${groupXMain.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${groupXMain.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const persistedAccountItem = findAccountItem({ accountGroup, userName });
-    expect(persistedAccountItem[toAccount].total).toBe(groupXMain);
+    expect(persistedAccountItem[toAccount].total).toBe(groupXMain * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -510,17 +521,17 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(defaultToAccount);
     expect(accountGroup).toBe(accountGroupIn);
 
     const what = `${accountGroup} ${defaultToAccount}`;
-    const makesIt = `[ makes ${what}: ${groupXMain.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${groupXMain.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[toAccount].total).toBe(groupXMain);
+    expect(accountItem[toAccount].total).toBe(groupXMain * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -564,18 +575,18 @@ describe('test action handler', function () {
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
-    expect(amount).toBe(amountIn);
+    expect(amount).toBe(amountIn * 100);
     expect(accountGroup).toBe(accountGroupIn);
     expect(fromAccount).toBe(defaultFromAccount);
     expect(category).toBe(defaultSpendCategory);
 
     const what = `${accountGroup} ${defaultFromAccount}`;
-    const makesIt = `[ makes ${what}: ${groupXMain.toFixed(2)} ] `;
+    const makesIt = `${TOTALS_SEP}${what}: ${groupXMain.toFixed(2)}`;
 
-    expect(actionStr).toBe(`${actionObj.actionStr} ${makesIt}`);
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
 
     const accountItem = findAccountItem({ accountGroup, userName });
-    expect(accountItem[fromAccount].total).toBe(groupXMain);
+    expect(accountItem[fromAccount].total).toBe(+(groupXMain * 100).toFixed(0));
 
     const theTime = utcdayjs.utc();
     const categoryItem = findCategoryItem({
@@ -586,7 +597,7 @@ describe('test action handler', function () {
     });
     const { spend } = categoryItem;
     expect(spend[upperCaseEachWordify(category)].total).toBe(
-      groupXDefaultSpendCategory
+      groupXDefaultSpendCategory * 100
     );
 
     const lastActions = getLastActions({

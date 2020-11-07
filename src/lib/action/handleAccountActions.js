@@ -19,6 +19,9 @@ import defaults from './defaults';
 
 const utcdayjs = dayjs.extend(utc);
 
+const TOTALS_SEP = '::';
+const ACCOUNT_SEP = ':::';
+
 // May be called recursively updateLinkedAccount
 // When called from there the link target user name
 // will be passed as the userName
@@ -32,15 +35,16 @@ function handleAccountActions(inputObj) {
   } = inputObj;
 
   const { actionStr, op } = actionObj;
-  const amount = +actionObj.amount;
 
-  if (!op || !amount || !actionStr) {
+  if (!op || !actionStr) {
     console.error('handleAccountActions: invalid actionObj');
     console.table(actionObj);
     throw new Error(
       'handleAccountActions: unable to handle action, invalid object'
     );
   }
+
+  const amount = +actionObj.amount * 100;
 
   const defaultAccountGroup = defaults.accountGroup;
   const accountGroup = upperCaseEachWordify(
@@ -93,7 +97,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${toAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -119,7 +125,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)} ] `;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${fromAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -182,7 +190,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)}`;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${fromAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -205,7 +215,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt += `, ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt += `${ACCOUNT_SEP}${accountGroup} ${toAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -231,7 +243,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ` [ makes ${accountGroup} ${fromAccount}: ${total.toFixed(2)} ]`;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${fromAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -280,7 +294,9 @@ function handleAccountActions(inputObj) {
 
     total = amount;
 
-    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${toAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -311,7 +327,9 @@ function handleAccountActions(inputObj) {
     updateObj.total = total;
     updateAccountItem(updateObj);
 
-    makesIt = ` [ makes ${accountGroup} ${toAccount}: ${total.toFixed(2)} ] `;
+    makesIt = `${TOTALS_SEP}${accountGroup} ${toAccount}: ${(
+      total / 100
+    ).toFixed(2)}`;
 
     /*
     console.log(
@@ -354,7 +372,6 @@ function handleAccountActions(inputObj) {
 
   addAction({ action, year, month });
 
-  // Support testing:
   return action;
 }
 

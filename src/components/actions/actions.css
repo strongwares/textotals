@@ -11,6 +11,10 @@
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+
+  align-items: center;
+  text-align: center;
+
   /* max-height: 452px; */
   /* background-color: #e5e5f7; */
   /* border: 5px solid red; */
@@ -18,18 +22,19 @@
 
 .action-item {
   color: black;
-  margin-right: 10px;
   display: flex;
   flex-direction: column;
-  margin-left: auto;
+  /* margin-right: 10px; */
+  /* margin-left: auto; */
+
   /* font-weight: bold; */
   /* background-color: #e5e5f7; */
 }
 
 .action-item-date {
   padding: 3px;
-  /* margin-left: 50px; */
   margin-left: auto;
+  margin-right: auto;
   margin-top: 10px;
   margin-bottom: 2px;
   font-size: 12px;
@@ -37,17 +42,18 @@
   background-color: #444cf7;
   color: #e5e5f7;
   width: fit-content;
-  float: right;
 }
 
 .action-item-actionstr {
   width: fit-content;
   background: #fff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 5px;
-  /* margin-left: 10px; */
   margin-top: 1px;
-  /* margin-right: 10px; */
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre;
+
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);

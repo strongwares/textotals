@@ -4,6 +4,13 @@ import * as dayjs from 'dayjs';
 // import defaults from '../../lib/action/defaults';
 import './actions.css';
 
+const TOTALS_SEP = '::';
+const ACCOUNT_SEP = ':::';
+
+function getActionString(str) {
+  return str.replace(TOTALS_SEP, '\nTotals:\n').replace(ACCOUNT_SEP, '\n');
+}
+
 function getDateString(timestampMs) {
   const aMoment = dayjs(timestampMs);
   const nowMoment = dayjs();
@@ -37,7 +44,7 @@ const ActionItem = ({ action }) => {
   return (
     <div className="action-item">
       <div className="action-item-date">{getDateString(timestampMs)}</div>
-      <div className="action-item-actionstr">{actionStr}</div>
+      <div className="action-item-actionstr">{getActionString(actionStr)}</div>
     </div>
   );
 };
