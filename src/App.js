@@ -97,7 +97,10 @@ function App() {
                   header="&nbsp;&nbsp;Accounts"
                   leftIcon="pi pi-folder-open"
                 >
-                  <AccountsContainer />
+                  <AccountsContainer
+                    user={user}
+                    onHelp={() => setShowHelp(true)}
+                  />
                 </TabPanel>
 
                 <TabPanel
@@ -105,7 +108,10 @@ function App() {
                   header="&nbsp;&nbsp;Totals"
                   leftIcon="pi pi-chart-line"
                 >
-                  <TotalsContainer />
+                  <TotalsContainer
+                    user={user}
+                    onHelp={() => setShowHelp(true)}
+                  />
                 </TabPanel>
               </TabView>
             </>

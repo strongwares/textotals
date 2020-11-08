@@ -54,6 +54,10 @@ function findAccountItem(query) {
   return persister.findAccountItem(query);
 }
 
+function getAccountGroups(query) {
+  return persister.getAccountGroups(query);
+}
+
 function addAccountItem(item) {
   return persister.addAccountItem(item);
 }
@@ -105,6 +109,7 @@ export {
   findAccountItem,
   findCategoryItem,
   getActions,
+  getAccountGroups,
   getLastActions,
   findLinkItem,
   findLinkItems,

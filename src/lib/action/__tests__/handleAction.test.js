@@ -6,6 +6,7 @@ import { initPersistence } from '../../../lib/persistenceUtils';
 import {
   findAccountItem,
   findCategoryItem,
+  getAccountGroups,
   getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
@@ -39,6 +40,20 @@ let groupXMain = 0;
 let groupXDefaultSpendCategory = 0;
 
 const defaultGroup = defaults.accountGroup;
+
+// Todo:
+// scroll action list to bottom on load
+
+// caci spend 10 from aib => pulls from main unless a category
+// spend 10 from savings  => pulls from main unless a category
+// spend 10 on gas from savings: works
+
+// add an "undo" op to undo last
+// add a "send" op to send to main without linking being required
+
+// don't upper case anything if is all caps
+
+// Add the account table linking like in orig:
 
 describe('test action handler', function () {
   it('should handle set main 500', function () {
@@ -82,6 +97,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupMain * 100
+    );
   });
 
   it('should handle set savings 500', function () {
@@ -128,6 +148,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupSavings * 100
+    );
   });
 
   it('should handle add 100 to Main', function () {
@@ -164,6 +189,11 @@ describe('test action handler', function () {
 
     const accountItem = findAccountItem({ accountGroup, userName });
     expect(accountItem[toAccount].total).toBe(defaultGroupMain * 100);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupMain * 100
+    );
   });
 
   it('should handle add 100.5 to savings', function () {
@@ -210,6 +240,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupSavings * 100
+    );
   });
 
   it('should handle add 100.99 to my savings', function () {
@@ -256,6 +291,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupMySavings * 100
+    );
   });
 
   it('should handle spend 50 from Main', function () {
@@ -324,6 +364,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][fromAccount].total).toBe(
+      defaultGroupMain * 100
+    );
   });
 
   it('should handle spend 25 from Main on food', function () {
@@ -394,6 +439,11 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][fromAccount].total).toBe(
+      defaultGroupMain * 100
+    );
   });
 
   it('should handle move 100.09 to savings from Main', function () {
@@ -452,6 +502,14 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(
+      defaultGroupSavings * 100
+    );
+    expect(accountGroups[accountGroup][fromAccount].total).toBe(
+      defaultGroupMain * 100
+    );
   });
 
   it('should handle set Group X main 500', function () {
@@ -497,6 +555,9 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(groupXMain * 100);
   });
 
   it('should handle add 100 to GroupX Main', function () {
@@ -541,6 +602,9 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][toAccount].total).toBe(groupXMain * 100);
   });
 
   it('should handle spend 50.55 from Group X Main', function () {
@@ -608,5 +672,10 @@ describe('test action handler', function () {
       userName,
     });
     expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][fromAccount].total).toBe(
+      +(groupXMain * 100).toFixed(0)
+    );
   });
 });

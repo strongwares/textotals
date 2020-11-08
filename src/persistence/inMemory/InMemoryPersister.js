@@ -47,6 +47,11 @@ class InMemoryPersister {
     return accountGroups ? accountGroups[accountGroup] : undefined;
   }
 
+  getAccountGroups(query) {
+    const { userName } = query;
+    return this.accounts[userName];
+  }
+
   updateAccountItem(updateObj) {
     /*
     console.log(

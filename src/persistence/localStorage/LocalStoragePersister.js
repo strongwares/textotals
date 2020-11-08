@@ -94,6 +94,12 @@ class LocalStoragePersister {
     */
   }
 
+  getAccountGroups(query) {
+    const { userName } = query;
+    const accounts = this.getStorageItem(ACCOUNTS_KEY);
+    return accounts[userName];
+  }
+
   updateAccountItem(updateObj) {
     const { account, accountGroup, total, userName } = updateObj;
     const accounts = this.getStorageItem(ACCOUNTS_KEY);

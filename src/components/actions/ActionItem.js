@@ -7,9 +7,12 @@ import './actions.css';
 const TOTALS_SEP = '::';
 const ACCOUNT_SEP = ':::';
 
+/*
 function getActionString(str) {
   return str.replace(TOTALS_SEP, '\nTotals:\n').replace(ACCOUNT_SEP, '\n');
 }
+// <div className="action-item-actionstr">{getActionString(actionStr)}</div>
+*/
 
 function getTotalsString(str) {
   return `Totals:\n${str.replace(ACCOUNT_SEP, '\n')}`;
@@ -45,7 +48,6 @@ function getDateString(timestampMs) {
 const ActionItem = ({ action }) => {
   const { actionStr, timestampMs } = action;
 
-  // <div className="action-item-actionstr">{getActionString(actionStr)}</div>
   const chunks = actionStr.split(TOTALS_SEP);
   return (
     <div className="action-item">
