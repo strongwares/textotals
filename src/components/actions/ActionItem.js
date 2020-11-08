@@ -32,12 +32,12 @@ function getDateString(timestampMs) {
     rval = 'Yesterday ' + aMoment.format('h:mm a');
   }
   // In past week
-  else if (aMoment.isAfter(nowMoment.startOf('week'))) {
+  else if (aMoment.isAfter(nowMoment.startOf('day').subtract(1, 'w'))) {
     rval = aMoment.format('dddd h:mm a');
   }
   // Longer than a week ago:
   else {
-    rval = aMoment.format('M/D/YY h:mm a');
+    rval = aMoment.format('dddd M/D/YY h:mm a');
   }
   return rval;
 }
