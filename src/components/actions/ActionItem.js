@@ -11,6 +11,10 @@ function getActionString(str) {
   return str.replace(TOTALS_SEP, '\nTotals:\n').replace(ACCOUNT_SEP, '\n');
 }
 
+function getTotalsString(str) {
+  return `Totals:\n${str.replace(ACCOUNT_SEP, '\n')}`;
+}
+
 function getDateString(timestampMs) {
   const aMoment = dayjs(timestampMs);
   const nowMoment = dayjs();
@@ -41,10 +45,15 @@ function getDateString(timestampMs) {
 const ActionItem = ({ action }) => {
   const { actionStr, timestampMs } = action;
 
+  // <div className="action-item-actionstr">{getActionString(actionStr)}</div>
+  const chunks = actionStr.split(TOTALS_SEP);
   return (
     <div className="action-item">
       <div className="action-item-date">{getDateString(timestampMs)}</div>
-      <div className="action-item-actionstr">{getActionString(actionStr)}</div>
+      <div className="action-item-action">{chunks[0]}</div>
+      <div className="action-item-totals">
+        {getTotalsString(chunks.length > 1 && chunks[1])}
+      </div>
     </div>
   );
 };
