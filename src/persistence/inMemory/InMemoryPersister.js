@@ -142,6 +142,31 @@ class InMemoryPersister {
     return undefined;
   }
 
+  getCategories(query) {
+    const { month, userName, year } = query;
+    const rval = {};
+    const categoryGroups = this.categories[userName];
+    if (!categoryGroups) {
+      return rval;
+    }
+    Object.keys(categoryGroups).forEach((accountGroup) => {
+      const accGroupCats = categoryGroups[accountGroup];
+      const accGroupCatsYear = accGroupCats[year];
+      if (accGroupCatsYear) {
+        const accGroupCatsYearMonth = accGroupCatsYear[month];
+        if (accGroupCatsYearMonth) {
+          rval[accountGroup] = {
+            year,
+            month,
+            spend: accGroupCatsYearMonth.spend,
+            give: accGroupCatsYearMonth.give,
+          };
+        }
+      }
+    });
+    return rval;
+  }
+
   updateCategoryItem(updateObj) {
     /*
     console.log(

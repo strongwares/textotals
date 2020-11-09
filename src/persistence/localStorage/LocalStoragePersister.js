@@ -276,6 +276,34 @@ class LocalStoragePersister {
     */
   }
 
+  getCategories(query) {
+    const { month, userName, year } = query;
+    const rval = {};
+
+    const categories = this.getStorageItem(CATEGORIES_KEY);
+    const categoryGroups = categories[userName];
+    if (!categoryGroups) {
+      return rval;
+    }
+
+    Object.keys(categoryGroups).forEach((accountGroup) => {
+      const accGroupCats = categoryGroups[accountGroup];
+      const accGroupCatsYear = accGroupCats[year];
+      if (accGroupCatsYear) {
+        const accGroupCatsYearMonth = accGroupCatsYear[month];
+        if (accGroupCatsYearMonth) {
+          rval[accountGroup] = {
+            year,
+            month,
+            spend: accGroupCatsYearMonth.spend,
+            give: accGroupCatsYearMonth.give,
+          };
+        }
+      }
+    });
+    return rval;
+  }
+
   findCategoryItem(query) {
     const { accountGroup, month, userName, year } = query;
 

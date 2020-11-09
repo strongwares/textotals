@@ -1,27 +1,43 @@
 import React, { useEffect, useState } from 'react';
-import { getAccountGroups } from '../../lib/action/persistenceUtils';
+import * as dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import {
+  getAccountGroups,
+  getCategories,
+} from '../../lib/action/persistenceUtils';
 import AccountGroupItem from './AccountGroupItem';
 import './accounts.css';
 
+const utcdayjs = dayjs.extend(utc);
+
 const AccountsContainer = ({ user, onHelp }) => {
-  const [accountGroups, setAccountGroups] = useState({});
+  const [accounts, setAccounts] = useState({});
+  const [categories, setCategories] = useState({});
   useEffect(() => {
-    setAccountGroups(getAccountGroups({ userName: user.userName }));
+    const theTime = utcdayjs.utc();
+    const year = theTime.format('YYYY');
+    const month = theTime.format('MMM');
+    const accts = getAccountGroups({ userName: user.userName });
+    setAccounts(accts);
+
+    const cats = getCategories({ month, userName: user.userName, year });
+    setCategories(cats);
   }, [user]);
 
-  const accountGroupList = Object.keys(accountGroups).map((name) => {
+  const accountList = Object.keys(accounts).map((name) => {
     return (
       <AccountGroupItem
         key={name}
         groupName={name}
-        item={accountGroups[name]}
+        accountsItem={accounts[name]}
+        categoriesItem={categories[name]}
       />
     );
   });
 
   return (
     <div className="accounts-container">
-      <div className="p-grid p-dir-col">{accountGroupList}</div>
+      <div className="p-grid p-dir-col">{accountList}</div>
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );

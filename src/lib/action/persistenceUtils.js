@@ -68,12 +68,16 @@ function updateAccountItem(itemId, updateObj) {
 
 // *********************
 // Account category support
+function addCategoryItem(item) {
+  return persister.addCategoryItem(item);
+}
+
 function findCategoryItem(query) {
   return persister.findCategoryItem(query);
 }
 
-function addCategoryItem(item) {
-  return persister.addCategoryItem(item);
+function getCategories(query) {
+  return persister.getCategories(query);
 }
 
 function updateCategoryItem(itemId, updateObj) {
@@ -110,6 +114,7 @@ export {
   findCategoryItem,
   getActions,
   getAccountGroups,
+  getCategories,
   getLastActions,
   findLinkItem,
   findLinkItems,

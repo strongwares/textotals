@@ -7,6 +7,7 @@ import {
   findAccountItem,
   findCategoryItem,
   getAccountGroups,
+  getCategories,
   getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
@@ -54,6 +55,10 @@ const defaultGroup = defaults.accountGroup;
 // don't upper case anything if is all caps
 
 // Add the account table linking like in orig:
+// see the budget_account_item.html
+
+// Finish the Totals tab which is the original "Budget Spending Page"
+// see the budget_spending_item.html (categories totals in a list)
 
 describe('test action handler', function () {
   it('should handle set main 500', function () {
@@ -102,6 +107,13 @@ describe('test action handler', function () {
     expect(accountGroups[accountGroup][toAccount].total).toBe(
       defaultGroupMain * 100
     );
+
+    const categories = getCategories({
+      month,
+      year,
+      userName,
+    });
+    expect(categories[accountGroup]).toBe(undefined);
   });
 
   it('should handle set savings 500', function () {
@@ -369,6 +381,16 @@ describe('test action handler', function () {
     expect(accountGroups[accountGroup][fromAccount].total).toBe(
       defaultGroupMain * 100
     );
+
+    const categories = getCategories({
+      month,
+      year,
+      userName,
+    });
+
+    expect(categories[accountGroup].spend[category].total).toBe(
+      defaultGroupDefaultSpendCategory * 100
+    );
   });
 
   it('should handle spend 25 from Main on food', function () {
@@ -443,6 +465,16 @@ describe('test action handler', function () {
     const accountGroups = getAccountGroups({ userName });
     expect(accountGroups[accountGroup][fromAccount].total).toBe(
       defaultGroupMain * 100
+    );
+
+    const categories = getCategories({
+      month,
+      year,
+      userName,
+    });
+    // console.dir(categories[accountGroup][0]);
+    expect(categories[accountGroup].spend[category].total).toBe(
+      defaultGroupFoodCategory * 100
     );
   });
 
@@ -676,6 +708,18 @@ describe('test action handler', function () {
     const accountGroups = getAccountGroups({ userName });
     expect(accountGroups[accountGroup][fromAccount].total).toBe(
       +(groupXMain * 100).toFixed(0)
+    );
+
+    const categories = getCategories({
+      month,
+      year,
+      userName,
+    });
+
+    // console.dir(categories[accountGroup][0]);
+
+    expect(categories[accountGroup].spend[category].total).toBe(
+      groupXDefaultSpendCategory * 100
     );
   });
 });
