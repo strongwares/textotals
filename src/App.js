@@ -106,7 +106,7 @@ function App() {
                 <TabPanel
                   contentClassName="aatapp-tabpanel-content"
                   header="&nbsp;&nbsp;Totals"
-                  leftIcon="pi pi-chart-line"
+                  leftIcon="pi pi-tags"
                 >
                   <TotalsContainer
                     user={user}

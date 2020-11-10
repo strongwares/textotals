@@ -30,7 +30,7 @@ const CategoryTotalsItem = ({ groupName, item }) => {
       {spendingCats.length > 0 && (
         <DataTable
           className="p-datatable-striped p-datatable-gridlines"
-          header="Spending"
+          header="Spending Totals"
           value={spendingCats}
         >
           <Column field="category" header="Category" sortable></Column>
@@ -39,8 +39,9 @@ const CategoryTotalsItem = ({ groupName, item }) => {
       )}
       {givingCats.length > 0 && (
         <DataTable
+          style={{ marginTop: '10px' }}
           className="p-datatable-striped p-datatable-gridlines"
-          header="Giving"
+          header="Giving Totals"
           value={givingCats}
         >
           <Column field="category" header="Category" sortable></Column>
