@@ -6,21 +6,21 @@ import AccountsContainer from './components/accounts/AccountsContainer';
 import ActionsContainer from './components/actions/ActionsContainer';
 import AuthContext from './auth/context';
 import authStorage from './auth/storage';
-import HelpOverlay from './components/help/HelpOverlay';
 import MenuBar from './components/menuBar';
+import Overlay from './components/overlay/Overlay';
 import TotalsContainer from './components/totals/TotalsContainer';
 import WelcomeScreen from './components/welcome';
 import './aatapp.css';
 
 function App() {
   const [user, setUser] = useState();
-  const [showHelp, setShowHelp] = useState(false);
-  const showHelpRef = useRef(showHelp);
+  const [showSidebar, setShowSidebar] = useState(undefined);
+  const showSidebarRef = useRef(showSidebar);
   const [tabNumber, setTabNumber] = useState(0);
   const tabNumberRef = useRef(tabNumber);
 
   useEffect(() => {
-    showHelpRef.current = showHelp;
+    showSidebarRef.current = showSidebar;
     tabNumberRef.current = tabNumber;
 
     if (!user) {
@@ -31,14 +31,16 @@ function App() {
     }
 
     // authStorage.removeToken();
-  }, [showHelp, tabNumber, user]);
+  }, [showSidebar, tabNumber, user]);
 
   const onMenuItemClick = (item) => {
     if (!item) {
       return;
     }
-    if (item === 'help') {
-      setShowHelp(!showHelpRef.current);
+    if (!!showSidebarRef.current && showSidebarRef.current === item) {
+      setShowSidebar(undefined);
+    } else {
+      setShowSidebar(item);
     }
   };
 
@@ -49,9 +51,9 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <div className="aatapp-container">
-        {showHelp && (
+        {!!showSidebar && (
           <Sidebar
-            onHide={() => setShowHelp(false)}
+            onHide={() => setShowSidebar(undefined)}
             position="top"
             style={{
               alignItems: 'center',
@@ -63,9 +65,9 @@ function App() {
               marginLeft: 'calc(50vw - 164px)',
               zIndex: 1000,
             }}
-            visible={showHelp}
+            visible={!!showSidebar}
           >
-            <HelpOverlay tabNumber={tabNumberRef.current} />
+            <Overlay what={showSidebar} />
           </Sidebar>
         )}
 
@@ -88,7 +90,7 @@ function App() {
                 >
                   <ActionsContainer
                     user={user}
-                    onHelp={() => setShowHelp(true)}
+                    onHelp={() => setShowSidebar('help')}
                   />
                 </TabPanel>
 
@@ -99,7 +101,7 @@ function App() {
                 >
                   <AccountsContainer
                     user={user}
-                    onHelp={() => setShowHelp(true)}
+                    onHelp={() => setShowSidebar('help')}
                   />
                 </TabPanel>
 
@@ -110,7 +112,7 @@ function App() {
                 >
                   <TotalsContainer
                     user={user}
-                    onHelp={() => setShowHelp(true)}
+                    onHelp={() => setShowSidebar('help')}
                   />
                 </TabPanel>
               </TabView>
