@@ -15,7 +15,7 @@ import { upperCaseEachWordify } from '../utils';
 import defaults from '../defaults';
 
 const TOTALS_SEP = '::';
-const ACCOUNT_SEP = ':::';
+const ACCOUNT_SEP = ':;:';
 
 let utcdayjs;
 let theTime;

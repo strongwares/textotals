@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import './actions.css';
 
 const TOTALS_SEP = '::';
-const ACCOUNT_SEP = ':::';
+const ACCOUNT_SEP = ':;:';
 
 /*
 function getActionString(str) {

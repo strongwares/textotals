@@ -1,0 +1,26 @@
+Action parsing not all lowercase
+d- check for op by lower case comparison
+x- check for all caps
+d- don't do any uppercasing
+d- change to all uppercase in parsing
+d- spend 10 from savings was broken
+d- move 10 to savings (UI doesn't show savings on action totals response)
+
+Auto scroll to bottom in action list
+
+Finish overlay container
+
+Finish History
+- container
+- action op
+
+User separate from other persistince
+
+lib/core containing all common logic across persistence types
+
+ipfs
+- investigate for user mgmt
+- investigate for user's data persistence
+
+social media logins
+

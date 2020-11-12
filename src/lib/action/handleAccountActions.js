@@ -20,7 +20,7 @@ import defaults from './defaults';
 const utcdayjs = dayjs.extend(utc);
 
 const TOTALS_SEP = '::';
-const ACCOUNT_SEP = ':::';
+const ACCOUNT_SEP = ':;:';
 
 // May be called recursively updateLinkedAccount
 // When called from there the link target user name
