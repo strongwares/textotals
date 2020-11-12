@@ -31,6 +31,10 @@ function dashToCamel(str) {
   });
 }
 
+function isAllCaps(str) {
+  return str && str.toUpperCase() === str;
+}
+
 function normalizePhoneNum(num) {
   return !!num ? num.replace(/\D/g, '') : num;
 }
@@ -53,12 +57,21 @@ function upperCaseEachWordify(str) {
   );
 }
 
+function upperCaseEachWordifyIfNotAllCaps(str) {
+  if (!str) {
+    return;
+  }
+  return isAllCaps(str) ? str : upperCaseEachWordify(str);
+}
+
 export {
   camelToDash,
   camelCaseify,
   capitalise,
   dashToCamel,
+  isAllCaps,
   normalizePhoneNum,
   trimWords,
   upperCaseEachWordify,
+  upperCaseEachWordifyIfNotAllCaps,
 };

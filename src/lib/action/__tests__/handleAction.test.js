@@ -45,20 +45,26 @@ const defaultGroup = defaults.accountGroup;
 // Todo:
 // scroll action list to bottom on load
 
-// caci spend 10 from aib => pulls from main unless a category
-// spend 10 from savings  => pulls from main unless a category
-// spend 10 on gas from savings: works
+// d caci spend 10 from aib => pulls from main unless a category
 
+// d spend 10 from savings  => pulls from main unless a category
+// spend 10 on gas from savings: works
+// d problem is spendCatRe matches first
+
+// d problem: set main 500 passes but is not valid
+
+// dana
+// don't upper case anything if is all caps
+
+// dana
 // add an "undo" op to undo last
 // add a "send" op to send to main without linking being required
 
-// don't upper case anything if is all caps
-
-// Add the account table linking like in orig:
+// x Add the account table linking like in orig:
 // see the budget_account_item.html
 
-// Finish the Totals tab which is the original "Budget Spending Page"
-// see the budget_spending_item.html (categories totals in a list)
+// d Finish the Totals tab which is the original "Budget Spending Page"
+// d see the budget_spending_item.html (categories totals in a list)
 
 describe('test action handler', function () {
   it('should handle set main 500', function () {
@@ -78,7 +84,7 @@ describe('test action handler', function () {
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
     // when no account is specified on "set" action string, then default is main
-    const defaultAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
@@ -134,12 +140,12 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
+    const defaultGroup = defaults.accountGroup;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
-    expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
+    expect(toAccount).toBe(toAccountIn);
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
@@ -183,8 +189,8 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
-    const defaultToAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultGroup = defaults.accountGroup;
+    const defaultToAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
@@ -226,12 +232,12 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
+    const defaultGroup = defaults.accountGroup;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
-    expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
+    expect(toAccount).toBe(toAccountIn);
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
@@ -277,12 +283,12 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
+    const defaultGroup = defaults.accountGroup;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
-    expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
+    expect(toAccount).toBe(toAccountIn);
     expect(accountGroup).toBe(defaultGroup);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
@@ -310,7 +316,7 @@ describe('test action handler', function () {
     );
   });
 
-  it('should handle spend 50 from Main', function () {
+  it('should handle spend 50', function () {
     const nameIn = 'fred';
     const opIn = 'spend';
     const amountIn = 50;
@@ -336,9 +342,9 @@ describe('test action handler', function () {
       userName,
     } = action;
 
-    const defaultSpendCategory = upperCaseEachWordify(defaults.spendCategory);
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
-    const defaultFromAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultSpendCategory = defaults.spendCategory;
+    const defaultGroup = defaults.accountGroup;
+    const defaultFromAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
@@ -364,9 +370,7 @@ describe('test action handler', function () {
       month: theTime.format('MMM'),
     });
     const { spend } = categoryItem;
-    expect(spend[upperCaseEachWordify(category)].total).toBe(
-      defaultGroupDefaultSpendCategory * 100
-    );
+    expect(spend[category].total).toBe(defaultGroupDefaultSpendCategory * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -380,6 +384,88 @@ describe('test action handler', function () {
     const accountGroups = getAccountGroups({ userName });
     expect(accountGroups[accountGroup][fromAccount].total).toBe(
       defaultGroupMain * 100
+    );
+
+    const categories = getCategories({
+      month,
+      year,
+      userName,
+    });
+
+    expect(categories[accountGroup].spend[category].total).toBe(
+      defaultGroupDefaultSpendCategory * 100
+    );
+  });
+
+  it('should handle spend 10.50 from savings', function () {
+    const nameIn = 'fred';
+    const opIn = 'spend';
+    const amountIn = 10.5;
+    const fromAccountIn = 'savings';
+    const actionObj = {
+      actionStr: `${opIn} ${amountIn} from ${fromAccountIn}`,
+      op: opIn,
+      amount: amountIn,
+      fromAccount: fromAccountIn,
+      isValid: true,
+    };
+
+    defaultGroupSavings -= amountIn;
+
+    defaultGroupDefaultSpendCategory += amountIn;
+
+    const action = handleAction(nameIn, actionObj);
+    const {
+      accountGroup,
+      actionStr,
+      amount,
+      category,
+      op,
+      fromAccount,
+      userName,
+    } = action;
+
+    const defaultSpendCategory = defaults.spendCategory;
+    const defaultGroup = defaults.accountGroup;
+
+    expect(userName).toBe(nameIn);
+    expect(op).toBe(opIn);
+    expect(amount).toBe(amountIn * 100);
+    expect(fromAccount).toBe(fromAccountIn);
+    expect(accountGroup).toBe(defaultGroup);
+    expect(category).toBe(defaultSpendCategory);
+
+    const what = !!accountGroup
+      ? `${accountGroup} ${fromAccount}`
+      : fromAccount;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupSavings.toFixed(2)}`;
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
+
+    const accountItem = findAccountItem({ accountGroup, userName });
+    expect(accountItem[fromAccount].total).toBe(defaultGroupSavings * 100);
+
+    const theTime = utcdayjs.utc();
+    const categoryItem = findCategoryItem({
+      userName,
+      accountGroup,
+      year: theTime.format('YYYY'),
+      month: theTime.format('MMM'),
+    });
+    const { spend } = categoryItem;
+    expect(spend[category].total).toBe(defaultGroupDefaultSpendCategory * 100);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+    expect(accountGroups[accountGroup][fromAccount].total).toBe(
+      defaultGroupSavings * 100
     );
 
     const categories = getCategories({
@@ -421,15 +507,15 @@ describe('test action handler', function () {
       userName,
     } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
-    const defaultFromAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultGroup = defaults.accountGroup;
+    const defaultFromAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
     expect(fromAccount).toBe(defaultFromAccount);
     expect(accountGroup).toBe(defaultGroup);
-    expect(category).toBe(upperCaseEachWordify(categoryIn));
+    expect(category).toBe(categoryIn);
 
     const what = !!accountGroup
       ? `${accountGroup} ${fromAccount}`
@@ -449,9 +535,7 @@ describe('test action handler', function () {
       month: theTime.format('MMM'),
     });
     const { spend } = categoryItem;
-    expect(spend[upperCaseEachWordify(category)].total).toBe(
-      defaultGroupFoodCategory * 100
-    );
+    expect(spend[category].total).toBe(defaultGroupFoodCategory * 100);
 
     const lastActions = getLastActions({
       accountGroup,
@@ -505,14 +589,14 @@ describe('test action handler', function () {
       userName,
     } = action;
 
-    const defaultGroup = upperCaseEachWordify(defaults.accountGroup);
-    const defaultFromAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultGroup = defaults.accountGroup;
+    const defaultFromAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
     expect(fromAccount).toBe(defaultFromAccount);
-    expect(toAccount).toBe(upperCaseEachWordify(toAccountIn));
+    expect(toAccount).toBe(toAccountIn);
     expect(accountGroup).toBe(defaultGroup);
 
     const makesIt = `${TOTALS_SEP}${accountGroup} ${fromAccount}: ${defaultGroupMain.toFixed(
@@ -563,13 +647,13 @@ describe('test action handler', function () {
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
     // when no account is specified on "set" action string, then default is main
-    const defaultAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
     expect(amount).toBe(amountIn * 100);
     expect(toAccount).toBe(defaultAccount);
-    expect(accountGroup).toBe(upperCaseEachWordify(accountGroupIn));
+    expect(accountGroup).toBe(accountGroupIn);
 
     const what = !!accountGroup ? `${accountGroup} ${toAccount}` : toAccount;
     const makesIt = `${TOTALS_SEP}${what}: ${groupXMain.toFixed(2)}`;
@@ -610,7 +694,7 @@ describe('test action handler', function () {
     const action = handleAction(nameIn, actionObj);
     const { accountGroup, actionStr, amount, op, toAccount, userName } = action;
 
-    const defaultToAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultToAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
@@ -666,8 +750,8 @@ describe('test action handler', function () {
       userName,
     } = action;
 
-    const defaultSpendCategory = upperCaseEachWordify(defaults.spendCategory);
-    const defaultFromAccount = upperCaseEachWordify(defaults.mainAccount);
+    const defaultSpendCategory = defaults.spendCategory;
+    const defaultFromAccount = defaults.mainAccount;
 
     expect(userName).toBe(nameIn);
     expect(op).toBe(opIn);
@@ -692,9 +776,7 @@ describe('test action handler', function () {
       month: theTime.format('MMM'),
     });
     const { spend } = categoryItem;
-    expect(spend[upperCaseEachWordify(category)].total).toBe(
-      groupXDefaultSpendCategory * 100
-    );
+    expect(spend[category].total).toBe(groupXDefaultSpendCategory * 100);
 
     const lastActions = getLastActions({
       accountGroup,

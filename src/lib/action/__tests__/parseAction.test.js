@@ -14,7 +14,7 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100.50');
-    expect(actionObj.toAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
 
     action = 'add 100 to my savings';
@@ -22,7 +22,7 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
 
     action = 'add 100.99 to My Savings';
@@ -30,61 +30,61 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX add 100.09';
+    action = 'groupx add 100.09';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.isValid).toBe(true);
 
     action = 'group a add 100.09';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX add 100 to fred';
+    action = 'GROUPX add 100 to fred';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('Fred');
+    expect(actionObj.toAccount).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a add 100 to fred';
+    action = 'GROUP A add 100 to FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('Fred');
+    expect(actionObj.toAccount).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX add 100 to fred b';
+    action = 'GROUPX add 100 to FRED b';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('Fred B');
+    expect(actionObj.toAccount).toBe('FRED B');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a add 100 to fred';
+    action = 'GROUP A add 100 to FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('Fred');
+    expect(actionObj.toAccount).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a add 100 to fred b';
+    action = 'GROUP A add 100 to FRED b';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
-    expect(actionObj.toAccount).toBe('Fred B');
+    expect(actionObj.toAccount).toBe('FRED B');
     expect(actionObj.isValid).toBe(true);
   });
   it('should parse spend actions', function () {
@@ -97,18 +97,18 @@ describe('test action parser', function () {
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX spend 100';
+    action = 'GROUPX spend 100';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a spend 100';
+    action = 'GROUP A spend 100';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100');
     expect(actionObj.fromAccount).toBe(undefined);
@@ -120,26 +120,26 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.category).toBe('Gas');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
+    expect(actionObj.category).toBe('GAS');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX spend 100.09 on gas from savings';
+    action = 'GROUPX spend 100.09 on GAS from SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.category).toBe('Gas');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
+    expect(actionObj.category).toBe('GAS');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a spend 100.09 on gas from savings';
+    action = 'GROUP A spend 100.09 on GAS from SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.category).toBe('Gas');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
+    expect(actionObj.category).toBe('GAS');
     expect(actionObj.isValid).toBe(true);
 
     action = 'spend 100.09 on eating out from my savings';
@@ -147,79 +147,79 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.category).toBe('Eating Out');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.category).toBe('EATING OUT');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX spend 100.09 on eating out from my savings';
+    action = 'GROUPX spend 100.09 on EATING OUT from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.category).toBe('Eating Out');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.category).toBe('EATING OUT');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a spend 100.09 on eating out from my savings';
+    action = 'GROUP A spend 100.09 on EATING OUT from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.category).toBe('Eating Out');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.category).toBe('EATING OUT');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'spend 100.09 gas';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe(undefined);
-    expect(actionObj.op).toBe('spend');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.category).toBe('Gas');
-    expect(actionObj.isValid).toBe(true);
-
-    action = 'groupX spend 100.09 gas';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
-    expect(actionObj.op).toBe('spend');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.category).toBe('Gas');
-    expect(actionObj.isValid).toBe(true);
-
-    action = 'group a spend 100.09 gas';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
-    expect(actionObj.op).toBe('spend');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.category).toBe('Gas');
-    expect(actionObj.isValid).toBe(true);
-
-    action = 'spend 100.09 from my savings';
+    action = 'spend 100.09 GAS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.category).toBe('GAS');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'GROUPX spend 100.09 GAS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUPX');
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.category).toBe('GAS');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'GROUP A spend 100.09 GAS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUP A');
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.category).toBe('GAS');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'spend 100.09 from SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX spend 100.09 from my savings';
+    action = 'GROUPX spend 100.09 from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a spend 100.09 from my savings';
+    action = 'GROUP A spend 100.09 from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
   });
@@ -229,147 +229,147 @@ describe('test action parser', function () {
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('SAVINGS');
+    expect(actionObj.fromAccount).toBe('MAIN');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX move 100.09 to savings from main';
+    action = 'GROUPX move 100.09 to SAVINGS from MAIN';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('SAVINGS');
+    expect(actionObj.fromAccount).toBe('MAIN');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'group a move 100.09 to savings from main';
+    action = 'GROUP A move 100.09 to SAVINGS from MAIN';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('SAVINGS');
+    expect(actionObj.fromAccount).toBe('MAIN');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'move 100.09 from my savings to fred savings';
+    action = 'move 100.09 from MY SAVINGS to FRED SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Fred Savings');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX move 100.09 from my savings to fred savings';
+    action = 'GROUPX move 100.09 from MY SAVINGS to FRED SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Fred Savings');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'group a move 100.09 from my savings to fred savings';
+    action = 'GROUP A move 100.09 from MY SAVINGS to FRED SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Fred Savings');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'move 100.99 to fred savings';
+    action = 'move 100.99 to FRED SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Fred Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX move 100.99 to fred savings';
+    action = 'GROUPX move 100.99 to FRED SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Fred Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'group a move 100.99 to fred savings';
+    action = 'GROUP A move 100.99 to FRED SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Fred Savings');
+    expect(actionObj.toAccount).toBe('FRED SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'move 100.99 savings';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe(undefined);
-    expect(actionObj.op).toBe('move');
-    expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'groupX move 100.99 savings';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
-    expect(actionObj.op).toBe('move');
-    expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'group a move 100.99 savings';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
-    expect(actionObj.op).toBe('move');
-    expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('Savings');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'move 100.99 my savings';
+    action = 'move 100.99 SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX move 100.99 my savings';
+    action = 'GROUPX move 100.99 SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'group a move 100.99 my savings';
+    action = 'GROUP A move 100.99 SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+    // console.log(actionObj);
+
+    action = 'move 100.99 MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('move');
+    expect(actionObj.amount).toBe('100.99');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+    // console.log(actionObj);
+
+    action = 'GROUPX move 100.99 MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUPX');
+    expect(actionObj.op).toBe('move');
+    expect(actionObj.amount).toBe('100.99');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+    // console.log(actionObj);
+
+    action = 'GROUP A move 100.99 MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUP A');
+    expect(actionObj.op).toBe('move');
+    expect(actionObj.amount).toBe('100.99');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
@@ -384,9 +384,9 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX  move 100.99';
+    action = 'GROUPX  move 100.99';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
     expect(actionObj.toAccount).toBe(undefined);
@@ -394,9 +394,9 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'group a move 100.99';
+    action = 'GROUP A move 100.99';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('move');
     expect(actionObj.amount).toBe('100.99');
     expect(actionObj.toAccount).toBe(undefined);
@@ -406,140 +406,140 @@ describe('test action parser', function () {
   });
 
   it('should parse give actions', function () {
-    var action = 'give 100.09 to homeless under bridge from main';
+    var action = 'give 100.09 to HOMELESS HOME from MAIN';
     var actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MAIN');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 to homeless under bridge from my savings';
+    action = 'give 100.09 to HOMELESS home from MY SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 to homeless from my savings';
+    action = 'give 100.09 to homeless from My Savings';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 to some group from my savings';
+    action = 'give 100.09 to Some group from MY SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 from my savings to homeless';
+    action = 'give 100.09 from MY SAVINGS to HOMELESS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 from my savings to Some Group';
+    action = 'give 100.09 from MY SAVINGS to Some Group';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 from savings to some group';
+    action = 'give 100.09 from SAVINGS to SOME GROUP';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
-    expect(actionObj.fromAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 from my savings to some group';
+    action = 'give 100.09 from MY SAVINGS to SOME GROUP';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 to some group';
+    action = 'give 100.09 to SOME GROUP';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 to homeless';
+    action = 'give 100.09 to HOMELESS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
+    expect(actionObj.toAccount).toBe('HOMELESS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 from savings';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe(undefined);
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'give 100.09 from my savings';
+    action = 'give 100.09 from SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 homeless';
+    action = 'give 100.09 from MY SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
+    expect(actionObj.toAccount).toBe(undefined);
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // console.log(actionObj);
+
+    action = 'give 100.09 HOMELESS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'give 100.09 some group';
+    action = 'give 100.09 SOME GROUP';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Some Group');
+    expect(actionObj.toAccount).toBe('SOME GROUP');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
@@ -552,287 +552,287 @@ describe('test action parser', function () {
     expect(actionObj.toAccount).toBe(undefined);
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
+    // consoleaccountaionObj);
 
-    action = 'accountA give 100.09 to homeless under bridge from main';
+    action = 'accounta give 100.09 to HOMELESS HOME from MAIN';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MAIN');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account a give 100.09 to homeless under bridge from main';
+    action = 'account A give 100.09 to HOMELESS HOME from MAIN';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account A');
+    expect(actionObj.accountGroup).toBe('ACCOUNT A');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('Main');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MAIN');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 to HOMELESS HOME from MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 to homeless under bridge from my savings';
+    action = 'ACCOUNT ABC give 100.09 to HOMELESS HOME from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 to HOMELESS from MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 to homeless under bridge from my savings';
+    action = 'ACCOUNT ABC give 100.09 to HOMELESS from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Under Bridge');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 to Homeless Home from MY SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 to homeless from my savings';
+    action = 'ACCOUNT ABC give 100.09 to HOMELESS HOME from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 from MY SAVINGS to HOMELESS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 to homeless from my savings';
+    action = 'ACCOUNT ABC give 100.09 from MY SAVINGS to HOMELESS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 from MY SAVINGS to HOMELESS HOME';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 to homeless camp from my savings';
+    action = 'ACCOUNT ABC give 100.09 from MY SAVINGS to HOMELESS HOME';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 from SAVINGS to HOMELESS HOME';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 to homeless camp from my savings';
+    action = 'ACCOUNT ABC give 100.09 from SAVINGS to HOMELESS HOME';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 from MY SAVINGS to HOMELESS HOME';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 from my savings to homeless';
+    action = 'ACCOUNT ABC give 100.09 from MY SAVINGS to HOMELESS HOME';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 to HOMELESS HOME';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 from my savings to homeless';
+    action = 'ACCOUNT ABC give 100.09 to HOMELESS HOME';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 to HOMELESS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 from my savings to homeless camp';
+    action = 'ACCOUNT ABC give 100.09 to HOMELESS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('HOMELESS');
     expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
+    // consoleaccountaionObj);
 
-    action = 'account abc give 100.09 from my savings to homeless camp';
+    action = 'accounta give 100.09 from SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09 from savings to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'account abc give 100.09 from savings to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09 from my savings to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'account abc give 100.09 from my savings to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09 to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'account abc give 100.09 to homeless camp';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09 to homeless';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'account abc give 100.09 to homeless';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09 from savings';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('Savings');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 from savings';
+    action = 'ACCOUNT ABC give 100.09 from SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('Savings');
+    expect(actionObj.fromAccount).toBe('SAVINGS');
     expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
+    // consoleaccountaionObj);
 
-    action = 'accountA give 100.09 from my savings';
+    action = 'accounta give 100.09 from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 from my savings';
+    action = 'ACCOUNT ABC give 100.09 from MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
-    expect(actionObj.fromAccount).toBe('My Savings');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
     expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
+    // consoleaccountaionObj);
 
-    action = 'accountA give 100.09 homeless';
+    action = 'accounta give 100.09 HOMELESS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
+    expect(actionObj.toAccount).toBe('HOMELESS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09 homeless';
+    action = 'ACCOUNT ABC give 100.09 HOMELESS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless');
+    expect(actionObj.toAccount).toBe('HOMELESS');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+    // consoleaccountaionObj);
+
+    action = 'accounta give 100.09 HOMELESS HOME';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
+    expect(actionObj.op).toBe('give');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'accountA give 100.09 homeless camp';
+    action = 'ACCOUNT ABC give 100.09 HOMELESS HOME';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
+    expect(actionObj.toAccount).toBe('HOMELESS HOME');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
+    // consoleaccountaionObj);
 
-    action = 'account abc give 100.09 homeless camp';
+    action = 'accounta give 100.09';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
-    expect(actionObj.op).toBe('give');
-    expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Homeless Camp');
-    expect(actionObj.fromAccount).toBe(undefined);
-    expect(actionObj.isValid).toBe(true);
-    // console.log(actionObj);
-
-    action = 'accountA give 100.09';
-    actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Accounta');
+    expect(actionObj.accountGroup).toBe('ACCOUNTA');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
@@ -840,9 +840,9 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc give 100.09';
+    action = 'ACCOUNT ABC give 100.09';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('give');
     expect(actionObj.amount).toBe('100.09');
     expect(actionObj.toAccount).toBe(undefined);
@@ -852,22 +852,22 @@ describe('test action parser', function () {
   });
 
   it('should parse textotals set actions', function () {
-    var action = 'set 100.09 savings';
+    var action = 'set 100.09 SAVINGS';
     var actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'set 100.10 my savings';
+    action = 'set 100.10 MY SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.10');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
@@ -882,29 +882,38 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX set 100.09 savings';
+    action = 'set MAIN 100.11';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('set');
+    expect(actionObj.amount).toBe(undefined);
+    expect(actionObj.toAccount).toBe(undefined);
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(false);
+
+    action = 'GROUPX set 100.09 SAVINGS';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.toAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX set 100.10 my savings';
+    action = 'GROUPX set 100.10 MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.10');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX set 100.11';
+    action = 'GROUPX set 100.11';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.11');
     expect(actionObj.toAccount).toBe(undefined);
@@ -912,9 +921,9 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc set 100.11';
+    action = 'ACCOUNT ABC set 100.11';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('set');
     expect(actionObj.amount).toBe('100.11');
     expect(actionObj.toAccount).toBe(undefined);
@@ -924,22 +933,22 @@ describe('test action parser', function () {
   });
 
   it('should parse adjust actions', function () {
-    var action = 'adjust 100.12 savings';
+    var action = 'adjust 100.12 SAVINGS';
     var actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.12');
-    expect(actionObj.toAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'adjust 100.13 my savings';
+    action = 'adjust 100.13 MY SAVINGS';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.13');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
@@ -954,29 +963,29 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX adjust 100.12 savings';
+    action = 'GROUPX adjust 100.12 SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.12');
-    expect(actionObj.toAccount).toBe('Savings');
+    expect(actionObj.toAccount).toBe('SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX adjust 100.13 my savings';
+    action = 'GROUPX adjust 100.13 MY SAVINGS';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.13');
-    expect(actionObj.toAccount).toBe('My Savings');
+    expect(actionObj.toAccount).toBe('MY SAVINGS');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'groupX adjust 100.14';
+    action = 'GROUPX adjust 100.14';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.14');
     expect(actionObj.toAccount).toBe(undefined);
@@ -984,9 +993,9 @@ describe('test action parser', function () {
     expect(actionObj.isValid).toBe(true);
     // console.log(actionObj);
 
-    action = 'account abc adjust 100.14';
+    action = 'ACCOUNT ABC adjust 100.14';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Account Abc');
+    expect(actionObj.accountGroup).toBe('ACCOUNT ABC');
     expect(actionObj.op).toBe('adjust');
     expect(actionObj.amount).toBe('100.14');
     expect(actionObj.toAccount).toBe(undefined);
@@ -998,123 +1007,123 @@ describe('test action parser', function () {
   // link with <target user id>
   // link from <from account> <to account> with <target user id>
   it('should parse link actions', function () {
-    var action = 'link with fred';
+    var action = 'link with FRED';
     var actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'link from myAccount to fredMain with fred';
+    action = 'link from myAccount to FREDMain with FRED';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('Myaccount');
-    expect(actionObj.toAccount).toBe('Fredmain');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MYACCOUNT');
+    expect(actionObj.toAccount).toBe('FREDMAIN');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'link from my savings to fred main with fred';
+    action = 'link from MY SAVINGS to FRED MAIN with FRED';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('My Savings');
-    expect(actionObj.toAccount).toBe('Fred Main');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MY SAVINGS');
+    expect(actionObj.toAccount).toBe('FRED MAIN');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'link from my fred savings to fred main b with fred';
+    action = 'link from MY FRED SAVINGS to FRED MAIN b with FRED';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('My Fred Savings');
-    expect(actionObj.toAccount).toBe('Fred Main B');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MY FRED SAVINGS');
+    expect(actionObj.toAccount).toBe('FRED MAIN B');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'link from fred savings to fred main with fred';
+    action = 'link from FRED SAVINGS to FRED MAIN with FRED';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('Fred Savings');
-    expect(actionObj.toAccount).toBe('Fred Main');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('FRED SAVINGS');
+    expect(actionObj.toAccount).toBe('FRED MAIN');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX link fred';
+    action = 'GROUPX link FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a link fred';
+    action = 'GROUP A link FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX link with Fred';
+    action = 'GROUPX link with FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a link with Fred';
+    action = 'GROUP A link with FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX link from myAccount to fredmain with fred';
+    action = 'GROUPX link from MYACCOUNT to FREDMAIN with FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('Myaccount');
-    expect(actionObj.toAccount).toBe('Fredmain');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MYACCOUNT');
+    expect(actionObj.toAccount).toBe('FREDMAIN');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX link from my fred a to fred main b with fred';
+    action = 'GROUPX link from MY FRED a to FRED MAIN b with FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('My Fred A');
-    expect(actionObj.toAccount).toBe('Fred Main B');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MY FRED A');
+    expect(actionObj.toAccount).toBe('FRED MAIN B');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group a link from myfredAccount to fredMain with fred';
+    action = 'GROUP A link from myFREDAccount to FREDMain with FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group A');
+    expect(actionObj.accountGroup).toBe('GROUP A');
     expect(actionObj.op).toBe('link');
-    expect(actionObj.linkId).toBe('fred');
-    expect(actionObj.fromAccount).toBe('Myfredaccount');
-    expect(actionObj.toAccount).toBe('Fredmain');
+    expect(actionObj.linkId).toBe('FRED');
+    expect(actionObj.fromAccount).toBe('MYFREDACCOUNT');
+    expect(actionObj.toAccount).toBe('FREDMAIN');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'unlink fred';
+    action = 'unlink FRED';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('unlink');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'groupX unlink fred';
+    action = 'GROUPX unlink FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Groupx');
+    expect(actionObj.accountGroup).toBe('GROUPX');
     expect(actionObj.op).toBe('unlink');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'group b unlink fred';
+    action = 'group B unlink FRED';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('Group B');
+    expect(actionObj.accountGroup).toBe('GROUP B');
     expect(actionObj.op).toBe('unlink');
-    expect(actionObj.linkId).toBe('fred');
+    expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
   });
 });

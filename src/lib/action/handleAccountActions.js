@@ -47,9 +47,12 @@ function handleAccountActions(inputObj) {
   const amount = +actionObj.amount * 100;
 
   const defaultAccountGroup = defaults.accountGroup;
+  /*
   const accountGroup = upperCaseEachWordify(
     actionObj.accountGroup || defaultAccountGroup
   );
+  */
+  const accountGroup = actionObj.accountGroup || defaultAccountGroup;
 
   const action = {
     userName,
@@ -83,9 +86,7 @@ function handleAccountActions(inputObj) {
   if (action.op === 'add') {
     fromAccount = '';
 
-    toAccount = upperCaseEachWordify(
-      actionObj.toAccount || defaults.mainAccount
-    );
+    toAccount = actionObj.toAccount || defaults.mainAccount;
 
     if (accountItem.hasOwnProperty(toAccount)) {
       total = accountItem[toAccount].total + amount;
@@ -111,9 +112,7 @@ function handleAccountActions(inputObj) {
   } else if (action.op === 'spend') {
     toAccount = '';
 
-    fromAccount = upperCaseEachWordify(
-      actionObj.fromAccount || defaults.mainAccount
-    );
+    fromAccount = actionObj.fromAccount || defaults.mainAccount;
 
     if (accountItem.hasOwnProperty(fromAccount)) {
       total = accountItem[fromAccount].total - amount;
@@ -129,6 +128,7 @@ function handleAccountActions(inputObj) {
       total / 100
     ).toFixed(2)}`;
 
+    // console.log(`actionStr in ${actionStr}, makesIt str out: ${makesIt}`);
     /*
     console.log(
       'spend ' +
@@ -151,9 +151,7 @@ function handleAccountActions(inputObj) {
       categoryItem = addCategoryItem(createCategoryItemShell(catQuery));
     }
 
-    category = upperCaseEachWordify(
-      actionObj.category || defaults.spendCategory
-    );
+    category = actionObj.category || defaults.spendCategory;
 
     if (categoryItem.spend.hasOwnProperty(category)) {
       total = categoryItem.spend[category].total + amount;
@@ -175,9 +173,7 @@ function handleAccountActions(inputObj) {
     action.fromAccount = fromAccount;
     action.category = category;
   } else if (action.op === 'move') {
-    fromAccount = upperCaseEachWordify(
-      actionObj.fromAccount || defaults.mainAccount
-    );
+    fromAccount = actionObj.fromAccount || defaults.mainAccount;
 
     // Handle fromAccount
     if (accountItem.hasOwnProperty(fromAccount)) {
@@ -201,9 +197,7 @@ function handleAccountActions(inputObj) {
     */
 
     // Handle toAccount
-    toAccount = upperCaseEachWordify(
-      actionObj.toAccount || defaults.mainAccount
-    );
+    toAccount = actionObj.toAccount || defaults.mainAccount;
 
     if (accountItem.hasOwnProperty(toAccount)) {
       total = accountItem[toAccount].total + amount;
@@ -229,9 +223,7 @@ function handleAccountActions(inputObj) {
     action.toAccount = toAccount;
   } else if (action.op === 'give') {
     // Handle fromAccount
-    fromAccount = upperCaseEachWordify(
-      actionObj.fromAccount || defaults.mainAccount
-    );
+    fromAccount = actionObj.fromAccount || defaults.mainAccount;
 
     if (accountItem.hasOwnProperty(fromAccount)) {
       total = accountItem[fromAccount].total - amount;
@@ -266,9 +258,7 @@ function handleAccountActions(inputObj) {
 
     // The give to category was parsed into toAccount,
     // its not one of my own account names.
-    category = upperCaseEachWordify(
-      actionObj.toAccount || defaults.giveAccount
-    );
+    category = actionObj.toAccount || defaults.giveAccount;
 
     if (categoryItem.give.hasOwnProperty(category)) {
       total = categoryItem.give[category].total + amount;
@@ -288,9 +278,7 @@ function handleAccountActions(inputObj) {
   } else if (action.op === 'set') {
     fromAccount = '';
 
-    toAccount = upperCaseEachWordify(
-      actionObj.toAccount || defaults.mainAccount
-    );
+    toAccount = actionObj.toAccount || defaults.mainAccount;
 
     total = amount;
 
@@ -312,9 +300,7 @@ function handleAccountActions(inputObj) {
   } else if (action.op === 'adjust') {
     fromAccount = '';
 
-    toAccount = upperCaseEachWordify(
-      actionObj.toAccount || defaults.mainAccount
-    );
+    toAccount = actionObj.toAccount || defaults.mainAccount;
 
     // Handle toAccount
     if (accountItem.hasOwnProperty(toAccount)) {
