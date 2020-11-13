@@ -36,6 +36,7 @@ class LocalStoragePersister {
     const { accountGroup, userName } = item;
     const accounts = this.getStorageItem(ACCOUNTS_KEY);
     const accountGroups = accounts[userName];
+
     if (!accountGroups) {
       throw new Error(`addAccountItem: user ${userName} accounts not found`);
     }
