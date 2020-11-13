@@ -1,4 +1,4 @@
-Action parsing not all lowercase
+d Action parsing acct and category all uppercase
 d- check for op by lower case comparison
 x- check for all caps
 d- don't do any uppercasing
@@ -8,7 +8,7 @@ d- move 10 to savings (UI doesn't show savings on action totals response)
 
 d Auto scroll to bottom in action list
 
-User separate from other persistince
+d User separate from other persistince
 
 lib/core containing all common logic across persistence types
 

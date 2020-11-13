@@ -8,9 +8,9 @@ import {
   findAccountItem,
   findCategoryItem,
   findLinkItem,
-  findUser,
   removeLinkItem,
 } from './persistenceUtils';
+import { findUser } from '../user/persistenceUtils';
 import defaults from './defaults';
 import handleAccountActions, {
   genAccountActionsInput,

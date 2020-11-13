@@ -11,10 +11,10 @@ import {
   findCategoryItem,
   findLinkItem,
   findLinkItems,
-  findUser,
   updateAccountItem,
   updateCategoryItem,
 } from './persistenceUtils';
+import { findUser } from '../user/persistenceUtils';
 import defaults from './defaults';
 
 const utcdayjs = dayjs.extend(utc);

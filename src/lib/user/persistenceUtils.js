@@ -4,12 +4,16 @@ function initUserPersistence(myPersister) {
   persister = myPersister;
 }
 
-async function registerUser(userObj) {
-  return persister.registerUser(userObj);
+async function findUser(query) {
+  return persister.findUser(query);
 }
 
 async function loginUser(userName, password) {
   return persister.loginUser(userName, password);
 }
 
-export { initUserPersistence, loginUser, registerUser };
+async function registerUser(userObj) {
+  return persister.registerUser(userObj);
+}
+
+export { findUser, initUserPersistence, loginUser, registerUser };

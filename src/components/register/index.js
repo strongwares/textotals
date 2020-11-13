@@ -5,6 +5,7 @@ import { Message } from 'primereact/message';
 import { Password } from 'primereact/password';
 import useAuth from '../../auth/useAuth';
 import { loginUser, registerUser } from '../../lib/user/persistenceUtils';
+import { registerUser as actionsRegisterUser } from '../../lib/action/persistenceUtils';
 import './register.css';
 
 const RegisterForm = ({ onClose }) => {
@@ -29,8 +30,7 @@ const RegisterForm = ({ onClose }) => {
       return;
     }
 
-    // console.log('register result:');
-    // console.table(response.data.text);
+    await actionsRegisterUser(userObj);
 
     if (registerError) {
       setRegisterError(undefined);

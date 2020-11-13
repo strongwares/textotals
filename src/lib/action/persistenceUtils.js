@@ -84,6 +84,10 @@ function updateCategoryItem(itemId, updateObj) {
   return persister.updateCategoryItem(itemId, updateObj);
 }
 
+function registerUser(userObj) {
+  return persister.registerUser(userObj);
+}
+
 // TODO
 // find one
 function findLinkItem(filter, options) {}
@@ -97,10 +101,6 @@ function addLinkItem(item) {}
 
 // TODO
 function removeLinkItem(options) {}
-
-function findUser(query) {
-  return persister.findUser(query);
-}
 
 export {
   addAction,
@@ -118,8 +118,8 @@ export {
   getLastActions,
   findLinkItem,
   findLinkItems,
-  findUser,
   initActionPersistence,
+  registerUser,
   removeLinkItem,
   updateAccountItem,
   updateCategoryItem,

@@ -4,7 +4,9 @@ import PrimeReact from 'primereact/utils';
 import App from './App';
 import { initPersistence } from './lib/persistenceUtils';
 import localStoragePersister from './persistence/localStorage/LocalStoragePersister';
+import localStorageUsers from './persistence/localStorage/LocalStorageUsers';
 // import inMemoryPersister from './persistence/inMemory/InMemoryPersister';
+// import inMemoryUsers from './persistence/inMemory/InMemoryUsers';
 // import reportWebVitals from './reportWebVitals';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -14,8 +16,8 @@ import './index.css';
 
 PrimeReact.ripple = true;
 
-initPersistence(localStoragePersister);
-// initPersistence(inMemoryPersister);
+initPersistence(localStoragePersister, localStorageUsers);
+// initPersistence(inMemoryPersister, inMemoryUsers);
 
 // <React.StrictMode></React.StrictMode>
 ReactDOM.render(

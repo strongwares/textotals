@@ -2,6 +2,7 @@ import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import handleAction from '../handleAction';
 import persister from '../../../persistence/inMemory/InMemoryPersister';
+import userPersister from '../../../persistence/inMemory/InMemoryUsers';
 import { initPersistence } from '../../../lib/persistenceUtils';
 import {
   findAccountItem,
@@ -11,6 +12,7 @@ import {
   getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
+import { registerUser as actionRegisterUser } from '../../../lib/action/persistenceUtils';
 import defaults from '../defaults';
 
 const TOTALS_SEP = '::';
@@ -26,8 +28,9 @@ beforeAll(() => {
   theTime = utcdayjs.utc();
   year = theTime.format('YYYY');
   month = theTime.format('MMM');
-  initPersistence(persister);
+  initPersistence(persister, userPersister);
   registerUser({ userName: 'fred', email: 'f@f.com', password: '1' });
+  actionRegisterUser({ userName: 'fred', email: 'f@f.com', password: '1' });
 });
 
 // Each test changes the given account's total, need to track it:
