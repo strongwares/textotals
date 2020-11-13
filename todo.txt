@@ -10,7 +10,7 @@ d Auto scroll to bottom in action list
 
 d User separate from other persistince
 
-lib/core containing all common logic across persistence types
+x lib/core containing all common logic across persistence types
 
 ipfs
 - investigate for user mgmt
