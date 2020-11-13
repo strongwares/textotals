@@ -11,7 +11,6 @@ import {
   getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
-import { upperCaseEachWordify } from '../utils';
 import defaults from '../defaults';
 
 const TOTALS_SEP = '::';

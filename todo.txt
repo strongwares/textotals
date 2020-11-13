@@ -6,13 +6,7 @@ d- change to all uppercase in parsing
 d- spend 10 from savings was broken
 d- move 10 to savings (UI doesn't show savings on action totals response)
 
-Auto scroll to bottom in action list
-
-Finish overlay container
-
-Finish History
-- container
-- action op
+d Auto scroll to bottom in action list
 
 User separate from other persistince
 
@@ -23,4 +17,10 @@ ipfs
 - investigate for user's data persistence
 
 social media logins
+
+Finish overlay container
+
+Finish History
+- container
+- action op
 

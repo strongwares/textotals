@@ -1,5 +1,5 @@
 const opRe = /^(add|spend|move|give|adjust|set|link|unlink)$/;
-const amountRe = /^(-?\d*[\.]?\d+)$/;
+const amountRe = /^(-?\d*[.]?\d+)$/;
 const addToRe = /^.*add.*\sto\s+(\w+\s*\w*)$/;
 
 // Intended to catch "spend 10 on gas from savings"
