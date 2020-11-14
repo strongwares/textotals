@@ -59,7 +59,7 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
       <div className="p-inputgroup actions-input">
         <InputText
           autoFocus
-          className="p-inputtext-sm p-d-block"
+          className="p-inputtext-md p-d-block"
           id="actionInput"
           placeholder="Enter action to take or type 'help'"
           onChange={onChange}

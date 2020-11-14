@@ -10,13 +10,7 @@ const Overlay = ({ what }) => {
   }
 
   return (
-    <div
-      className="overlay-container"
-      style={{
-        height: '100%',
-        width: '100%',
-      }}
-    >
+    <div className="overlay-container">
       <TheOverlay />
     </div>
   );

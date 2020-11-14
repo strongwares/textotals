@@ -1,4 +1,16 @@
 .helpoverlay-container {
-  background-color: #444cf7;
   height: 100%;
+  width: 100%;
+}
+
+.p-carousel-prev {
+  margin: 3px 0px 3px 0px !important;
+}
+
+.p-carousel-next {
+  margin: 3px 0px 3px 0px !important;
+}
+
+.p-carousel-indicators {
+  padding: 2px 0px 2px 2px !important;
 }

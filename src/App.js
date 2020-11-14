@@ -57,10 +57,12 @@ function App() {
             position="top"
             style={{
               alignItems: 'center',
-              backgroundColor: '#444cf755',
-              height: 'calc(100vh - 9.5rem)',
+              borderRadius: '5%',
+              border: '2px solid blue',
+              backgrounddColor: '#e5e5f7',
+              height: 'calc(100vh - 3rem)',
               justifyContent: 'center',
-              marginTop: '5.5rem',
+              marginTop: '1rem',
               maxWidth: '327px',
               marginLeft: 'calc(50vw - 164px)',
               zIndex: 1000,

@@ -45,7 +45,7 @@ let groupXDefaultSpendCategory = 0;
 const defaultGroup = defaults.accountGroup;
 
 // Todo:
-// scroll action list to bottom on load
+// d scroll action list to bottom on load
 
 // d caci spend 10 from aib => pulls from main unless a category
 
@@ -55,10 +55,6 @@ const defaultGroup = defaults.accountGroup;
 
 // d problem: set main 500 passes but is not valid
 
-// dana
-// don't upper case anything if is all caps
-
-// dana
 // add an "undo" op to undo last
 // add a "send" op to send to main without linking being required
 
