@@ -8,7 +8,7 @@ import GiveOp from './screens/GiveOp';
 import ManyAccountNames from './screens/ManyAccountNames';
 import ManyAccountGroups from './screens/ManyAccountGroups';
 import MoveOp from './screens/MoveOp';
-import NotReallyTexting from './screens/NotReallyTexting';
+import TheBrain from './screens/TheBrain';
 import Possibilities from './screens/Possibilities';
 import SetOp from './screens/SetOp';
 import SpendOp from './screens/SpendOp';
@@ -18,18 +18,18 @@ import UppercaseLetters from './screens/UppercaseLetters';
 
 const helpScreenMap = {
   1: First,
-  2: NotReallyTexting,
-  3: Actions,
-  4: SetOp,
-  5: AccountNames,
-  6: ManyAccountNames,
-  7: AccountGroupNames,
-  8: ManyAccountGroups,
-  9: UppercaseLetters,
-  10: AddOp,
-  11: SpendOp,
-  12: SpendCategoryStuff,
-  13: SpendingCategories,
+  2: Actions,
+  3: SetOp,
+  4: SpendOp,
+  5: TheBrain,
+  6: AccountNames,
+  7: ManyAccountNames,
+  8: AccountGroupNames,
+  9: ManyAccountGroups,
+  10: UppercaseLetters,
+  11: SpendCategoryStuff,
+  12: SpendingCategories,
+  13: AddOp,
   14: GiveOp,
   15: MoveOp,
   16: AdjustOp,

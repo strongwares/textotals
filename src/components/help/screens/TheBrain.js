@@ -4,19 +4,19 @@ import './helpscreen.css';
 
 // <div className="fake-input-arrow animate__animated animate__bounceInDown" />
 
-const NotReallyTexting = (
+const TheBrain = (
   <div className="helpscreen-item">
-    <h2 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-      Not Really Texting
-    </h2>
+    <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+      Textotals Brain
+    </h3>
+
     <h4 className="p-mt-0 p-mb-3">
-      Its not really a text, it only goes to the Textotals app's little brain.
-    </h4>
-    <h4 className="p-mt-0 p-mb-3">
-      It figures out your account totals and texts them back like this:
+      Textotals automatically updates account totals after each action.
     </h4>
 
-    <div id="spacer" style={{ flex: 1 }} />
+    <h4 style={{ marginTop: '-10px' }} className="p-mt-0 p-mb-3">
+      Then it acts like it texts the totals back to you. Something like this:
+    </h4>
 
     <ActionItem
       action={{
@@ -34,4 +34,4 @@ const NotReallyTexting = (
   </div>
 );
 
-export default NotReallyTexting;
+export default TheBrain;

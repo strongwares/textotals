@@ -97,31 +97,86 @@ describe('test action parser', function () {
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'GROUPX spend 100';
+    action = 'alice school spend 1 on 1984 from reading';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('GROUPX');
+    expect(actionObj.accountGroup).toBe('ALICE SCHOOL');
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('1');
+    expect(actionObj.fromAccount).toBe('READING');
+    expect(actionObj.category).toBe('1984');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'alice school spend 3.5 on war and peace from reading';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ALICE SCHOOL');
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('3.5');
+    expect(actionObj.fromAccount).toBe('READING');
+    expect(actionObj.category).toBe('WAR AND PEACE');
+    expect(actionObj.isValid).toBe(true);
+
+    action =
+      'alice home school spend 3.5 on war and peace from reading and writing';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('ALICE HOME SCHOOL');
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('3.5');
+    expect(actionObj.fromAccount).toBe('READING AND WRITING');
+    expect(actionObj.category).toBe('WAR AND PEACE');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'GROUP X Y Z spend 100';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUP X Y Z');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'GROUP A spend 100';
+    action = 'GROUPA spend 100';
     actionObj = parseAction(action);
-    expect(actionObj.accountGroup).toBe('GROUP A');
+    expect(actionObj.accountGroup).toBe('GROUPA');
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100');
     expect(actionObj.fromAccount).toBe(undefined);
     expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
-    action = 'spend 100.09 on gas from savings';
+    action = 'spend 100.09 on gas and oil';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('spend');
     expect(actionObj.amount).toBe('100.09');
-    expect(actionObj.fromAccount).toBe('SAVINGS');
-    expect(actionObj.category).toBe('GAS');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.category).toBe('GAS AND OIL');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'spend 100.09 gas and oil';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.category).toBe('GAS AND OIL');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'spend 100.09 on gas and oil from savings and loan';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe('SAVINGS AND LOAN');
+    expect(actionObj.category).toBe('GAS AND OIL');
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'spend 100.09 from savings and loan';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('spend');
+    expect(actionObj.amount).toBe('100.09');
+    expect(actionObj.fromAccount).toBe('SAVINGS AND LOAN');
+    expect(actionObj.category).toBe(undefined);
     expect(actionObj.isValid).toBe(true);
 
     action = 'GROUPX spend 100.09 on GAS from SAVINGS';

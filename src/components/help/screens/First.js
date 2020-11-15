@@ -6,14 +6,24 @@ import './helpscreen.css';
 
 const First = (
   <div className="helpscreen-item">
-    <h2 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+    <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
       First
-    </h2>
+    </h3>
     <h4 className="p-mt-0 p-mb-3">
-      On the Action tab, enter an action in the bottom text box like here:
+      On the Action tab, enter an action in the bottom text box like this:
     </h4>
     <div id="spacer" style={{ flex: 1 }} />
-    <div className="fake-input-arrow animate__animated animate__bounceInDown" />
+
+    <div
+      style={{ textAlign: 'center', marginBottom: '10px' }}
+      className="animate__animated animate__bounceInDown"
+    >
+      <i
+        className="pi pi-arrow-down"
+        style={{ color: '#444cf7', fontSize: '5em' }}
+      ></i>
+    </div>
+
     <div
       className="p-inputgroup fake-action-input"
       style={{ marginBottom: '5px' }}
