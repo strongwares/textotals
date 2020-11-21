@@ -1,13 +1,13 @@
 .helpscreen-item {
   width: 100%;
   height: 100%;
+  background-color: #e5e5f7;
   display: flex;
   flex-direction: column;
   border-radius: 5%;
   border: 2px solid blue;
   padding: 2px 5px 2px 5px;
 
-  background-color: #e5e5f7;
   /* opacity: 0.5; */
   /*
   background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
@@ -27,9 +27,24 @@
   border-top: 100px solid #444cf7;
 }
 
-.fake-action-input {
-  background-color: #e5e5f7;
-  flex: 0;
-  width: 100%;
-  min-height: 2rem;
+.myaccountgroup-item {
+  color: black;
+  margin: 15px 10px 0px 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #444cf7;
+  opacity: 0.5;
+  align-items: center;
+  text-align: center;
+}
+
+.mycategorytotals-item {
+  color: black;
+  margin: 15px 10px 0px 10px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #444cf7;
+  opacity: 0.5;
+  align-items: center;
+  text-align: center;
 }
