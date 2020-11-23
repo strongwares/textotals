@@ -17,7 +17,7 @@ const Possibilities = (
     </h4>
 
     <h4 style={{ marginBottom: '0px' }} className="p-mt-0">
-      In these actions:
+      In the actions below:
     </h4>
 
     <ul>
