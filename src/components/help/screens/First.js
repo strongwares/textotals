@@ -22,18 +22,44 @@ const First = () => {
           First
         </h3>
         <h4 className="p-mt-0 p-mb-3">
-          On the Action tab, enter an action in the bottom text box like this:
+          On the Action tab, enter an action in the bottom text box.
         </h4>
+
+        <h4 className="p-mt-0 p-mb-3">
+          Or you can enter 'help' to display the help panels again.
+        </h4>
+
+        <div style={{ marginLeft: '100px' }}>
+          <h4 className="p-mt-0 p-mb-3">
+            Then hit the 'Enter' key or click the round 'plus' Add button:
+          </h4>
+        </div>
+
         <div id="spacer" style={{ flex: 1 }} />
 
         {isVisible && (
           <div
-            style={{ textAlign: 'center', marginBottom: '10px' }}
+            style={{ display: 'flex', flexDirection: 'row' }}
             className="animate__animated animate__bounceInDown"
           >
             <i
               className="pi pi-arrow-down"
-              style={{ color: '#444cf7', fontSize: '5em' }}
+              style={{
+                marginLeft: '5px',
+                marginBottom: '10px',
+                color: '#444cf7',
+                fontSize: '5em',
+              }}
+            ></i>
+
+            <i
+              className="pi pi-arrow-down"
+              style={{
+                marginLeft: '150px',
+                marginTop: '50px',
+                color: '#444cf7',
+                fontSize: '2em',
+              }}
             ></i>
           </div>
         )}

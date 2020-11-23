@@ -58,16 +58,20 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
     <>
       <div className="p-inputgroup actions-input">
         <InputText
-          autoFocus
-          className="p-inputtext-md p-d-block"
+          autoFocus={false}
+          className="p-inputtext-lg p-d-block"
           id="actionInput"
-          placeholder="Enter action to take or type 'help'"
+          placeholder="Type 'help' or enter action"
           onChange={onChange}
           onKeyPress={onKeyPress}
           type="text"
           value={curValue}
         />
-        <Button onClick={onClick} icon="pi pi-plus-circle" />
+        <Button
+          className="p-button-lg"
+          onClick={onClick}
+          icon="pi pi-plus-circle"
+        />
       </div>
       {!isValid && (
         <div className="actions-input-invalid">

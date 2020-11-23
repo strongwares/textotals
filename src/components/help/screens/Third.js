@@ -25,7 +25,7 @@ const Third = () => {
 
         <div style={{ marginTop: '-5px' }}>
           <h4 className="p-mt-0 p-mb-3">
-            The Totals tab shows the total spent in differen categories:
+            The Totals tab shows the total spent in different categories:
           </h4>
         </div>
 

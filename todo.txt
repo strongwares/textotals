@@ -57,23 +57,26 @@ to fix:
 - screens too wide for iphone7
 - with toolbar, screen is too short also
 - make help screens couple pixels to right
-- help screens are too tall, bottom links and down arrow not showing
-- don't auto focus action input, it automatically pops up keyboard
-- don't have the totals and accounts screens opaque
-- don't have help screens opaque
-- move example and possibilities help screens to end
+- oniphone7, help screens are too tall, bottom links and down arrow not showing
+d- don't auto focus action input, it automatically pops up keyboard
+d- make action input a bit bigger?
+x- make action input add button bigger?
+d- don't have the totals and accounts screens opaque
+d- don't have help screens opaque
+d- move example and possibilities help screens to end
 - make it clear that add is deposit, move is transfer, etc
 - on help screens, make the account name and category name highlighted in yellow
 - make sure to remove trailing spaces from user name and email and pwd
 - make sure to set user action to lower case
 - on iphone7, the help screens are drifting lower and lower to bottom
-- make help screen animate arrow icons smaller
 - add a clear action
-- make the action add button larger
-- and as action is typed in, make add button emphasized
+x- make help screen animate arrow icons smaller
+x- make the action add button larger
+x- and as action is typed in, make add button emphasized
 
 
-- add info page like zanshin.dev
+todo:
+- add info page somewhere like zanshin.dev
 
 
 ipfs
