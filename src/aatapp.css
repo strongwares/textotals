@@ -15,7 +15,7 @@
     --responsive-width: calc(100% - 10px);
     --responsive-overlaywidth: calc(100% - 10px);
     --responsive-overlayMarginLeft: 4px;
-    --responsive-tabViewTitlePadding: 0.75rem;
+    --responsive-tabViewTitlePadding: 0.5rem;
   }
 }
 

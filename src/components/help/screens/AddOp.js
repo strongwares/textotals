@@ -4,7 +4,7 @@ import './helpscreen.css';
 const AddOp = (
   <div className="helpscreen-item">
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-      {'The Add Operation'}
+      {'The Add Action'}
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
