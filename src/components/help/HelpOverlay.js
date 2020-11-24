@@ -11,7 +11,7 @@ const itemTemplate = (screenNum) => {
 const HelpOverlay = () => (
   <div className="helpoverlay-container card">
     <Carousel
-      style={{ maxWidth: '300px', margin: '0px' }}
+      style={{ margin: '0px' }}
       value={helpScreenList}
       numVisible={1}
       numScroll={1}

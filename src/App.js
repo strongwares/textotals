@@ -56,16 +56,20 @@ function App() {
             onHide={() => setShowSidebar(undefined)}
             position="top"
             style={{
-              alignItems: 'center',
               borderRadius: '5%',
               border: '2px solid blue',
               backgrounddColor: '#e5e5f7',
-              height: 'calc(100vh - 3rem)',
-              justifyContent: 'center',
+              height: 'calc(100% - 1rem)',
+              aheight: 'var(--overlayHeight)',
+              aheight: '100%',
               marginTop: '1rem',
-              maxWidth: '327px',
-              marginLeft: 'calc(50vw - 164px)',
+              maxWidth: 'var(--responsive-overlaywidth)',
               zIndex: 1000,
+
+              aalignItems: 'center',
+              justifyContent: 'center',
+
+              marginLeft: 'var(--responsive-overlayMarginLeft)',
             }}
             visible={!!showSidebar}
           >

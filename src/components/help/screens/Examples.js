@@ -1,14 +1,13 @@
 import React from 'react';
 import './helpscreen.css';
 
+// style={{ height: '370px', maxHeight: '370px', overflowY: 'auto' }}
 const Examples = (
-  <div
-    style={{ height: '370px', maxHeight: '370px', overflowY: 'auto' }}
-    className="helpscreen-item"
-  >
+  <div className="helpscreen-item">
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
       Examples
     </h3>
+
     <h4 className="p-mt-0 p-mb-3">
       These are examples of what Textotals actions look like. Actions are what
       you type into the bottom of the 'Action' tab.
@@ -69,6 +68,8 @@ const Examples = (
         home school spend 3.5 on war and peace from reading
       </div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

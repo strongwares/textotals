@@ -32,6 +32,8 @@ const ManyAccountNames = (
       <div className="action-item-action">set 500 another account</div>
       <div className="action-item-action">set 500 accountX</div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

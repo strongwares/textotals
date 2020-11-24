@@ -22,6 +22,8 @@ const AdjustOp = (
       <div className="action-item-action">adjust -0.99</div>
       <div className="action-item-action">adjust 50.99 savings</div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

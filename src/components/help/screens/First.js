@@ -19,14 +19,14 @@ const First = () => {
     >
       <div className="helpscreen-item">
         <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-          First
+          Actions
         </h3>
         <h4 className="p-mt-0 p-mb-3">
           On the Action tab, enter an action in the bottom text box.
         </h4>
 
         <h4 className="p-mt-0 p-mb-3">
-          Or you can enter 'help' to display the help panels again.
+          Or you can enter 'help' to display these help panels again.
         </h4>
 
         <div style={{ marginLeft: '100px' }}>

@@ -20,6 +20,8 @@ const MoveOp = (
         contract x move 299 from account a to account b
       </div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

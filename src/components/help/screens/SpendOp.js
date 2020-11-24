@@ -20,6 +20,8 @@ const SpendOp = (
       <div className="action-item-action">spend 19.19 on gas</div>
       <div className="action-item-action">spend 10.99 from savings</div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

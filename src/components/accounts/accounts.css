@@ -12,12 +12,13 @@
 
 .accountgroup-item {
   color: black;
-  margin: 15px 10px 0px 10px;
+  margin: 5px 10px 0px 10px;
   padding: 5px;
   border-radius: 10px;
   background-color: #444cf7;
+  font-size: 18px !important;
 }
-
+/*
 .categorytotals-item {
   color: black;
   margin: 15px 10px 0px 10px;
@@ -25,3 +26,4 @@
   border-radius: 10px;
   background-color: #444cf7;
 }
+*/

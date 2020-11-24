@@ -31,6 +31,8 @@ const GiveOp = (
         give 500 to charity x from savings
       </div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

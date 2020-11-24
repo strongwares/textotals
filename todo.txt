@@ -54,22 +54,29 @@ d- build it
 d- scp it to /var/www/textotals.com
 
 to fix:
-- screens too wide for iphone7
+
 - with toolbar, screen is too short also
 - make help screens couple pixels to right
-- oniphone7, help screens are too tall, bottom links and down arrow not showing
+
+- screens too wide for iphone7
+- the HelpOverlay carousel's verticalPortHeight is hardcoded, whichis bad
+
+d- oniphone7, help screens are too tall, bottom links and down arrow not showing
+d- on iphone7, the help screens are drifting lower and lower to bottom
 d- don't auto focus action input, it automatically pops up keyboard
 d- make action input a bit bigger?
 x- make action input add button bigger?
 d- don't have the totals and accounts screens opaque
 d- don't have help screens opaque
 d- move example and possibilities help screens to end
-- make it clear that add is deposit, move is transfer, etc
-- on help screens, make the account name and category name highlighted in yellow
+d- make it clear that add is deposit, move is transfer, etc
+d- on help screens, make the account name and category name highlighted in yellow
+
 - make sure to remove trailing spaces from user name and email and pwd
 - make sure to set user action to lower case
-- on iphone7, the help screens are drifting lower and lower to bottom
+
 - add a clear action
+
 x- make help screen animate arrow icons smaller
 x- make the action add button larger
 x- and as action is typed in, make add button emphasized

@@ -25,6 +25,8 @@ const SpendingCategories = (
         contract x spend 485.01 on software from account a
       </div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

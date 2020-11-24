@@ -25,6 +25,8 @@ const SetOp = (
       <div className="action-item-action">set 500</div>
       <div className="action-item-action">set 500 savings</div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

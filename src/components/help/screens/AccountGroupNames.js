@@ -39,6 +39,8 @@ const AccountGroupNames = (
     </div>
 
     <h4 className="p-mt-0 p-mb-3">is also the same action.</h4>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

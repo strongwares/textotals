@@ -19,6 +19,8 @@ const UppercaseLetters = (
     <h4 className="p-mt-0 p-mb-3">
       That just makes it easier for its little brain to remember things.
     </h4>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

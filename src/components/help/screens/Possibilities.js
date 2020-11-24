@@ -1,11 +1,10 @@
 import React from 'react';
 import './helpscreen.css';
 
+// style={{ height: '370px', maxHeight: '370px', overflowY: 'auto' }}
+
 const Possibilities = (
-  <div
-    className="helpscreen-item"
-    style={{ height: '370px', maxHeight: '370px', overflowY: 'auto' }}
-  >
+  <div className="helpscreen-item">
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
       Possibilities
     </h3>
@@ -36,6 +35,8 @@ const Possibilities = (
         school spend 3.5 on war and peace from reading
       </div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

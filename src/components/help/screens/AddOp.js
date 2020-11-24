@@ -18,6 +18,8 @@ const AddOp = (
       <div className="action-item-action">add 500 savings</div>
       <div className="action-item-action">contract x add 500 account a</div>
     </div>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

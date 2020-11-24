@@ -31,6 +31,8 @@ const TheBrain = (
         timestampMs: new Date().getTime(),
       }}
     />
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 

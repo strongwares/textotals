@@ -1,4 +1,20 @@
+:root {
+  --responsive-width: 400px;
+  --responsive-overlaywidth: 400px;
+  --responsive-overlayMarginLeft: calc(50% - 200px);
+  --overlayHeight: 80vh;
+}
+
+@media screen and (max-device-width: 640px), screen and (max-width: 640px) {
+  :root {
+    --responsive-width: calc(100% - 10px);
+    --responsive-overlaywidth: calc(100% - 10px);
+    --responsive-overlayMarginLeft: 4px;
+  }
+}
+
 .aatapp-container {
+  /* margin-top: 15px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,13 +22,21 @@
   height: 100%;
 }
 
+.sidebar-container {
+  align-items: center;
+  justify-content: center;
+  aheight: 100%;
+  border: 2px solid black;
+  padding: 10px;
+}
+
 .aatapp-appcard {
   margin: 1rem;
   align-items: center;
   text-align: center;
-  width: 336px;
-  max-width: 336px;
-  min-width: 336px;
+  width: var(--responsive-width);
+  max-width: var(--responsive-width);
+  min-width: var(--responsive-width);
 }
 
 .aatapp-tabview {
@@ -23,12 +47,9 @@
 .aatapp-tabpanel-content {
   height: calc(100vh - 7rem);
   font-size: calc(10px + 2vmin);
-  /* color: white; */
-  /* color: #282c34; */
-  /* background-color: #282c34; */
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
+  border-radius: 5%;
   background-color: #e5e5f7;
-  /* opacity: 0.5; */
   background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
       36px 36px,
     linear-gradient(225deg, #444cf7 25%, transparent 25%) -18px 0/ 36px 36px,
@@ -55,6 +76,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.p-sidebar-content {
+  height: var(--overlayHeight);
+  border: 2px solid black;
 }
 
 .p-tabview .p-tabview-panels {
@@ -88,4 +114,25 @@
 
 ul {
   margin-block-start: unset !important;
+}
+
+.p-datatable .p-datatable-header {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.p-card {
+  border: 2px solid blue !important;
+  border-radius: 5% !important;
+}
+
+.p-carousel-content {
+  height: var(--overlayHeight);
 }

@@ -32,6 +32,8 @@ const SpendCategoryStuff = (
     <h4 style={{ marginBottom: '-10px' }} className="p-mt-0">
       Will put the spent amounts into the STUFF category of each account.
     </h4>
+
+    <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
 
