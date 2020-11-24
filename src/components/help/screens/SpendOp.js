@@ -8,8 +8,8 @@ const SpendOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Text "spend" to tell Textotals that you've spent something from one of
-      your accounts.
+      Use the "spend" action to tell Textotals that you've spent something from
+      one of your accounts.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">

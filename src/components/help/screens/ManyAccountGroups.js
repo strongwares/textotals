@@ -22,10 +22,10 @@ const ManyAccountGroups = (
 
     <div style={{ marginLeft: '20px' }}>
       <div className="action-item-action">drawer set 500</div>
+      <div className="action-item-action">home school set 500</div>
       <div className="action-item-action">credit union set 500 main</div>
       <div className="action-item-action">contract x set 500 account a</div>
       <div className="action-item-action">contract x set 500 account b</div>
-      <div className="action-item-action">home school set 500</div>
     </div>
 
     <div id="spacer" style={{ flex: 1 }} />

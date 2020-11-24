@@ -11,35 +11,35 @@ const Actions = (
     <div className="action-li">
       <div className="action-li-name">set:&nbsp;</div>
       <div className="action-li-descr">
-        like opening an account, set the starting amount
+        like opening an account, you set the starting amount
       </div>
     </div>
 
     <div className="action-li">
       <div className="action-li-name">spend:&nbsp;</div>
       <div className="action-li-descr">
-        like buying groceries, pull an amount from an account
+        like buying groceries, you pull an amount out of an account
       </div>
     </div>
 
     <div className="action-li">
       <div className="action-li-name">add:&nbsp;</div>
       <div className="action-li-descr">
-        like a deposit, increases the amount in an account
+        like a deposit, you increase the amount in an account
       </div>
     </div>
 
     <div className="action-li">
       <div className="action-li-name">move:&nbsp;</div>
       <div className="action-li-descr">
-        like a transfer, move an amount from one account to another
+        like a transfer, you move an amount from one account to another
       </div>
     </div>
 
     <div className="action-li">
       <div className="action-li-name">adjust:&nbsp;</div>
       <div className="action-li-descr">
-        like a correction, add or remove an amount from an account
+        like a correction or a fee, you add or remove an amount from an account
       </div>
     </div>
 

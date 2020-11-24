@@ -14,7 +14,11 @@ const LoginForm = ({ onClose }) => {
   const [nameValue, setName] = useState('');
 
   async function onLoginClick(name, password) {
-    const response = await loginUser(name, password);
+    console.log(`name is "${name.trim().toLowerCase()}"`);
+    const response = await loginUser(
+      name.trim().toLowerCase(),
+      password.trim()
+    );
     if (!response.ok) {
       if (response.data) {
         setLoginError(response.data.error);

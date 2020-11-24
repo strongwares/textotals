@@ -8,8 +8,8 @@ const GiveOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Text "give" to tell Textotals that you've spent something on charitable
-      giving.
+      Use the "give" action to tell Textotals that you've given an amount to a
+      charity.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">

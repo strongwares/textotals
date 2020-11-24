@@ -56,9 +56,8 @@ d- scp it to /var/www/textotals.com
 to fix:
 - iphone7, with toolbar, screen is too short also
 
-- make sure to remove trailing spaces from user name and email and pwd
-- make sure to set user action to lower case
-
+d- set user action to lower case
+d- make sure to remove trailing spaces from user name and email and pwd
 d- tabpanel tabs too wide for iphone7
 d screens too wide for iphone7
 d- make help screens couple pixels to right
@@ -73,7 +72,6 @@ d- don't have help screens opaque
 d- move example and possibilities help screens to end
 d- make it clear that add is deposit, move is transfer, etc
 d- on help screens, make the account name and category name highlighted in yellow
-
 
 
 x- make help screen animate arrow icons smaller

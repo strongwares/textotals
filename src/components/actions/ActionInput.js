@@ -16,6 +16,7 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
 
     if (actionStr.toLowerCase() === 'help') {
       onHelp();
+      setValue('');
       return;
     }
 
@@ -61,14 +62,14 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
           autoFocus={false}
           className="p-inputtext-lg p-d-block"
           id="actionInput"
-          placeholder="Type 'help' or enter action"
+          placeholder="Type 'help' or type an action"
           onChange={onChange}
           onKeyPress={onKeyPress}
           type="text"
           value={curValue}
         />
         <Button
-          className="p-button-lg"
+          className="p-button-sm"
           onClick={onClick}
           icon="pi pi-plus-circle"
         />

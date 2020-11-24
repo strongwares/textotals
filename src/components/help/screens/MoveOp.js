@@ -8,8 +8,8 @@ const MoveOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Text "move" to tell Textotals that you want to move an amount from one
-      account to another.
+      Use the "move" action to tell Textotals that you want to transfer an
+      amount from one account to another.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">Here are examples of move actions:</h4>

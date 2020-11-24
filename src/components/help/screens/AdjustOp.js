@@ -4,16 +4,17 @@ import './helpscreen.css';
 const AdjustOp = (
   <div className="helpscreen-item">
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-      {'The "adjust" Operation'}
+      {'The "adjust" Action'}
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Text "adjust" to tell Textotals that you need to adjust the total amount
-      that is in one of your accounts.
+      Use the "adjust" action to tell Textotals that you need to adjust the
+      total amount that is in one of your accounts.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      The adjust operation adds or subtracts an amount from a specified account.
+      The "adjust" action adds or subtracts an amount from the specified
+      account.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">Here are examples of adjust actions:</h4>

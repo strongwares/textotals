@@ -66,7 +66,7 @@ function parseAction(strIn) {
     const token = tokens[tokenIdx];
     const tokenLc = token.toLowerCase();
     if (opRe.test(tokenLc)) {
-      rval.op = tokens[tokenIdx];
+      rval.op = tokenLc; // tokens[tokenIdx];
     }
     tokenIdx++;
   }

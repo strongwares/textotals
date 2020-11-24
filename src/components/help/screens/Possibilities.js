@@ -8,22 +8,21 @@ const Possibilities = (
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
       Possibilities
     </h3>
-    <h4 className="p-mt-0 p-mb-3">Textotals tracks numbers.</h4>
+    <h4 className="p-mt-0 p-mb-3">Textotals just tracks numbers.</h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      You can track things (time, money) that reduce an amount (contract hours,
-      main checking account) by spending from an account.
+      You can track almost anything, like time or money.
     </h4>
 
     <h4 style={{ marginBottom: '0px' }} className="p-mt-0">
-      In the actions below:
+      For example, these actions below track time spent reading.
     </h4>
 
     <ul>
       <li>the account belongs to a group named "SCHOOL"</li>
-      <li>the account is "READING"</li>
+      <li>the account name is "READING"</li>
       <li>the numbers are hours</li>
-      <li>the categories are book titles</li>
+      <li>the category names ("1984" and "war and peace") are book titles</li>
     </ul>
 
     <div style={{ marginTop: '-10px' }}>

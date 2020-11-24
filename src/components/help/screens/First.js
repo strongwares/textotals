@@ -22,16 +22,16 @@ const First = () => {
           Actions
         </h3>
         <h4 className="p-mt-0 p-mb-3">
-          On the Action tab, enter an action in the bottom text box.
+          On the Action tab, type in an action in the bottom text box.
         </h4>
 
         <h4 className="p-mt-0 p-mb-3">
-          Or you can enter 'help' to display these help panels again.
+          Or you can type 'help' to display these help screens again.
         </h4>
 
         <div style={{ marginLeft: '120px' }}>
           <h4 className="p-mt-0 p-mb-3">
-            Then hit the 'Enter' key or click the round 'plus' Add button:
+            Then hit the 'Enter' key or click the round 'plus' button:
           </h4>
         </div>
 

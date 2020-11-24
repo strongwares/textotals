@@ -8,14 +8,13 @@ const SetOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      First you must set the starting total for your main account.
+      First you should set the starting total for your main account.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      And for any another account you want to keep track of.
+      And use the "set" action to set the starting total for any another account
+      you want to keep track of.
     </h4>
-
-    <h4 className="p-mt-0 p-mb-3">One named "savings" for example.</h4>
 
     <h4 className="p-mt-0 p-mb-3">
       Here are examples of set actions you could enter:

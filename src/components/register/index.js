@@ -16,7 +16,11 @@ const RegisterForm = ({ onClose }) => {
   const [nameValue, setName] = useState('');
 
   async function onRegisterClick(userName, email, password) {
-    const userObj = { userName, email, password };
+    const userObj = {
+      userName: userName.trim().toLowerCase(),
+      email: email.trim().toLowerCase(),
+      password: password.trim(),
+    };
     let response = await registerUser(userObj);
 
     if (!response.ok) {

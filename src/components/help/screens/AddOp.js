@@ -8,7 +8,8 @@ const AddOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Text "add" to tell Textotals to add some amount to one of your accounts.
+      Use the "add" action to tell Textotals to add an amount to one of your
+      accounts.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">Here are examples of add actions:</h4>

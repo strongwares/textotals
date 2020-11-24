@@ -152,3 +152,11 @@ ul {
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
   padding: var(--responsive-tabViewTitlePadding) !important;
 }
+
+.p-inputtext.p-inputtext-lg {
+  padding: 0 !important;
+}
+
+.p-inputtext {
+  padding: 0 !important;
+}
