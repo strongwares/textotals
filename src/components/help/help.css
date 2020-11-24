@@ -1,7 +1,5 @@
 .helpoverlay-container {
-  height: 100%;
-  awidth: 100%;
-  awidth: var(--responsive-overlaywidth);
+  height: var(--sidebarContentHeight) !important;
 }
 
 .p-carousel-prev {

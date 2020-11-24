@@ -11,7 +11,7 @@ const Actions = (
     <div className="action-li">
       <div className="action-li-name">set:&nbsp;</div>
       <div className="action-li-descr">
-        like opening an account, sets the starting amount
+        like opening an account, set the starting amount
       </div>
     </div>
 
@@ -46,7 +46,7 @@ const Actions = (
     <div className="action-li">
       <div className="action-li-name">give:&nbsp;</div>
       <div className="action-li-descr">
-        like spending, you give an mount to some charity
+        like spending, but you give an amount to charity
       </div>
     </div>
 

@@ -29,7 +29,7 @@ const First = () => {
           Or you can enter 'help' to display these help panels again.
         </h4>
 
-        <div style={{ marginLeft: '100px' }}>
+        <div style={{ marginLeft: '120px' }}>
           <h4 className="p-mt-0 p-mb-3">
             Then hit the 'Enter' key or click the round 'plus' Add button:
           </h4>
@@ -39,28 +39,41 @@ const First = () => {
 
         {isVisible && (
           <div
-            style={{ display: 'flex', flexDirection: 'row' }}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              marginTop: '-80px',
+              marginBottom: '0px',
+              marginLeft: '5px',
+            }}
             className="animate__animated animate__bounceInDown"
           >
             <i
               className="pi pi-arrow-down"
               style={{
-                marginLeft: '5px',
-                marginBottom: '10px',
+                flex: 0,
                 color: '#444cf7',
                 fontSize: '5em',
               }}
             ></i>
 
-            <i
-              className="pi pi-arrow-down"
+            <div id="spacer" style={{ flex: 1 }} />
+
+            <div
               style={{
-                marginLeft: '150px',
-                marginTop: '50px',
-                color: '#444cf7',
-                fontSize: '2em',
+                flex: 0,
+                marginRight: '5px',
               }}
-            ></i>
+            >
+              <i
+                className="pi pi-arrow-down"
+                style={{
+                  marginTop: '50px',
+                  color: '#444cf7',
+                  fontSize: '2em',
+                }}
+              ></i>
+            </div>
           </div>
         )}
 

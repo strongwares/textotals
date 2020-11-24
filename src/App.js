@@ -59,10 +59,8 @@ function App() {
               borderRadius: '5%',
               border: '2px solid blue',
               backgrounddColor: '#e5e5f7',
-              height: 'calc(100% - 1rem)',
-              aheight: 'var(--overlayHeight)',
-              aheight: '100%',
-              marginTop: '1rem',
+              height: 'var(--sidebarHeight)',
+              marginTop: '0.5rem',
               maxWidth: 'var(--responsive-overlaywidth)',
               zIndex: 1000,
 

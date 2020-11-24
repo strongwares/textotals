@@ -2,7 +2,12 @@
   --responsive-width: 400px;
   --responsive-overlaywidth: 400px;
   --responsive-overlayMarginLeft: calc(50% - 200px);
-  --overlayHeight: 80vh;
+  --responsive-tabViewTitlePadding: 1rem;
+  --responsive-helpScreenItemHeight: calc(100vh - 17rem);
+
+  --tabPanelContentHeight: calc(100vh - 7rem);
+  --sidebarHeight: calc(100% - 1rem);
+  --sidebarContentHeight: calc(100% - 2rem);
 }
 
 @media screen and (max-device-width: 640px), screen and (max-width: 640px) {
@@ -10,6 +15,13 @@
     --responsive-width: calc(100% - 10px);
     --responsive-overlaywidth: calc(100% - 10px);
     --responsive-overlayMarginLeft: 4px;
+    --responsive-tabViewTitlePadding: 0.75rem;
+  }
+}
+
+@media screen and (max-device-height: 655px), screen and (max-height: 655px) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
@@ -25,8 +37,6 @@
 .sidebar-container {
   align-items: center;
   justify-content: center;
-  aheight: 100%;
-  border: 2px solid black;
   padding: 10px;
 }
 
@@ -45,9 +55,8 @@
 }
 
 .aatapp-tabpanel-content {
-  height: calc(100vh - 7rem);
+  height: var(--tabPanelContentHeight);
   font-size: calc(10px + 2vmin);
-  /* border: 2px solid blue; */
   border-radius: 5%;
   background-color: #e5e5f7;
   background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
@@ -79,8 +88,7 @@
 }
 
 .p-sidebar-content {
-  height: var(--overlayHeight);
-  border: 2px solid black;
+  height: var(--sidebarHeight);
 }
 
 .p-tabview .p-tabview-panels {
@@ -133,6 +141,14 @@ ul {
   border-radius: 5% !important;
 }
 
+.p-sidebar-content {
+  height: var(--sidebarContentHeight) !important;
+}
+
 .p-carousel-content {
-  height: var(--overlayHeight);
+  height: calc(var(--sidebarContentHeight) - 1rem) !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  padding: var(--responsive-tabViewTitlePadding) !important;
 }
