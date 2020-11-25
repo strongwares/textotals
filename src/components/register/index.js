@@ -65,9 +65,13 @@ const RegisterForm = ({ onClose }) => {
                 id="userName"
                 value={nameValue}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="User Name: a single word user ID"
               />
-              <label htmlhtmlFor="userName">User Name:</label>
+              <label
+                style={{ fontSize: '14px', fontWeight: 'bold' }}
+                htmlhtmlFor="userName"
+              >
+                User Name (single word user ID)
+              </label>
             </span>
           </div>
 
@@ -80,9 +84,13 @@ const RegisterForm = ({ onClose }) => {
                 id="userEmail"
                 value={emailValue}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email: your email address"
               />
-              <label htmlhtmlFor="userEmail">Email:</label>
+              <label
+                style={{ fontSize: '14px', fontWeight: 'bold' }}
+                htmlhtmlFor="userEmail"
+              >
+                Email Address
+              </label>
             </span>
           </div>
 

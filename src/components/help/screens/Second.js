@@ -4,10 +4,6 @@ import { DataTable } from 'primereact/datatable';
 import 'animate.css/animate.min.css';
 import './helpscreen.css';
 
-// Using VizSensor since this guy is a screen in the help
-// carousel that gets rendered immediately when the carousel
-// is loaded. But we want to run animation effect only when
-// it is visible.
 const Second = () => {
   return (
     <div className="helpscreen-item">

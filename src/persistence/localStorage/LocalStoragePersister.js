@@ -1,7 +1,10 @@
+import * as C from '../../constants';
+
 let storage = window.localStorage;
-const ACCOUNTS_KEY = 'accounts';
-const CATEGORIES_KEY = 'categories';
-const ACTIONS_KEY = 'actions';
+
+const ACCOUNTS_KEY = `__${C.APP_NAME}__accounts`;
+const CATEGORIES_KEY = `__${C.APP_NAME}__categories`;
+const ACTIONS_KEY = `__${C.APP_NAME}_actions`;
 
 class LocalStoragePersister {
   constructor() {

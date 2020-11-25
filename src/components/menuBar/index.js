@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import AuthContext from '../../auth/context';
 import useAuth from '../../auth/useAuth';
 import logo from '../../assets/icons/logo.png';
@@ -23,50 +24,30 @@ const MenuBar = ({ onItemClick }) => {
         onClick={() => onItemClick('help')}
       />
       <div id="spacer" style={{ flex: 1 }} />
+
       {!!user && (
-        <i
-          title="Logout"
-          className="pi pi-sign-out menubar-icon"
-          onClick={onLogout}
-        />
+        <div>
+          <span>{user.userName}</span>
+        </div>
+      )}
+      <div id="spacer" style={{ flex: 1 }} />
+
+      {!!user && (
+        <>
+          <span style={{ marginRight: '10px' }}>Logout: </span>
+          <i
+            title="Logout"
+            className="pi pi-sign-out menubar-icon"
+            onClick={onLogout}
+          />
+        </>
       )}
     </div>
   );
 };
 
-// The primereact menubar component is too helpful and sets a breakpoint
-// on narrow screens and them creates a hamburger menu with a drop down
-/*
-class MenuBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.items = [
-      {
-        icon: 'pi pi-question-circle',
-        command: () => props.onItemClick('help'),
-      },
-    ];
-  }
-
-  render() {
-    const start = (
-      <img
-        alt="Action Accounts Totals Logo"
-        className="p-mr-2"
-        height="20"
-        src={logo}
-        title="Action Accounts Totals"
-      />
-    );
-
-    return (
-      <div className="menubar-container">
-        <Menubar model={this.items} start={start} />
-      </div>
-    );
-  }
-}
-*/
+MenuBar.propTypes = {
+  onItemClick: PropTypes.func.isRequired,
+};
 
 export default MenuBar;

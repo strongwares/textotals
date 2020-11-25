@@ -1,4 +1,6 @@
-const FAKE = 1;
+import * as C from '../../constants';
+
+const FAKE = false;
 const FAKE_USER = {
   userName: 'test',
   email: 'test@test.com',
@@ -6,7 +8,7 @@ const FAKE_USER = {
 };
 
 let storage = window.localStorage;
-const USERS_KEY = 'users';
+const USERS_KEY = `__${C.APP_NAME}__users`;
 
 class LocalStorageUsers {
   constructor() {

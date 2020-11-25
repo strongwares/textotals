@@ -56,9 +56,13 @@ const LoginForm = ({ onClose }) => {
                 id="userName"
                 value={nameValue}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="User Name: a single word user ID"
               />
-              <label htmlhtmlFor="userName">User Name:</label>
+              <label
+                style={{ fontSize: '14px', fontWeight: 'bold' }}
+                htmlhtmlFor="userName"
+              >
+                User Name (single word user ID)
+              </label>
             </span>
           </div>
 

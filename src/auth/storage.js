@@ -1,4 +1,6 @@
-const KEY = 'authToken';
+import * as C from '../constants';
+
+const KEY = `__${C.APP_NAME}__authToken`;
 
 let myStorage = window.localStorage;
 

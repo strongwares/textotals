@@ -53,9 +53,6 @@ d- get pki cert:
 d- build it
 d- scp it to /var/www/textotals.com
 
-to fix:
-- iphone7, with toolbar, screen is too short also
-
 d- set user action to lower case
 d- make sure to remove trailing spaces from user name and email and pwd
 d- tabpanel tabs too wide for iphone7
@@ -79,11 +76,7 @@ x- make the action add button larger
 x- and as action is typed in, make add button emphasized
 
 
-todo:
-- add a clear action
-- add info page somewhere like zanshin.dev
-
-sizing:
+sizing notes:
 - responsive css vars in aatapp.css:
   default:
   --responsive-width: 400px;
@@ -104,7 +97,6 @@ default:
 --responsive-helpScreenItemHeight: calc(100vh - 17rem);
 height under 655
 --responsive-helpScreenItemHeight: calc(100vh - 18rem);
-
 
 
 SideBar in App.js style:
@@ -135,6 +127,20 @@ Each HelpOverlay Carousel  item is defined as a
 
 
 d- the first help screen small arrow needs to be width responsive
+
+d- add logged in user to toolbar
+d- drop the default text from login and register input fields
+d- add help screen on only local storage
+d- add help screen on not very connected
+
+todo:
+- for local storage, make sure it is under textotals
+- add help screen on last 2 months
+- add undo last action
+- add a clear action
+
+- add info page somewhere like zanshin.dev
+- iphone7, with toolbar, screen is too short also
 
 ipfs
 - investigate for user mgmt

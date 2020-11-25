@@ -19,6 +19,8 @@ const helpScreenList = [
   18,
   19,
   20,
+  21,
+  22,
 ];
 
 export default helpScreenList;

@@ -9,7 +9,7 @@ const Examples = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      These are examples of what Textotals actions look like:
+      Here are some examples of Textotals actions.
     </h4>
 
     <div style={{ marginTop: '-10px' }}>
