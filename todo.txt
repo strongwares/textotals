@@ -135,13 +135,33 @@ d- add help screen on not very connected
 d- for local storage, make sure it is under textotals
 
 todo:
+d- change register button to add user
+d- add unregister or remove unregister button on welcome and screen:
+  - user name input
+  - pwd input
+  - prompt: are you sure, it will erase all info on this device for this user
+  - if user not found, show all users found
+  - on submit, erase all data for that user and erase user
+d- add premium button welcome and screen:
+  - coming soon
+  - in the meantime...
+
+- on add action, delete last month actions, or older then month
+- update persistence help screen on last month only
+
 - disable the swipe action in help screen from reloading app
-- add help screen on last 2 months
 - add undo last action
 - add a clear action
-
-- add info page somewhere like zanshin.dev
 - iphone7, with toolbar, screen is too short also
+
+
+Put info page somewhere like zanshin.dev
+
+Don't open source aat.fyi, but make it its own landing page:
+  - with the gatsby page like zanshin
+  - with ability to run aat.fyi in a popup dialog
+
+
 
 ipfs
 - investigate for user mgmt

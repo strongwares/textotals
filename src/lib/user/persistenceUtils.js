@@ -16,4 +16,14 @@ async function registerUser(userObj) {
   return persister.registerUser(userObj);
 }
 
-export { findUser, initUserPersistence, loginUser, registerUser };
+async function unRegisterUser(userObj) {
+  return persister.unRegisterUser(userObj);
+}
+
+export {
+  findUser,
+  initUserPersistence,
+  loginUser,
+  registerUser,
+  unRegisterUser,
+};

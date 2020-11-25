@@ -1,62 +1,65 @@
 import React, { useState } from 'react';
-import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
 import { Password } from 'primereact/password';
-import useAuth from '../../auth/useAuth';
-import { loginUser } from '../../lib/user/persistenceUtils';
+import { unRegisterUser } from '../../lib/user/persistenceUtils';
+import { unRegisterUser as actionsUnRegisterUser } from '../../lib/action/persistenceUtils';
 import * as C from '../../constants';
-import './login.css';
+import './unregister.css';
 
-const LoginForm = ({ onClose }) => {
-  const { onLogin } = useAuth();
-  const [loginError, setLoginError] = useState(undefined);
+const UnRegisterForm = ({ onClose }) => {
+  const [unRegisterError, setUnRegisterError] = useState(undefined);
   const [passwordValue, setPassword] = useState('');
   const [nameValue, setName] = useState('');
 
-  async function onLoginClick(name, password) {
-    const response = await loginUser(
-      name.trim().toLowerCase(),
-      password.trim()
-    );
+  async function onUnRegisterClick(userName, password) {
+    const userObj = {
+      userName: userName.trim().toLowerCase(),
+      password: password.trim(),
+    };
+    let response = await unRegisterUser(userObj);
+
     if (!response.ok) {
       if (response.data) {
-        setLoginError(response.data.error);
+        // console.log(`Registration error: ${response.data.error}`);
+        setUnRegisterError(response.data.error);
       } else {
-        setLoginError('Login failed');
+        setUnRegisterError(`${C.UNREGISTER_BUTTON_TEXT} error`);
+        // console.log("Registration error response: ", response);
       }
       return;
     }
 
-    // console.log('login result:');
-    // console.table(response.data);
+    await actionsUnRegisterUser(userObj);
 
-    if (loginError) {
-      setLoginError(undefined);
+    if (unRegisterError) {
+      setUnRegisterError(undefined);
+    } else {
+      setUnRegisterError('Successfully removed that user');
+      setTimeout(() => {
+        onClose();
+      }, 1000);
     }
-    onLogin(response.data.text);
   }
 
   return (
-    <div className="loginform-container">
+    <div className="unregisterform-container">
       <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
         <div className="p-col-12 p-md-12">
-          {!!loginError && (
-            <div className="loginform-inputgroup">
-              <Message severity="warn" text={loginError} />
+          {!!unRegisterError && (
+            <div className="unregisterform-inputgroup">
+              <Message severity="warn" text={unRegisterError} />
             </div>
           )}
 
-          <div
-            style={{ marginBottom: '0px' }}
-            className="p-inputgroup loginform-inputgroup"
-          >
+          <div className="p-inputgroup unregisterform-inputgroup">
             <h2 style={{ marginBottom: '0px', marginTop: '0px' }}>
-              {`${C.LOGIN_BUTTON_TEXT}:`}
+              {C.UNREGISTER_BUTTON_TEXT}:
             </h2>
           </div>
 
-          <div className="p-inputgroup loginform-inputgroup">
+          <div className="p-inputgroup unregisterform-inputgroup">
             <span className="p-inputgroup-addon">
               <i className="pi pi-user"></i>
             </span>
@@ -75,7 +78,7 @@ const LoginForm = ({ onClose }) => {
             </span>
           </div>
 
-          <div className="p-inputgroup loginform-inputgroup">
+          <div className="p-inputgroup unregisterform-inputgroup">
             <span className="p-inputgroup-addon">
               <i className="pi pi-lock"></i>
             </span>
@@ -90,8 +93,8 @@ const LoginForm = ({ onClose }) => {
           <Button
             className="p-button-rounded"
             disabled={!passwordValue || !nameValue}
-            label={C.LOGIN_BUTTON_TEXT}
-            onClick={() => onLoginClick(nameValue, passwordValue)}
+            label={C.UNREGISTER_BUTTON_TEXT}
+            onClick={() => onUnRegisterClick(nameValue, passwordValue)}
           />
 
           <Button
@@ -107,4 +110,4 @@ const LoginForm = ({ onClose }) => {
   );
 };
 
-export default LoginForm;
+export default UnRegisterForm;

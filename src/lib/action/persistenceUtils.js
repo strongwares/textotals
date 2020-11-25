@@ -88,6 +88,10 @@ function registerUser(userObj) {
   return persister.registerUser(userObj);
 }
 
+function unRegisterUser(userObj) {
+  return persister.unRegisterUser(userObj);
+}
+
 // TODO
 // find one
 function findLinkItem(filter, options) {}
@@ -120,6 +124,7 @@ export {
   findLinkItems,
   initActionPersistence,
   registerUser,
+  unRegisterUser,
   removeLinkItem,
   updateAccountItem,
   updateCategoryItem,

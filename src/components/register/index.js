@@ -6,6 +6,7 @@ import { Password } from 'primereact/password';
 import useAuth from '../../auth/useAuth';
 import { loginUser, registerUser } from '../../lib/user/persistenceUtils';
 import { registerUser as actionsRegisterUser } from '../../lib/action/persistenceUtils';
+import * as C from '../../constants';
 import './register.css';
 
 const RegisterForm = ({ onClose }) => {
@@ -28,7 +29,7 @@ const RegisterForm = ({ onClose }) => {
         // console.log(`Registration error: ${response.data.error}`);
         setRegisterError(response.data.error);
       } else {
-        setRegisterError('Registration error');
+        setRegisterError(`${C.REGISTER_BUTTON_TEXT} error`);
         // console.log("Registration error response: ", response);
       }
       return;
@@ -55,6 +56,15 @@ const RegisterForm = ({ onClose }) => {
               <Message severity="warn" text={registerError} />
             </div>
           )}
+
+          <div
+            style={{ marginBottom: '0px' }}
+            className="p-inputgroup registerform-inputgroup"
+          >
+            <h2 style={{ marginBottom: '0px', marginTop: '0px' }}>
+              {C.REGISTER_BUTTON_TEXT}:
+            </h2>
+          </div>
 
           <div className="p-inputgroup registerform-inputgroup">
             <span className="p-inputgroup-addon">
@@ -109,7 +119,7 @@ const RegisterForm = ({ onClose }) => {
           <Button
             className="p-button-rounded"
             disabled={!passwordValue || !nameValue || !emailValue}
-            label="Register"
+            label={C.REGISTER_BUTTON_TEXT}
             onClick={() =>
               onRegisterClick(nameValue, emailValue, passwordValue)
             }

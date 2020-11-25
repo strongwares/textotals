@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import AuthContext from '../../auth/context';
 import useAuth from '../../auth/useAuth';
 import logo from '../../assets/icons/logo.png';
+import * as C from '../../constants';
 import './menubar.css';
 
 const MenuBar = ({ onItemClick }) => {
@@ -12,11 +13,11 @@ const MenuBar = ({ onItemClick }) => {
   return (
     <div className="menubar-container">
       <img
-        alt="Textotals Logo"
+        alt={`${C.APP_NAME} Logo`}
         className="p-mr-2"
         height="20"
         src={logo}
-        title="Texotals: Action Accounts Totals"
+        title={`${C.APP_NAME} ${C.APP_SHORT_DESCR}`}
       />
       <i
         title="Show Help"

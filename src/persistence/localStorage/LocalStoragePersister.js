@@ -6,6 +6,8 @@ const ACCOUNTS_KEY = `__${C.APP_NAME}__accounts`;
 const CATEGORIES_KEY = `__${C.APP_NAME}__categories`;
 const ACTIONS_KEY = `__${C.APP_NAME}_actions`;
 
+const DELETE_ALL = false;
+
 class LocalStoragePersister {
   constructor() {
     // console.log('LocalStoragePersister constructed');
@@ -17,7 +19,15 @@ class LocalStoragePersister {
     //       it contains: { spend, give } with:
     //            give[category]: { total, timestampMs }
     //            spend[category]: { total, timestampMs }
+    if (DELETE_ALL) {
+      this.setStorageItem(ACCOUNTS_KEY, {});
+      this.setStorageItem(CATEGORIES_KEY, {});
+      this.setStorageItem(ACTIONS_KEY, {});
+      return;
+    }
+
     let stuff = this.getStorageItem(ACCOUNTS_KEY);
+
     if (!stuff) {
       this.setStorageItem(ACCOUNTS_KEY, {});
     }
@@ -98,28 +108,35 @@ class LocalStoragePersister {
     const { userName } = action;
 
     const key = `${userName}-${year}-${month}`;
+
     const actions = this.getStorageItem(ACTIONS_KEY);
-    let userActions = actions[key];
+    let userActions = actions[userName];
     if (!userActions) {
-      actions[key] = [];
-      userActions = actions[key];
+      userActions = {
+        [key]: [],
+      };
+      this.setStorageItem(ACTIONS_KEY, actions);
+    } else {
+      if (!userActions[key]) {
+        userActions[key] = [];
+      }
     }
-    userActions.unshift(action);
+    const userActionsList = userActions[key];
+
+    userActionsList.unshift(action);
     this.setStorageItem(ACTIONS_KEY, actions);
   }
 
   getActions(query) {
     const { userName, year, month } = query;
 
+    const key = `${userName}-${year}-${month}`;
     let rval = [];
 
     const actions = this.getStorageItem(ACTIONS_KEY);
-
-    const key = `${userName}-${year}-${month}`;
-    const userActions = actions[key];
-
-    if (userActions) {
-      rval = userActions.slice();
+    const userActions = actions[userName];
+    if (userActions && userActions[key]) {
+      rval = userActions[key].slice();
     }
     return rval;
   }
@@ -298,6 +315,28 @@ class LocalStoragePersister {
       const categories = this.getStorageItem(CATEGORIES_KEY);
       categories[userName] = {};
       this.setStorageItem(CATEGORIES_KEY, categories);
+    }
+  }
+
+  unRegisterUser(userObj) {
+    const { userName } = userObj;
+
+    console.log(`unregistering user '${userName}`);
+
+    const accounts = this.getStorageItem(ACCOUNTS_KEY);
+    if (accounts[userName]) {
+      delete accounts[userName];
+      this.setStorageItem(ACCOUNTS_KEY, accounts);
+
+      const actions = this.getStorageItem(ACTIONS_KEY);
+      delete actions[userName];
+      this.setStorageItem(ACTIONS_KEY, actions);
+
+      const categories = this.getStorageItem(CATEGORIES_KEY);
+      delete categories[userName];
+      this.setStorageItem(CATEGORIES_KEY, categories);
+    } else {
+      console.error(`unRegister ${userName}, accounts not found`);
     }
   }
 

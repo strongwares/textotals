@@ -8,10 +8,17 @@ const FAKE_USER = {
 };
 
 let storage = window.localStorage;
+
 const USERS_KEY = `__${C.APP_NAME}__users`;
+const DELETE_ALL = false;
 
 class LocalStorageUsers {
   constructor() {
+    if (DELETE_ALL) {
+      this.setStorageItem(USERS_KEY, {});
+      return;
+    }
+
     const stuff = this.getStorageItem(USERS_KEY);
     if (!stuff) {
       this.setStorageItem(USERS_KEY, {});
@@ -65,6 +72,29 @@ class LocalStorageUsers {
       };
       this.setStorageItem(USERS_KEY, users);
       response.data.text = users[userName];
+    }
+    return response;
+  }
+
+  unRegisterUser(userObj) {
+    const response = { ok: true, data: {} };
+    const { userName, password: savedPassword } = userObj;
+    const users = this.getStorageItem(USERS_KEY);
+    if (!users[userName]) {
+      response.ok = false;
+      const userNames = Object.keys(users).join(', ');
+      const usersResp = userNames.length > 0 ? `(${userNames})` : '';
+      response.data.error = `Name not found ${usersResp}`;
+    } else {
+      if (users[userName].password !== savedPassword) {
+        response.ok = false;
+        response.data.error = 'Invalid password';
+      } else {
+        // Remove the user:
+        delete users[userName];
+        this.setStorageItem(USERS_KEY, users);
+        response.data.text = userName;
+      }
     }
     return response;
   }
