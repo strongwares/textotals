@@ -22,7 +22,10 @@ const SetOp = (
 
     <div style={{ marginLeft: '20px' }}>
       <div className="action-item-action">set 500</div>
-      <div className="action-item-action">set 500 savings</div>
+      <div className="action-item-action">set 1000 savings</div>
+      <div className="action-item-action">
+        special group set 50000 special account
+      </div>
     </div>
 
     <div id="spacer" style={{ flex: 1 }} />

@@ -19,6 +19,9 @@ const SpendOp = (
     <div style={{ marginLeft: '20px' }}>
       <div className="action-item-action">spend 19.19 on gas</div>
       <div className="action-item-action">spend 10.99 from savings</div>
+      <div className="action-item-action">
+        special group spend 1000 on special stuff from special account
+      </div>
     </div>
 
     <div id="spacer" style={{ flex: 1 }} />

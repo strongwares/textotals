@@ -10,9 +10,7 @@ const Possibilities = (
     </h3>
     <h4 className="p-mt-0 p-mb-3">Textotals just tracks numbers.</h4>
 
-    <h4 className="p-mt-0 p-mb-3">
-      You can track almost anything, like time or money.
-    </h4>
+    <h4 className="p-mt-0 p-mb-3">You can track almost anything, like time.</h4>
 
     <h4 style={{ marginBottom: '0px' }} className="p-mt-0">
       For example, these actions below track time spent reading.

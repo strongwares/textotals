@@ -28,9 +28,9 @@ const ManyAccountNames = (
     </h4>
 
     <div style={{ marginLeft: '20px' }}>
-      <div className="action-item-action">set 500 family savings</div>
-      <div className="action-item-action">set 500 another account</div>
       <div className="action-item-action">set 500 accountX</div>
+      <div className="action-item-action">set 500 family savings</div>
+      <div className="action-item-action">set 500 another great account</div>
     </div>
 
     <div id="spacer" style={{ flex: 1 }} />

@@ -25,7 +25,9 @@ const ManyAccountGroups = (
       <div className="action-item-action">home school set 500</div>
       <div className="action-item-action">credit union set 500 main</div>
       <div className="action-item-action">contract x set 500 account a</div>
-      <div className="action-item-action">contract x set 500 account b</div>
+      <div className="action-item-action">
+        special group set 5000 special account
+      </div>
     </div>
 
     <div id="spacer" style={{ flex: 1 }} />

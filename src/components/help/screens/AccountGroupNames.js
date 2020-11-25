@@ -8,7 +8,8 @@ const AccountGroupNames = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals automatically keeps track of a group each account belongs to.
+      Textotals automatically keeps track of a group that every account belongs
+      to.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">

@@ -132,9 +132,10 @@ d- add logged in user to toolbar
 d- drop the default text from login and register input fields
 d- add help screen on only local storage
 d- add help screen on not very connected
+d- for local storage, make sure it is under textotals
 
 todo:
-- for local storage, make sure it is under textotals
+- disable the swipe action in help screen from reloading app
 - add help screen on last 2 months
 - add undo last action
 - add a clear action

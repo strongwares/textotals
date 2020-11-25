@@ -8,7 +8,7 @@ const Persistence = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      This Textotals only stores data in the local storage on this device.
+      Textotals only stores data in the local storage on this device.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
@@ -19,6 +19,11 @@ const Persistence = (
     <h4 className="p-mt-0 p-mb-3">
       It also means that any data you enter on one device will not be visible
       (yet) on any other device.
+    </h4>
+
+    <h4 className="p-mt-0 p-mb-3">
+      The user name, email, and password only ever live on this device you're
+      looking at right now.
     </h4>
 
     <div id="spacer" style={{ flex: 1 }} />

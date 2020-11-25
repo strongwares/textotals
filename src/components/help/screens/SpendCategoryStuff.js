@@ -8,16 +8,17 @@ const SpendCategoryStuff = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals automatically puts every spending action into a category.
+      Textotals puts the amount in every "spend" action into a category.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      The automatic category that Textotals uses is named "STUFF".
+      If your spend action does not include a category, then Textotals will
+      automatically put the spend amount into a "STUFF" category.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      It will use the STUFF category when you don't include a category with a
-      spend action.
+      The automatic category (when your action doesn't include a category) is
+      named "STUFF".
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">For example, these actions:</h4>
@@ -30,7 +31,7 @@ const SpendCategoryStuff = (
     </div>
 
     <h4 style={{ marginBottom: '-10px' }} className="p-mt-0">
-      Will put the spent amounts into the STUFF category of each account.
+      will put the spend amounts into a category named "STUFF".
     </h4>
 
     <div id="spacer" style={{ flex: 1 }} />

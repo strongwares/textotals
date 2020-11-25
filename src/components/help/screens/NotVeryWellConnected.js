@@ -8,7 +8,7 @@ const NotVeryWellConnected = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      This Textotals application is not very well connected right now.
+      Textotals is not very well connected right now.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
@@ -17,6 +17,16 @@ const NotVeryWellConnected = (
 
     <h4 className="p-mt-0 p-mb-3">
       But it is your personal budget tracking and time management playground!
+    </h4>
+
+    <h4 className="p-mt-0 p-mb-3">
+      It doesn't send your user name, email, or password anywhere.
+    </h4>
+
+    <h4 className="p-mt-0 p-mb-3">
+      But you can register several user names on this device if you wanted to.
+      The passwords are checked only within Textotals on this device, not sent
+      anywhere else.
     </h4>
 
     <div id="spacer" style={{ flex: 1 }} />
