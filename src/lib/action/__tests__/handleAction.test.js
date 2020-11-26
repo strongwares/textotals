@@ -1,8 +1,10 @@
 import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import handleAction from '../handleAction';
-import persister from '../../../persistence/inMemory/InMemoryPersister';
-import userPersister from '../../../persistence/inMemory/InMemoryUsers';
+// import persister from '../../../persistence/inMemory/InMemoryPersister';
+// import userPersister from '../../../persistence/inMemory/InMemoryUsers';
+import persister from '../../../persistence/localStorage/LocalStoragePersister';
+import userPersister from '../../../persistence/localStorage/LocalStorageUsers';
 import { initPersistence } from '../../../lib/persistenceUtils';
 import {
   findAccountItem,

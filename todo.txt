@@ -164,9 +164,19 @@ d- add premium button welcome and screen
 d- in action screen, delete last month actions, or older then month
 d- update persistence help screen on last month only
 
-- disable the swipe action in help screen from reloading app
-- add undo last action
+d- use only local storage in unit test: mock
+
+- before delete prev month, copy prev week into this month
+- update persistence help screen on last month only
+
 - add a clear action
+- add undo last action
+
+- add help examples on tracking eating, ww, calories
+
+
+- disable the swipe action in help screen from reloading app
+
 - iphone7, with toolbar, screen is too short also
 
 

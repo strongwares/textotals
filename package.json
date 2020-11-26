@@ -62,5 +62,8 @@
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --write"
     ]
+  },
+  "jest": {
+    "globalSetup": "./jestGlobalSetup.js"
   }
 }
