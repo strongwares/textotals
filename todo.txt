@@ -28,8 +28,9 @@ d- fix first step as react comp that re-renders on each focus
 d- finish second step that shows accounts tab
 d- finish third step that shows totals tab
 
+--
 
-deploy to DigiOcean:
+deploy to DigitalOcean:
 d- use one vm for textotals.com
 d- setup dns on namecheap
 d- setup domain on DO
@@ -50,8 +51,21 @@ d- get pki cert:
    also contain certificates and private keys obtained by Certbot so
    making regular backups of this folder is ideal.
 
-d- build it
-d- scp it to /var/www/textotals.com
+npm run build
+cd build
+tar -czf ../textotals-build.11-25.2020.tgz *    
+cd ..
+scp textotals-build.11-25.2020.tgz textotals@textotals.com:/tmp
+ssh textotals@textotals.com      
+mv /tmp/textotals-build.11-25.2020.tgz ~/builds/
+cd /var/www/textotals.com/html/
+tar -xzf ~/builds/textotals-build.11-25.2020.tgz 
+sudo systemctl restart nginx
+exit
+
+--
+
+
 
 d- set user action to lower case
 d- make sure to remove trailing spaces from user name and email and pwd
@@ -142,9 +156,10 @@ d- add unregister or remove unregister button on welcome and screen:
   - prompt: are you sure, it will erase all info on this device for this user
   - if user not found, show all users found
   - on submit, erase all data for that user and erase user
-d- add premium button welcome and screen:
-  - coming soon
-  - in the meantime...
+
+d- add premium button welcome and screen
+?  - coming soon
+?  - in the meantime...
 
 - on add action, delete last month actions, or older then month
 - update persistence help screen on last month only

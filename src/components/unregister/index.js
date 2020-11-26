@@ -53,10 +53,11 @@ const UnRegisterForm = ({ onClose }) => {
             </div>
           )}
 
-          <div className="p-inputgroup unregisterform-inputgroup">
-            <h2 style={{ marginBottom: '0px', marginTop: '0px' }}>
-              {C.UNREGISTER_BUTTON_TEXT}:
-            </h2>
+          <div
+            style={{ marginTop: '-15px', marginBottom: '-25px' }}
+            className="p-inputgroup unregisterform-inputgroup"
+          >
+            <h2>{C.UNREGISTER_BUTTON_TEXT}:</h2>
           </div>
 
           <div className="p-inputgroup unregisterform-inputgroup">

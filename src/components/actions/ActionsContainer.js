@@ -4,7 +4,7 @@ import utc from 'dayjs/plugin/utc';
 import ActionInput from './ActionInput';
 import ActionList from './ActionList';
 import handleAction from '../../lib/action/handleAction';
-import { getActions } from '../../lib/action/persistenceUtils';
+import { getActions, pruneActions } from '../../lib/action/persistenceUtils';
 import './actions.css';
 
 const utcdayjs = dayjs.extend(utc);
@@ -27,7 +27,28 @@ const ActionsContainer = ({ user, onHelp }) => {
     const theTime = utcdayjs.utc();
     const year = theTime.format('YYYY');
     const month = theTime.format('MMM');
-    setActions(getActions({ userName: user.userName, month, year }));
+
+    // The local storage non-premium user will only have
+    // a month of actions stored.
+    // So just making it easy to delete previous month data
+    // when we query for actions.
+    // Yes badly repetitive, but easy to do for now
+    const thePrevMonth = utcdayjs.utc().subtract(1, 'month');
+    const prevYear = thePrevMonth.format('YYYY');
+    const prevMonth = thePrevMonth.format('MMM');
+    pruneActions({
+      userName: user.userName,
+      month: prevMonth,
+      year: prevYear,
+    });
+
+    setActions(
+      getActions({
+        userName: user.userName,
+        month,
+        year,
+      })
+    );
   }, [user]);
 
   return (

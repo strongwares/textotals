@@ -48,6 +48,10 @@ function getActions(query) {
   return persister.getActions(query);
 }
 
+function pruneActions(query) {
+  return persister.pruneActions(query);
+}
+
 // *********************
 // Account item support
 function findAccountItem(query) {
@@ -123,6 +127,7 @@ export {
   findLinkItem,
   findLinkItems,
   initActionPersistence,
+  pruneActions,
   registerUser,
   unRegisterUser,
   removeLinkItem,

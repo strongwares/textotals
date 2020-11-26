@@ -58,12 +58,10 @@ const RegisterForm = ({ onClose }) => {
           )}
 
           <div
-            style={{ marginBottom: '0px' }}
+            style={{ marginTop: '-15px', marginBottom: '-25px' }}
             className="p-inputgroup registerform-inputgroup"
           >
-            <h2 style={{ marginBottom: '0px', marginTop: '0px' }}>
-              {C.REGISTER_BUTTON_TEXT}:
-            </h2>
+            <h2>{C.REGISTER_BUTTON_TEXT}:</h2>
           </div>
 
           <div className="p-inputgroup registerform-inputgroup">
@@ -80,7 +78,7 @@ const RegisterForm = ({ onClose }) => {
                 style={{ fontSize: '14px', fontWeight: 'bold' }}
                 htmlhtmlFor="userName"
               >
-                User Name (single word user ID)
+                Name (a single word user ID)
               </label>
             </span>
           </div>

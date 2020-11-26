@@ -83,8 +83,9 @@ class LocalStorageUsers {
     if (!users[userName]) {
       response.ok = false;
       const userNames = Object.keys(users).join(', ');
-      const usersResp = userNames.length > 0 ? `(${userNames})` : '';
-      response.data.error = `Name not found ${usersResp}`;
+      const usersFound =
+        userNames.length > 0 ? `(found these: ${userNames})` : '';
+      response.data.error = `Name not found ${usersFound}`;
     } else {
       if (users[userName].password !== savedPassword) {
         response.ok = false;

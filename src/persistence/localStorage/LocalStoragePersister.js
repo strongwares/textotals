@@ -141,18 +141,27 @@ class LocalStoragePersister {
     return rval;
   }
 
+  pruneActions(query) {
+    const { userName, year, month } = query;
+    const key = `${userName}-${year}-${month}`;
+    const actions = this.getStorageItem(ACTIONS_KEY);
+    const userActions = actions[userName];
+    if (userActions && userActions[key]) {
+      delete userActions[key];
+      this.setStorageItem(ACTIONS_KEY, actions);
+    }
+  }
+
   getLastActions(query) {
     const { numActions = 1, userName, year, month } = query;
 
+    const key = `${userName}-${year}-${month}`;
     let rval = [];
 
     const actions = this.getStorageItem(ACTIONS_KEY);
-
-    const key = `${userName}-${year}-${month}`;
-    const userActions = actions[key];
-
-    if (userActions) {
-      rval = userActions.slice(0, numActions);
+    const userActions = actions[userName];
+    if (userActions && userActions[key]) {
+      rval = userActions[key].slice(0, numActions);
     }
     return rval;
   }

@@ -48,12 +48,10 @@ const LoginForm = ({ onClose }) => {
           )}
 
           <div
-            style={{ marginBottom: '0px' }}
+            style={{ marginTop: '-15px', marginBottom: '-25px' }}
             className="p-inputgroup loginform-inputgroup"
           >
-            <h2 style={{ marginBottom: '0px', marginTop: '0px' }}>
-              {`${C.LOGIN_BUTTON_TEXT}:`}
-            </h2>
+            <h2>{`${C.LOGIN_BUTTON_TEXT}:`}</h2>
           </div>
 
           <div className="p-inputgroup loginform-inputgroup">
@@ -70,7 +68,7 @@ const LoginForm = ({ onClose }) => {
                 style={{ fontSize: '14px', fontWeight: 'bold' }}
                 htmlhtmlFor="userName"
               >
-                User Name (single word user ID)
+                Name (single word user ID)
               </label>
             </span>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'primereact/button';
 import * as C from '../../constants';
 import './premium.css';
