@@ -9,7 +9,7 @@ const RegisterForm = ({ onClose }) => {
       <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
         <div className="p-col-12 p-md-12">
           <div className="p-inputgroup unregisterform-inputgroup">
-            <h2>{C.PREMIUM_BUTTON_TEXT} coming soon!!</h2>
+            <h2>{C.PREMIUM_BUTTON_TEXT} coming soon!</h2>
           </div>
 
           <Button

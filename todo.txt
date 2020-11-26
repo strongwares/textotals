@@ -161,8 +161,8 @@ d- add premium button welcome and screen
 ?  - coming soon
 ?  - in the meantime...
 
-- on add action, delete last month actions, or older then month
-- update persistence help screen on last month only
+d- in action screen, delete last month actions, or older then month
+d- update persistence help screen on last month only
 
 - disable the swipe action in help screen from reloading app
 - add undo last action
