@@ -14,13 +14,13 @@ import './aatapp.css';
 
 function App() {
   const [user, setUser] = useState();
-  const [showSidebar, setShowSidebar] = useState(undefined);
-  const showSidebarRef = useRef(showSidebar);
+  const [sidebarItem, setShowSidebar] = useState(undefined);
+  const sidebarItemRef = useRef(sidebarItem);
   const [tabNumber, setTabNumber] = useState(0);
   const tabNumberRef = useRef(tabNumber);
 
   useEffect(() => {
-    showSidebarRef.current = showSidebar;
+    sidebarItemRef.current = sidebarItem;
     tabNumberRef.current = tabNumber;
 
     if (!user) {
@@ -31,13 +31,13 @@ function App() {
     }
 
     // authStorage.removeToken();
-  }, [showSidebar, tabNumber, user]);
+  }, [sidebarItem, tabNumber, user]);
 
   const onMenuItemClick = (item) => {
     if (!item) {
       return;
     }
-    if (!!showSidebarRef.current && showSidebarRef.current === item) {
+    if (!!sidebarItemRef.current && sidebarItemRef.current === item) {
       setShowSidebar(undefined);
     } else {
       setShowSidebar(item);
@@ -51,7 +51,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <div className="aatapp-container">
-        {!!showSidebar && (
+        {!!sidebarItem && (
           <Sidebar
             onHide={() => setShowSidebar(undefined)}
             position="top"
@@ -69,9 +69,9 @@ function App() {
 
               marginLeft: 'var(--responsive-overlayMarginLeft)',
             }}
-            visible={!!showSidebar}
+            visible={!!sidebarItem}
           >
-            <Overlay what={showSidebar} />
+            <Overlay what={sidebarItem} />
           </Sidebar>
         )}
 

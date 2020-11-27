@@ -190,6 +190,10 @@ d   add help clear screen
 d   ui test clear
 d   ui test group clear
 
+- support landscape mode
+
+- no need for totals by month and year
+
 - update prune to prune prev month categories
 
 - disable the swipe action in help screen from reloading app
