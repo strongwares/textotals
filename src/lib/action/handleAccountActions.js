@@ -48,7 +48,10 @@ function handleAccountActions(inputObj) {
     );
   }
 
-  const amount = +actionObj.amount * 100;
+  const amount =
+    typeof actionObj.amount === 'undefined'
+      ? undefined
+      : +actionObj.amount * 100;
 
   const defaultAccountGroup = defaults.accountGroup;
   /*
@@ -328,6 +331,24 @@ function handleAccountActions(inputObj) {
     */
 
     action.toAccount = toAccount;
+  } else if (action.op === 'clear') {
+    // Reset the account item obj for this account group to an empty shell:
+    let shell = createAccountItemShell(query);
+    addAccountItem({ ...shell, force: true });
+
+    // Reset the category obj to an empty shell:
+    shell = createCategoryItemShell({
+      ...query,
+      year,
+      month,
+    });
+    addCategoryItem({
+      ...shell,
+
+      force: true,
+    });
+
+    makesIt = `${TOTALS_SEP}${accountGroup}: 0.00`;
   } else {
     console.error(action.actionStr + ' not supported');
     throw new Error(`Unsupported action: ${action.actionStr}`);

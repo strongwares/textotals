@@ -180,11 +180,27 @@ d  hint: to undo last spend action, you can enter a negative amount:
 d      spend 100 on gas
 d      spend -100 on gas
 
-- add a clear action
+d- add a clear action
+d  parsing
+d  parse test
+d  handle action
+d  handle action test
+d   add to help ops page
+d   add help clear screen
+d   ui test clear
+d   ui test group clear
+
+- update prune to prune prev month categories
+
+- disable the swipe action in help screen from reloading app
 
 - add help examples on tracking eating, ww, calories
 
-- disable the swipe action in help screen from reloading app
+- on clear add are you sure confirm to component
+
+- on remove user add are you sure confirm to component
+
+- add test of prune action
 
 - fix logo to make transparent outside
 

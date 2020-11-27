@@ -3,6 +3,7 @@ import AccountNames from './screens/AccountNames';
 import Actions from './screens/Actions';
 import AddOp from './screens/AddOp';
 import AdjustOp from './screens/AdjustOp';
+import ClearOp from './screens/ClearOp';
 import Examples from './screens/Examples';
 import First from './screens/First';
 import GiveOp from './screens/GiveOp';
@@ -40,10 +41,11 @@ const helpScreenMap = {
   16: GiveOp,
   17: MoveOp,
   18: AdjustOp,
-  19: Storage,
-  20: NotVeryWellConnected,
-  21: Examples,
-  22: Possibilities,
+  19: ClearOp,
+  20: Storage,
+  21: NotVeryWellConnected,
+  22: Examples,
+  23: Possibilities,
 };
 
 export default helpScreenMap;

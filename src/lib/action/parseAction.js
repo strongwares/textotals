@@ -1,4 +1,4 @@
-const opRe = /^(add|spend|move|give|adjust|set|link|unlink)$/;
+const opRe = /^(add|spend|move|give|adjust|set|link|unlink|clear)$/;
 const amountRe = /^(-?\d*[.]?\d+)$/;
 const addToRe = /^.*add.*\sto\s+([a-zA-Z0-9_\s]+)$/;
 
@@ -6,26 +6,18 @@ const addToRe = /^.*add.*\sto\s+([a-zA-Z0-9_\s]+)$/;
 
 // Intended to catch "spend 10 on gas from savings"
 // And "spend 10 on war and peace from reading"
-// orig not working
-// const spendOnFromRe = /^.*spend.*\son\s+(\w+\s*\w*)\s+from\s+(\w+\s*\w*)$/;
-
 const spendOnFromRe = /^.*spend.*\son\s+([a-zA-Z0-9_\s]+)\s+from\s+([a-zA-Z0-9_\s]+)$/;
 
 // Intended to catch "spend 10 on gas" with no from account
 // And "spend 10 on war and peace"
-// orig not working
-// const spendOnRe = /^.*spend.*\son\s+(\w+\s*\w*)$/;
 const spendOnRe = /^.*spend.*\son\s+([a-zA-Z0-9_\s]+)$/;
 
 // Intended to catch "spend 10 gas" with no from account
 // And "spend 10 gas and oil"
 const spendCatRe = /^.*spend\s+-?\d*[.]?\d+\s+([a-zA-Z0-9_\s]+)$/;
-// const spendCatRe = /^.*spend\s+-?\d*[.]?\d+\s+(\w+\s*\w*)?!(.*from)$/;
 
 // Intended to catch "spend 10 from account" with no category
 // and "spend 10 from savings and loan" with no category
-// const spendFromRe = /^.*spend.*\s+from\s+(\w+\s*\w*)$/;
-// const spendFromRe = /^.*spend.*from\s+(\w+\s*\w*)$/;
 const spendFromRe = /^.*spend\s+-?\d*[.]?\d+\s+from\s+([a-zA-Z0-9_\s]+)$/;
 
 const moveToFromRe = /^.*move.*\sto\s+([a-zA-Z0-9_\s]+)\s+from\s+([a-zA-Z0-9_\s]+)$/;
@@ -103,6 +95,9 @@ function parseAction(strIn) {
     if (rval.linkId) {
       rval.isValid = true;
     }
+  } else if (rval.op === 'clear') {
+    // Special cases: clear
+    rval.isValid = true;
   } else {
     // General action cases:
     rval.amount = tokens[tokenIdx];

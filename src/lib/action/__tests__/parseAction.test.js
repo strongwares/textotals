@@ -1181,4 +1181,24 @@ describe('test action parser', function () {
     expect(actionObj.linkId).toBe('FRED');
     expect(actionObj.isValid).toBe(true);
   });
+
+  it('should parse clear actions', function () {
+    var action = 'clear';
+    var actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe(undefined);
+    expect(actionObj.op).toBe('clear');
+    expect(actionObj.amount).toBe(undefined);
+    expect(actionObj.toAccount).toBe(undefined);
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+
+    action = 'GROUPX clear';
+    actionObj = parseAction(action);
+    expect(actionObj.accountGroup).toBe('GROUPX');
+    expect(actionObj.op).toBe('clear');
+    expect(actionObj.amount).toBe(undefined);
+    expect(actionObj.toAccount).toBe(undefined);
+    expect(actionObj.fromAccount).toBe(undefined);
+    expect(actionObj.isValid).toBe(true);
+  });
 });

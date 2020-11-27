@@ -11,6 +11,7 @@ import {
   findCategoryItem,
   getAccountGroups,
   getCategories,
+  getActions,
   getLastActions,
 } from '../../../lib/action/persistenceUtils';
 import { registerUser } from '../../../lib/user/persistenceUtils';
@@ -45,26 +46,6 @@ let groupXMain = 0;
 let groupXDefaultSpendCategory = 0;
 
 const defaultGroup = defaults.accountGroup;
-
-// Todo:
-// d scroll action list to bottom on load
-
-// d caci spend 10 from aib => pulls from main unless a category
-
-// d spend 10 from savings  => pulls from main unless a category
-// spend 10 on gas from savings: works
-// d problem is spendCatRe matches first
-
-// d problem: set main 500 passes but is not valid
-
-// add an "undo" op to undo last
-// add a "send" op to send to main without linking being required
-
-// x Add the account table linking like in orig:
-// see the budget_account_item.html
-
-// d Finish the Totals tab which is the original "Budget Spending Page"
-// d see the budget_spending_item.html (categories totals in a list)
 
 describe('test action handler', function () {
   it('should handle set main 500', function () {
@@ -803,5 +784,159 @@ describe('test action handler', function () {
     expect(categories[accountGroup].spend[category].total).toBe(
       groupXDefaultSpendCategory * 100
     );
+  });
+
+  it('should handle clear of default account group', function () {
+    const nameIn = 'fred';
+    const opIn = 'clear';
+    const actionObj = {
+      actionStr: opIn,
+      op: opIn,
+      isValid: true,
+    };
+
+    defaultGroupMain = 0;
+
+    const action = handleAction(nameIn, actionObj);
+    const {
+      accountGroup,
+      actionStr,
+      amount,
+      category,
+      op,
+      fromAccount,
+      userName,
+    } = action;
+
+    expect(userName).toBe(nameIn);
+    expect(op).toBe(opIn);
+    expect(amount).toBe(undefined);
+    expect(accountGroup).toBe(defaults.accountGroup);
+    expect(fromAccount).toBe(undefined);
+    expect(category).toBe(undefined);
+
+    const what = `${accountGroup}`;
+    const makesIt = `${TOTALS_SEP}${what}: ${defaultGroupMain.toFixed(2)}`;
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
+
+    const accountItem = findAccountItem({ accountGroup, userName });
+    expect(accountItem).toStrictEqual({});
+
+    const theTime = utcdayjs.utc();
+    const categoryItem = findCategoryItem({
+      userName: nameIn,
+      accountGroup: defaults.accountGroup,
+      year: theTime.format('YYYY'),
+      month: theTime.format('MMM'),
+    });
+    const { spend, give } = categoryItem;
+    expect(spend).toStrictEqual({});
+    expect(give).toStrictEqual({});
+
+    const actions = getActions({
+      accountGroup,
+      month,
+      year,
+      userName,
+    });
+    expect(
+      actions.filter((action) => action.accountGroup === accountGroup).length
+    ).toBe(1);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+
+    // The group we cleared has no accounts:
+    expect(accountGroups[accountGroup]).toStrictEqual({});
+
+    // The group we did not clear should have accounts:
+    expect(accountGroups['Group X'][defaults.mainAccount].total).toBe(
+      +(groupXMain * 100).toFixed(0)
+    );
+  });
+
+  it('should handle clear of an account group', function () {
+    const nameIn = 'fred';
+    const opIn = 'clear';
+    const accountGroupIn = 'Group X';
+    const actionObj = {
+      actionStr: `${accountGroupIn} ${opIn}`,
+      op: opIn,
+      accountGroup: accountGroupIn,
+      isValid: true,
+    };
+
+    groupXMain = 0;
+    groupXDefaultSpendCategory = 0;
+
+    const action = handleAction(nameIn, actionObj);
+    const {
+      accountGroup,
+      actionStr,
+      amount,
+      category,
+      op,
+      fromAccount,
+      userName,
+    } = action;
+
+    expect(userName).toBe(nameIn);
+    expect(op).toBe(opIn);
+    expect(amount).toBe(undefined);
+    expect(accountGroup).toBe(accountGroupIn);
+    expect(fromAccount).toBe(undefined);
+    expect(category).toBe(undefined);
+
+    const what = `${accountGroup}`;
+    const makesIt = `${TOTALS_SEP}${what}: ${groupXMain.toFixed(2)}`;
+
+    expect(actionStr).toBe(`${actionObj.actionStr}${makesIt}`);
+
+    const accountItem = findAccountItem({ accountGroup, userName });
+    expect(accountItem).toStrictEqual({});
+
+    const theTime = utcdayjs.utc();
+    const categoryItem = findCategoryItem({
+      userName: nameIn,
+      accountGroup: defaults.accountGroup,
+      year: theTime.format('YYYY'),
+      month: theTime.format('MMM'),
+    });
+    const { spend, give } = categoryItem;
+    expect(spend).toStrictEqual({});
+    expect(give).toStrictEqual({});
+
+    const actions = getActions({
+      accountGroup,
+      month,
+      year,
+      userName,
+    });
+    expect(
+      actions.filter((action) => action.accountGroup === accountGroup).length
+    ).toBe(1);
+
+    const lastActions = getLastActions({
+      accountGroup,
+      numActions: 1,
+      month,
+      year,
+      userName,
+    });
+    expect(lastActions.length).toBe(1);
+    expect(lastActions[0].actionStr).toBe(actionStr);
+
+    const accountGroups = getAccountGroups({ userName });
+
+    // The group we cleared has no accounts:
+    expect(accountGroups[accountGroup]).toStrictEqual({});
   });
 });

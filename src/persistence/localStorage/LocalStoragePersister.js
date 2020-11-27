@@ -51,14 +51,15 @@ class LocalStoragePersister {
   // *********************
   // Accounts:
   addAccountItem(item) {
-    const { accountGroup, userName } = item;
+    const { accountGroup, userName, force } = item;
     const accounts = this.getStorageItem(ACCOUNTS_KEY);
     const accountGroups = accounts[userName];
 
     if (!accountGroups) {
       throw new Error(`addAccountItem: user ${userName} accounts not found`);
     }
-    if (accountGroups[accountGroup]) {
+
+    if (!force && accountGroups[accountGroup]) {
       throw new Error(
         `addAccountItem: user ${userName} account group ${accountGroup} already exists`
       );
@@ -110,7 +111,7 @@ class LocalStoragePersister {
   // Actions:
   addAction(actionObj) {
     const { action, year, month } = actionObj;
-    const { userName } = action;
+    const { accountGroup, op, userName } = action;
 
     const key = `${userName}-${year}-${month}`;
 
@@ -124,6 +125,11 @@ class LocalStoragePersister {
     } else {
       if (!userActions[key]) {
         userActions[key] = [];
+      } else if (op === 'clear') {
+        const newActions = userActions[key].filter(
+          (action) => action.accountGroup !== accountGroup
+        );
+        userActions[key] = newActions;
       }
     }
     const userActionsList = userActions[key];
@@ -204,7 +210,7 @@ class LocalStoragePersister {
   // *********************
   // Categories:
   addCategoryItem(item) {
-    const { accountGroup, month, userName, year } = item;
+    const { accountGroup, force, month, userName, year } = item;
 
     const categories = this.getStorageItem(CATEGORIES_KEY);
     const userCategories = categories[userName];
@@ -225,7 +231,7 @@ class LocalStoragePersister {
       accGroupCatsYears = accGroupCats[year];
     }
 
-    if (accGroupCatsYears[month]) {
+    if (!force && accGroupCatsYears[month]) {
       throw new Error(
         `User ${userName} ${accountGroup} ${month} ${year} account categories already exists`
       );

@@ -50,6 +50,13 @@ const Actions = (
       </div>
     </div>
 
+    <div className="action-li">
+      <div className="action-li-name">clear:&nbsp;</div>
+      <div className="action-li-descr">
+        wipes the slate clean, removes all data
+      </div>
+    </div>
+
     <div id="spacer" style={{ flex: 1 }} />
   </div>
 );
