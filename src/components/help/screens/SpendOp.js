@@ -24,6 +24,17 @@ const SpendOp = (
       </div>
     </div>
 
+    <h4 className="p-mt-0 p-mb-3">
+      Hint: to undo a previous spend action, simply re-enter the same action but
+      with a negative amount, like this:
+    </h4>
+
+    <div style={{ marginLeft: '20px' }}>
+      <div className="action-item-action">spend 409.99 on gas</div>
+      <span>Woops, I entered the wrong spend amount, need to undo it:</span>
+      <div className="action-item-action">spend -409.99 on gas</div>
+    </div>
+
     <div id="spacer" style={{ flex: 1 }} />
   </div>
 );

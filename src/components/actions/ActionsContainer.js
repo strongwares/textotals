@@ -38,8 +38,10 @@ const ActionsContainer = ({ user, onHelp }) => {
     const prevMonth = thePrevMonth.format('MMM');
     pruneActions({
       userName: user.userName,
-      month: prevMonth,
-      year: prevYear,
+      month: month,
+      year: year,
+      prevMonth,
+      prevYear,
     });
 
     setActions(

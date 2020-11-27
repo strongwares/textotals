@@ -10,13 +10,13 @@ import ManyAccountNames from './screens/ManyAccountNames';
 import ManyAccountGroups from './screens/ManyAccountGroups';
 import MoveOp from './screens/MoveOp';
 import NotVeryWellConnected from './screens/NotVeryWellConnected';
-import Persistence from './screens/Persistence';
 import Possibilities from './screens/Possibilities';
 import Second from './screens/Second';
 import SetOp from './screens/SetOp';
 import SpendOp from './screens/SpendOp';
 import SpendCategoryStuff from './screens/SpendCategoryStuff';
 import SpendingCategories from './screens/SpendingCategories';
+import Storage from './screens/Storage';
 import TheBrain from './screens/TheBrain';
 import Third from './screens/Third';
 import UppercaseLetters from './screens/UppercaseLetters';
@@ -40,7 +40,7 @@ const helpScreenMap = {
   16: GiveOp,
   17: MoveOp,
   18: AdjustOp,
-  19: Persistence,
+  19: Storage,
   20: NotVeryWellConnected,
   21: Examples,
   22: Possibilities,

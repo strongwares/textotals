@@ -18,6 +18,9 @@ const HelpOverlay = () => {
     }
   }, [parentRef]);
 
+  // TODO: Make it controled and abort the event
+  // page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}
+
   return (
     <div className="helpoverlay-container card" ref={parentRef}>
       <Carousel

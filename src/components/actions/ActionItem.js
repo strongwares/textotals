@@ -2,8 +2,11 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import * as dayjs from 'dayjs';
 // import defaults from '../../lib/action/defaults';
+import * as C from '../../constants';
 import './actions.css';
 
+// TODO: Bad duplication
+// TODO: Only change this if you are changing lib/action/handleAccountAction
 const TOTALS_SEP = '::';
 const ACCOUNT_SEP = ':;:';
 
@@ -14,7 +17,10 @@ function getActionString(str) {
 // <div className="action-item-actionstr">{getActionString(actionStr)}</div>
 */
 
-function getTotalsString(str) {
+function getResponseString(str) {
+  if (str.indexOf(C.APP_NAME) === 0) {
+    return str.replace(ACCOUNT_SEP, '\n');
+  }
   return `Totals:\n${str.replace(ACCOUNT_SEP, '\n')}`;
 }
 
@@ -49,13 +55,16 @@ const ActionItem = ({ action }) => {
   const { actionStr, timestampMs } = action;
 
   const chunks = actionStr.split(TOTALS_SEP);
+  const haveResponse = chunks.length > 1 && chunks[1].length > 0;
   return (
     <div className="action-item">
       <div className="action-item-date">{getDateString(timestampMs)}</div>
       <div className="action-item-action">{chunks[0]}</div>
-      <div className="action-item-totals">
-        {getTotalsString(chunks.length > 1 && chunks[1])}
-      </div>
+      {haveResponse && (
+        <div className="action-item-response">
+          {getResponseString(chunks[1])}
+        </div>
+      )}
     </div>
   );
 };

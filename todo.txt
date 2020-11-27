@@ -166,16 +166,27 @@ d- update persistence help screen on last month only
 
 d- use only local storage in unit test: mock
 
-- before delete prev month, copy prev week into this month
-- update persistence help screen on last month only
+d- before delete prev month, copy prev week into this month
+d- update persistence help screen on last month only
+d- on pruning:
+d - insert a response from Textotals:
+d  - Textotals: pruned actions from last month in order to save storage
+
+
+d- make help persistence be storage instead
+
+d- add help on spend:
+d  hint: to undo last spend action, you can enter a negative amount:
+d      spend 100 on gas
+d      spend -100 on gas
 
 - add a clear action
-- add undo last action
 
 - add help examples on tracking eating, ww, calories
 
-
 - disable the swipe action in help screen from reloading app
+
+- fix logo to make transparent outside
 
 - iphone7, with toolbar, screen is too short also
 

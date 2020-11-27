@@ -19,6 +19,10 @@ import defaults from './defaults';
 
 const utcdayjs = dayjs.extend(utc);
 
+// TODO: Bad duplication
+// TODO: if you change this, then change any place else
+// TODO: you see the same constant,
+// TODO: like in a persister or the ActionItem component
 const TOTALS_SEP = '::';
 const ACCOUNT_SEP = ':;:';
 

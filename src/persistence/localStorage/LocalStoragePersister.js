@@ -8,6 +8,11 @@ const ACTIONS_KEY = `__${C.APP_NAME}_actions`;
 
 const DELETE_ALL = false;
 
+// TODO: Bad duplication
+// TODO: Only change this if you are changing lib/action/handleAccountAction
+const TOTALS_SEP = '::';
+const ACCOUNT_SEP = ':;:';
+
 class LocalStoragePersister {
   constructor() {
     // console.log('LocalStoragePersister constructed');
@@ -142,14 +147,44 @@ class LocalStoragePersister {
   }
 
   pruneActions(query) {
-    const { userName, year, month } = query;
+    const { month, prevMonth, prevYear, year, userName } = query;
+    const prevKey = `${userName}-${prevYear}-${prevMonth}`;
     const key = `${userName}-${year}-${month}`;
     const actions = this.getStorageItem(ACTIONS_KEY);
     const userActions = actions[userName];
-    if (userActions && userActions[key]) {
-      delete userActions[key];
-      this.setStorageItem(ACTIONS_KEY, actions);
+    if (!userActions) {
+      return;
     }
+    const prevMonthActions = userActions[prevKey];
+    if (!prevMonthActions) {
+      return;
+    }
+    let curMonthActions = userActions[key];
+    if (!curMonthActions) {
+      userActions[key] = [];
+      curMonthActions = userActions[key];
+    }
+
+    const prevLen = prevMonthActions.length;
+    const copySize = prevLen > 16 ? Math.floor(prevLen / 4) : prevLen;
+    for (let i = prevLen - 1; i >= prevLen - copySize; i--) {
+      curMonthActions.push(prevMonthActions[i]);
+    }
+
+    // Only need to put a Textotals response action if any records were
+    // not actually copied from prev month to this month's list:
+    if (copySize !== prevLen) {
+      curMonthActions.push({
+        userName,
+        accountGroup: undefined,
+        timestampMs: new Date().getTime(),
+        actionStr: `${TOTALS_SEP}${C.APP_NAME}${ACCOUNT_SEP}I pruned old actions from last month to save space`,
+        amount: undefined,
+        op: undefined,
+      });
+    }
+    delete userActions[prevKey];
+    this.setStorageItem(ACTIONS_KEY, actions);
   }
 
   getLastActions(query) {
