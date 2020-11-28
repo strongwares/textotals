@@ -9,7 +9,7 @@ import { registerUser as actionsRegisterUser } from '../../lib/action/persistenc
 import * as C from '../../constants';
 import './register.css';
 
-const RegisterForm = ({ onClose }) => {
+const RegisterForm = ({ isMobileLandscape, onClose }) => {
   const { onLogin } = useAuth();
   const [registerError, setRegisterError] = useState(undefined);
   const [passwordValue, setPassword] = useState('');
@@ -47,90 +47,101 @@ const RegisterForm = ({ onClose }) => {
     onLogin(response.data.text);
   }
 
+  const inputGroupClassName = `registerform-inputgroup-${
+    isMobileLandscape ? 'row' : 'column'
+  }`;
+
   return (
     <div className="registerform-container">
-      <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
-        <div className="p-col-12 p-md-12">
-          {!!registerError && (
-            <div className="registerform-inputgroup">
-              <Message severity="warn" text={registerError} />
-            </div>
-          )}
+      {!!registerError && (
+        <div className="registerform-inputgroup">
+          <Message severity="warn" text={registerError} />
+        </div>
+      )}
 
-          <div
-            style={{ marginTop: '-15px', marginBottom: '-25px' }}
-            className="p-inputgroup registerform-inputgroup"
-          >
-            <h2>{C.REGISTER_BUTTON_TEXT}:</h2>
-          </div>
+      <div
+        style={{ marginTop: '-15px', marginBottom: '-5px' }}
+        className="p-inputgroup registerform-inputgroup"
+      >
+        <h2>{C.REGISTER_BUTTON_TEXT}:</h2>
+      </div>
 
-          <div className="p-inputgroup registerform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-user"></i>
-            </span>
-            <span className="p-float-label">
-              <InputText
-                id="userName"
-                value={nameValue}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label
-                style={{ fontSize: '14px', fontWeight: 'bold' }}
-                htmlhtmlFor="userName"
-              >
-                Name (a single word user ID)
-              </label>
-            </span>
-          </div>
-
-          <div className="p-inputgroup registerform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-envelope"></i>
-            </span>
-            <span className="p-float-label">
-              <InputText
-                id="userEmail"
-                value={emailValue}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <label
-                style={{ fontSize: '14px', fontWeight: 'bold' }}
-                htmlhtmlFor="userEmail"
-              >
-                Email Address
-              </label>
-            </span>
-          </div>
-
-          <div className="p-inputgroup registerform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-lock"></i>
-            </span>
-            <Password
-              id="userPassword"
-              placeholder="Password"
-              value={passwordValue}
-              onChange={(e) => setPassword(e.target.value)}
+      <div className={inputGroupClassName}>
+        <div
+          className="registerform-inputgroup p-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-user"></i>
+          </span>
+          <span className="p-float-label">
+            <InputText
+              id="userName"
+              value={nameValue}
+              onChange={(e) => setName(e.target.value)}
             />
-          </div>
+            <label
+              style={{ fontSize: '14px', fontWeight: 'bold' }}
+              htmlhtmlFor="userName"
+            >
+              Name (a single word)
+            </label>
+          </span>
+        </div>
 
-          <Button
-            className="p-button-rounded"
-            disabled={!passwordValue || !nameValue || !emailValue}
-            label={C.REGISTER_BUTTON_TEXT}
-            onClick={() =>
-              onRegisterClick(nameValue, emailValue, passwordValue)
-            }
-          />
+        <div
+          className="registerform-inputgroup p-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-envelope"></i>
+          </span>
+          <span className="p-float-label">
+            <InputText
+              id="userEmail"
+              value={emailValue}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <label
+              style={{ fontSize: '14px', fontWeight: 'bold' }}
+              htmlhtmlFor="userEmail"
+            >
+              Email Address
+            </label>
+          </span>
+        </div>
 
-          <Button
-            className="p-button-rounded"
-            icon="pi pi-arrow-left"
-            onClick={onClose}
-            style={{ marginTop: '10px', maxWidth: '100px' }}
+        <div
+          className="p-inputgroup registerform-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-lock"></i>
+          </span>
+          <Password
+            id="userPassword"
+            placeholder="Password"
+            value={passwordValue}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>
+
+      <Button
+        className="p-button-rounded"
+        disabled={!passwordValue || !nameValue || !emailValue}
+        label={C.REGISTER_BUTTON_TEXT}
+        onClick={() => onRegisterClick(nameValue, emailValue, passwordValue)}
+        style={{ width: 'var(--responsive-inputGroupWidth)' }}
+      />
+
+      <Button
+        className="p-button-rounded"
+        icon="pi pi-arrow-left"
+        onClick={onClose}
+        style={{ marginTop: '10px', maxWidth: '100px' }}
+      />
+
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );

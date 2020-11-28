@@ -8,7 +8,7 @@ import { unRegisterUser as actionsUnRegisterUser } from '../../lib/action/persis
 import * as C from '../../constants';
 import './unregister.css';
 
-const UnRegisterForm = ({ onClose }) => {
+const UnRegisterForm = ({ isMobileLandscape, onClose }) => {
   const [unRegisterError, setUnRegisterError] = useState(undefined);
   const [passwordValue, setPassword] = useState('');
   const [nameValue, setName] = useState('');
@@ -43,69 +43,78 @@ const UnRegisterForm = ({ onClose }) => {
     }
   }
 
+  const inputGroupClassName = `unregisterform-inputgroup-${
+    isMobileLandscape ? 'row' : 'column'
+  }`;
+
   return (
     <div className="unregisterform-container">
-      <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
-        <div className="p-col-12 p-md-12">
-          {!!unRegisterError && (
-            <div className="unregisterform-inputgroup">
-              <Message severity="warn" text={unRegisterError} />
-            </div>
-          )}
+      {!!unRegisterError && (
+        <div className="unregisterform-inputgroup">
+          <Message severity="warn" text={unRegisterError} />
+        </div>
+      )}
 
-          <div
-            style={{ marginTop: '-15px', marginBottom: '-25px' }}
-            className="p-inputgroup unregisterform-inputgroup"
-          >
-            <h2>{C.UNREGISTER_BUTTON_TEXT}:</h2>
-          </div>
+      <div
+        style={{ marginTop: '-15px', marginBottom: '0px' }}
+        className="p-inputgroup unregisterform-inputgroup"
+      >
+        <h2>{C.UNREGISTER_BUTTON_TEXT}:</h2>
+      </div>
 
-          <div className="p-inputgroup unregisterform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-user"></i>
-            </span>
-            <span className="p-float-label">
-              <InputText
-                id="userName"
-                value={nameValue}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label
-                style={{ fontSize: '14px', fontWeight: 'bold' }}
-                htmlhtmlFor="userName"
-              >
-                User Name (single word user ID)
-              </label>
-            </span>
-          </div>
-
-          <div className="p-inputgroup unregisterform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-lock"></i>
-            </span>
-            <Password
-              id="userPassword"
-              placeholder="Password"
-              value={passwordValue}
-              onChange={(e) => setPassword(e.target.value)}
+      <div className={inputGroupClassName}>
+        <div
+          className="unregisterform-inputgroup p-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-user"></i>
+          </span>
+          <span className="p-float-label">
+            <InputText
+              id="userName"
+              value={nameValue}
+              onChange={(e) => setName(e.target.value)}
             />
-          </div>
+            <label
+              style={{ fontSize: '14px', fontWeight: 'bold' }}
+              htmlhtmlFor="userName"
+            >
+              Name (a single word)
+            </label>
+          </span>
+        </div>
 
-          <Button
-            className="p-button-rounded"
-            disabled={!passwordValue || !nameValue}
-            label={C.UNREGISTER_BUTTON_TEXT}
-            onClick={() => onUnRegisterClick(nameValue, passwordValue)}
-          />
-
-          <Button
-            className="p-button-rounded"
-            icon="pi pi-arrow-left"
-            onClick={onClose}
-            style={{ marginTop: '10px', maxWidth: '100px' }}
+        <div
+          className="unregisterform-inputgroup p-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-lock"></i>
+          </span>
+          <Password
+            id="userPassword"
+            placeholder="Password"
+            value={passwordValue}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>
+
+      <Button
+        className="p-button-rounded"
+        disabled={!passwordValue || !nameValue}
+        label={C.UNREGISTER_BUTTON_TEXT}
+        onClick={() => onUnRegisterClick(nameValue, passwordValue)}
+        style={{ width: 'var(--responsive-inputGroupWidth)' }}
+      />
+
+      <Button
+        className="p-button-rounded"
+        icon="pi pi-arrow-left"
+        onClick={onClose}
+        style={{ marginTop: '10px', maxWidth: '100px' }}
+      />
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );

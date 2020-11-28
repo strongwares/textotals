@@ -2,7 +2,7 @@ import React from 'react';
 import HelpOverlay from '../help/HelpOverlay';
 import './overlay.css';
 
-const Overlay = ({ what }) => {
+const Overlay = ({ isMobileLandscape, what }) => {
   let TheOverlay;
 
   if (what === 'help') {
@@ -11,7 +11,7 @@ const Overlay = ({ what }) => {
 
   return (
     <div className="overlay-container">
-      <TheOverlay />
+      <TheOverlay isMobileLandscape={isMobileLandscape} />
     </div>
   );
 };

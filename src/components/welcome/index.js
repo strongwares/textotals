@@ -8,7 +8,7 @@ import UnRegisterForm from '../unregister';
 import * as C from '../../constants';
 import './welcome.css';
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ isMobileLandscape }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [showUnRegister, setShowUnRegister] = useState(false);
@@ -17,8 +17,16 @@ const WelcomeScreen = () => {
   const showWelcome =
     !showLogin && !showRegister && !showUnRegister && !showPremium;
 
+  const buttonListClassName = `welcome-container-${
+    isMobileLandscape ? 'row' : 'column'
+  }`;
+
+  const buttonStyle = isMobileLandscape
+    ? undefined
+    : { width: 'var(--responsive-inputGroupWidth)' };
+
   return (
-    <div className="welcome-container">
+    <div>
       <img
         alt={`${C.APP_NAME} Logo`}
         className="p-mr-2"
@@ -27,27 +35,48 @@ const WelcomeScreen = () => {
         title={`${C.APP_NAME}: ${C.APP_SHORT_DESCR}`}
       />
 
-      {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
+      {showLogin && (
+        <LoginForm
+          isMobileLandscape={isMobileLandscape}
+          onClose={() => setShowLogin(false)}
+        />
+      )}
 
-      {showPremium && <PremiumForm onClose={() => setShowPremium(false)} />}
+      {showPremium && (
+        <PremiumForm
+          isMobileLandscape={isMobileLandscape}
+          onClose={() => setShowPremium(false)}
+        />
+      )}
 
-      {showRegister && <RegisterForm onClose={() => setShowRegister(false)} />}
+      {showRegister && (
+        <RegisterForm
+          isMobileLandscape={isMobileLandscape}
+          onClose={() => setShowRegister(false)}
+        />
+      )}
 
       {showUnRegister && (
-        <UnRegisterForm onClose={() => setShowUnRegister(false)} />
+        <UnRegisterForm
+          isMobileLandscape={isMobileLandscape}
+          onClose={() => setShowUnRegister(false)}
+        />
       )}
 
       {showWelcome && (
-        <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
-          <div className="p-col-12 p-md-12">
-            <h2>{`Welcome to ${C.APP_NAME}`}</h2>
-            <h5>{`A playground for ${C.APP_SHORT_DESCR}`}</h5>
+        <div className="welcome-container">
+          <h2 style={{ marginTop: '-20px' }}>{`Welcome to ${C.APP_NAME}`}</h2>
+          <h5
+            style={{ marginTop: '-20px' }}
+          >{`A playground for ${C.APP_SHORT_DESCR}`}</h5>
 
+          <div className={buttonListClassName}>
             <div className="welcome-item">
               <Button
                 className="p-button-rounded"
                 label={C.PREMIUM_BUTTON_TEXT}
                 onClick={() => setShowPremium(true)}
+                style={buttonStyle}
               />
             </div>
 
@@ -56,6 +85,7 @@ const WelcomeScreen = () => {
                 className="p-button-rounded"
                 label={C.REGISTER_BUTTON_TEXT}
                 onClick={() => setShowRegister(true)}
+                style={buttonStyle}
               />
             </div>
 
@@ -64,6 +94,7 @@ const WelcomeScreen = () => {
                 className="p-button-rounded"
                 label={C.UNREGISTER_BUTTON_TEXT}
                 onClick={() => setShowUnRegister(true)}
+                style={buttonStyle}
               />
             </div>
 
@@ -72,12 +103,13 @@ const WelcomeScreen = () => {
                 className="p-button-rounded"
                 label={C.LOGIN_BUTTON_TEXT}
                 onClick={() => setShowLogin(true)}
+                style={buttonStyle}
               />
             </div>
           </div>
+          <div id="bottomSpacer" style={{ flex: 1 }} />
         </div>
       )}
-      <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import ActionItem from './ActionItem';
 import './actions.css';
 
-const ActionList = ({ actions = [] }) => {
+const ActionList = ({ actions = [], isMobileLandscape }) => {
   const listEndRef = useRef(null);
   const scrollToBottom = () => {
     listEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -17,10 +17,16 @@ const ActionList = ({ actions = [] }) => {
     return <ActionItem key={action.timestampMs} action={action} />;
   });
 
+  const classNames = `actionlist-container actionlist-container-${
+    isMobileLandscape ? 'row' : 'column'
+  }`;
+
+  const listClassNames = `p-grid p-dir-${isMobileLandscape ? '' : 'col-'}rev`;
+
   return (
-    <div className="actionlist-container">
+    <div className={classNames}>
       <div id="topSpacer" style={{ flex: 1 }} />
-      <div className="p-grid p-dir-col-rev">{actionList}</div>
+      <div className={listClassNames}>{actionList}</div>
       <div ref={listEndRef} />
     </div>
   );

@@ -10,7 +10,18 @@ import MenuBar from './components/menuBar';
 import Overlay from './components/overlay/Overlay';
 import TotalsContainer from './components/totals/TotalsContainer';
 import WelcomeScreen from './components/welcome';
+import { useMediaQuery } from 'react-responsive';
 import './aatapp.css';
+
+/*
+let setIsMobileLandscapeFunc;
+function onMediaQueryChange(matches) {
+  console.log(`onMediaQueryChange: matches: ${matches}`);
+  if (setIsMobileLandscapeFunc) {
+    setIsMobileLandscapeFunc(matches);
+  }
+}
+*/
 
 function App() {
   const [user, setUser] = useState();
@@ -18,6 +29,21 @@ function App() {
   const sidebarItemRef = useRef(sidebarItem);
   const [tabNumber, setTabNumber] = useState(0);
   const tabNumberRef = useRef(tabNumber);
+  const isMobileLandscape = useMediaQuery({
+    maxWidth: 767,
+    orientation: 'landscape',
+  });
+  // undefined,
+  // onMediaQueryChange
+  /*
+  const [isMobileLandscape, setIsMobileLandscape] = useState(
+    initialIsMobileLandscape
+  );
+  console.log(
+    `initial: ${initialIsMobileLandscape},  isMobileLandscape: ${isMobileLandscape}`
+  );
+  */
+  // console.log(`isMobileLandscape: ${isMobileLandscape}`);
 
   useEffect(() => {
     sidebarItemRef.current = sidebarItem;
@@ -61,24 +87,21 @@ function App() {
               backgrounddColor: '#e5e5f7',
               height: 'var(--sidebarHeight)',
               marginTop: '0.5rem',
-              maxWidth: 'var(--responsive-overlaywidth)',
+              maxWidth: 'var(--responsive-overlayWidth)',
               zIndex: 1000,
-
-              aalignItems: 'center',
               justifyContent: 'center',
-
               marginLeft: 'var(--responsive-overlayMarginLeft)',
             }}
             visible={!!sidebarItem}
           >
-            <Overlay what={sidebarItem} />
+            <Overlay isMobileLandscape={isMobileLandscape} what={sidebarItem} />
           </Sidebar>
         )}
 
         <Card className="aatapp-appcard p-shadow-5">
           <MenuBar onItemClick={onMenuItemClick} />
 
-          {!user && <WelcomeScreen />}
+          {!user && <WelcomeScreen isMobileLandscape={isMobileLandscape} />}
 
           {!!user && (
             <>
@@ -93,8 +116,9 @@ function App() {
                   leftIcon="pi pi-comments"
                 >
                   <ActionsContainer
-                    user={user}
+                    isMobileLandscape={isMobileLandscape}
                     onHelp={() => setShowSidebar('help')}
+                    user={user}
                   />
                 </TabPanel>
 
@@ -104,8 +128,9 @@ function App() {
                   leftIcon="pi pi-folder-open"
                 >
                   <AccountsContainer
-                    user={user}
+                    isMobileLandscape={isMobileLandscape}
                     onHelp={() => setShowSidebar('help')}
+                    user={user}
                   />
                 </TabPanel>
 
@@ -115,8 +140,9 @@ function App() {
                   leftIcon="pi pi-tags"
                 >
                   <TotalsContainer
-                    user={user}
+                    isMobileLandscape={isMobileLandscape}
                     onHelp={() => setShowSidebar('help')}
+                    user={user}
                   />
                 </TabPanel>
               </TabView>

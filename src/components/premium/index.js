@@ -6,7 +6,10 @@ import './premium.css';
 const RegisterForm = ({ onClose }) => {
   return (
     <div className="registerform-container">
-      <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
+      <div
+        style={{ width: '100%', margin: '20px 0px 0px 0px' }}
+        className="p-grid p-fluid"
+      >
         <div className="p-col-12 p-md-12">
           <div className="p-inputgroup unregisterform-inputgroup">
             <h2>{C.PREMIUM_BUTTON_TEXT} coming soon!</h2>

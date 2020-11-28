@@ -8,7 +8,7 @@ import { loginUser } from '../../lib/user/persistenceUtils';
 import * as C from '../../constants';
 import './login.css';
 
-const LoginForm = ({ onClose }) => {
+const LoginForm = ({ isMobileLandscape, onClose }) => {
   const { onLogin } = useAuth();
   const [loginError, setLoginError] = useState(undefined);
   const [passwordValue, setPassword] = useState('');
@@ -37,69 +37,78 @@ const LoginForm = ({ onClose }) => {
     onLogin(response.data.text);
   }
 
+  const inputGroupClassName = `loginform-inputgroup-${
+    isMobileLandscape ? 'row' : 'column'
+  }`;
+
   return (
     <div className="loginform-container">
-      <div style={{ margin: '20px 0px 0px 0px' }} className="p-grid p-fluid">
-        <div className="p-col-12 p-md-12">
-          {!!loginError && (
-            <div className="loginform-inputgroup">
-              <Message severity="warn" text={loginError} />
-            </div>
-          )}
+      {!!loginError && (
+        <div className="loginform-inputgroup">
+          <Message severity="warn" text={loginError} />
+        </div>
+      )}
 
-          <div
-            style={{ marginTop: '-15px', marginBottom: '-25px' }}
-            className="p-inputgroup loginform-inputgroup"
-          >
-            <h2>{`${C.LOGIN_BUTTON_TEXT}:`}</h2>
-          </div>
+      <div
+        style={{ marginTop: '-15px', marginBottom: '0px' }}
+        className="p-inputgroup loginform-inputgroup"
+      >
+        <h2>{`${C.LOGIN_BUTTON_TEXT}:`}</h2>
+      </div>
 
-          <div className="p-inputgroup loginform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-user"></i>
-            </span>
-            <span className="p-float-label">
-              <InputText
-                id="userName"
-                value={nameValue}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <label
-                style={{ fontSize: '14px', fontWeight: 'bold' }}
-                htmlhtmlFor="userName"
-              >
-                Name (single word user ID)
-              </label>
-            </span>
-          </div>
-
-          <div className="p-inputgroup loginform-inputgroup">
-            <span className="p-inputgroup-addon">
-              <i className="pi pi-lock"></i>
-            </span>
-            <Password
-              id="userPassword"
-              placeholder="Password"
-              value={passwordValue}
-              onChange={(e) => setPassword(e.target.value)}
+      <div className={inputGroupClassName}>
+        <div
+          className="p-inputgroup loginform-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-user"></i>
+          </span>
+          <span className="p-float-label">
+            <InputText
+              id="userName"
+              value={nameValue}
+              onChange={(e) => setName(e.target.value)}
             />
-          </div>
+            <label
+              style={{ fontSize: '14px', fontWeight: 'bold' }}
+              htmlhtmlFor="userName"
+            >
+              Name (a single word)
+            </label>
+          </span>
+        </div>
 
-          <Button
-            className="p-button-rounded"
-            disabled={!passwordValue || !nameValue}
-            label={C.LOGIN_BUTTON_TEXT}
-            onClick={() => onLoginClick(nameValue, passwordValue)}
-          />
-
-          <Button
-            className="p-button-rounded"
-            icon="pi pi-arrow-left"
-            onClick={onClose}
-            style={{ marginTop: '10px', maxWidth: '100px' }}
+        <div
+          className="p-inputgroup loginform-inputgroup"
+          style={{ marginBottom: '10px' }}
+        >
+          <span className="p-inputgroup-addon">
+            <i className="pi pi-lock"></i>
+          </span>
+          <Password
+            id="userPassword"
+            placeholder="Password"
+            value={passwordValue}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
       </div>
+
+      <Button
+        className="p-button-rounded"
+        disabled={!passwordValue || !nameValue}
+        label={C.LOGIN_BUTTON_TEXT}
+        onClick={() => onLoginClick(nameValue, passwordValue)}
+        style={{ width: 'var(--responsive-inputGroupWidth)' }}
+      />
+
+      <Button
+        className="p-button-rounded"
+        icon="pi pi-arrow-left"
+        onClick={onClose}
+        style={{ marginTop: '10px', maxWidth: '100px' }}
+      />
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );

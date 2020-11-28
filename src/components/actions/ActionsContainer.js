@@ -21,7 +21,7 @@ function onNewAction({ userName }, actionObj, setActions) {
   }
 }
 
-const ActionsContainer = ({ user, onHelp }) => {
+const ActionsContainer = ({ isMobileLandscape, user, onHelp }) => {
   const [actions, setActions] = useState([]);
   useEffect(() => {
     const theTime = utcdayjs.utc();
@@ -55,7 +55,7 @@ const ActionsContainer = ({ user, onHelp }) => {
 
   return (
     <div className="actions-container">
-      <ActionList actions={actions} />
+      <ActionList actions={actions} isMobileLandscape={isMobileLandscape} />
       <ActionInput
         onInput={(actionObj) => onNewAction(user, actionObj, setActions)}
         onHelp={onHelp}

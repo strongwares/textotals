@@ -1,21 +1,25 @@
 :root {
   --responsive-width: 400px;
-  --responsive-overlaywidth: 400px;
+  --responsive-overlayWidth: 400px;
   --responsive-overlayMarginLeft: calc(50% - 200px);
   --responsive-tabViewTitlePadding: 1rem;
   --responsive-helpScreenItemHeight: calc(100vh - 17rem);
+  --responsive-inputGroupWidth: 300px;
+  /* --responsive-flexDirection: column; */
 
   --tabPanelContentHeight: calc(100vh - 7rem);
   --sidebarHeight: calc(100% - 1rem);
   --sidebarContentHeight: calc(100% - 2rem);
+  --welcomeFormContainerHeight: calc(100vh - 7rem);
 }
 
 @media screen and (max-device-width: 640px), screen and (max-width: 640px) {
   :root {
     --responsive-width: calc(100% - 10px);
-    --responsive-overlaywidth: calc(100% - 10px);
+    --responsive-overlayWidth: calc(100% - 10px);
     --responsive-overlayMarginLeft: 4px;
     --responsive-tabViewTitlePadding: 0.5rem;
+    --responsive-inputGroupWidth: 240px;
   }
 }
 
@@ -24,6 +28,18 @@
     --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
+
+@media screen and (max-device-height: 400px), screen and (max-height: 400px) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 6.5rem);
+  }
+}
+
+/*
+@media only screen and (orientation: landscape) {
+  --responsive-flexDirection: row;
+}
+*/
 
 .aatapp-container {
   display: flex;
@@ -117,6 +133,7 @@
   margin-right: 0px !important;
   margin-left: 0px !important;
   margin-top: 0px !important;
+  flex-wrap: nowrap !important;
 }
 
 ul {

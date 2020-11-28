@@ -8,18 +8,24 @@ const itemTemplate = (screenNum) => {
   return helpScreenMap[screenNum];
 };
 
-const HelpOverlay = () => {
+const HelpOverlay = ({ isMobileLandscape }) => {
   const [height, setHeight] = useState(300);
   const parentRef = useRef(null);
   useEffect(() => {
     if (parentRef.current) {
       const parHeight = parentRef.current.offsetHeight;
-      setHeight(parHeight - 120);
+      if (isMobileLandscape) {
+        setHeight(parHeight);
+      } else {
+        setHeight(parHeight - 120);
+      }
     }
   }, [parentRef]);
 
-  // TODO: Make it controled and abort the event
+  // TODO: Make it controlled and abort the event
   // page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}
+
+  const orientation = isMobileLandscape ? 'horizontal' : 'vertical';
 
   return (
     <div className="helpoverlay-container card" ref={parentRef}>
@@ -28,7 +34,7 @@ const HelpOverlay = () => {
         value={helpScreenList}
         numVisible={1}
         numScroll={1}
-        orientation="vertical"
+        orientation={orientation}
         verticalViewPortHeight={`${height}px`}
         itemTemplate={itemTemplate}
       />
