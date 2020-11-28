@@ -20,7 +20,7 @@ const HelpOverlay = ({ isMobileLandscape }) => {
         setHeight(parHeight - 120);
       }
     }
-  }, [parentRef]);
+  }, [parentRef, isMobileLandscape]);
 
   // TODO: Make it controlled and abort the event
   // page={this.state.page} onPageChange={(e) => this.setState({page: e.page})}
