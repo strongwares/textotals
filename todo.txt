@@ -190,7 +190,7 @@ d   add help clear screen
 d   ui test clear
 d   ui test group clear
 
-- support landscape mode
+d- support landscape mode
 
 - no need for totals by month and year
 
@@ -208,7 +208,8 @@ d   ui test group clear
 
 - fix logo to make transparent outside
 
-- iphone7, with toolbar, screen is too short also
+- iphone5, with toolbar, screen is too short also
+- still broken help rendering on elizabeth's phone
 
 
 Put info page somewhere like zanshin.dev
