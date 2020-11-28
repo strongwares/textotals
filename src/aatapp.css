@@ -1,7 +1,7 @@
 :root {
-  --responsive-width: 400px;
-  --responsive-overlayWidth: 400px;
-  --responsive-overlayMarginLeft: calc(50% - 200px);
+  --responsive-width: 500px;
+  --responsive-overlayWidth: 500px;
+  --responsive-overlayMarginLeft: calc(50% - 250px);
   --responsive-tabViewTitlePadding: 1rem;
   --responsive-helpScreenItemHeight: calc(100vh - 17rem);
   --responsive-inputGroupWidth: 300px;
