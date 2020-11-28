@@ -39,34 +39,40 @@ const adjustToRe = /^.*adjust\s+-?\d*[.]?\d+\s+(.*)$/;
 const linkFromToRe = /^.*link\s+from\s+(.*)\s+to\s+(.*)\s+with.*$/;
 
 function parseAction(strIn) {
-  const rval = {
-    actionStr: strIn,
-    isValid: false,
-  };
-
   // console.log(`parse strIn: ${strIn}`);
 
   let tokenIdx = 0;
   let match;
 
-  // const str = strIn.toLowerCase().replace(',', '');
-  const str = strIn.replace(',', '');
+  let str = strIn.replace(',', '');
 
   const tokens = str.match(/\S+/g);
-
-  while (tokenIdx < tokens.length && !rval.op) {
+  let origOp;
+  let newOp;
+  while (tokenIdx < tokens.length && !newOp) {
     const token = tokens[tokenIdx];
     const tokenLc = token.toLowerCase();
     if (opRe.test(tokenLc)) {
-      rval.op = tokenLc; // tokens[tokenIdx];
+      newOp = tokenLc; // tokens[tokenIdx];
+      origOp = token;
     }
     tokenIdx++;
   }
 
   // Invalid!
-  if (!rval.op) {
-    return rval;
+  if (!newOp) {
+    return { isValid: false };
   }
+
+  str = str.replace(origOp, newOp);
+
+  const rval = {
+    actionStr: str,
+    isValid: false,
+    op: newOp,
+  };
+
+  // console.log(`op: ${rval.op}`);
 
   if (tokenIdx > 1) {
     const accountGroup = tokens.slice(0, tokenIdx - 1).join(' ');

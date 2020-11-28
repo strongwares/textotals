@@ -4,6 +4,7 @@ describe('test action parser', function () {
   it('should parse add actions', function () {
     var action = 'add 100';
     var actionObj = parseAction(action);
+    /*
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('add');
     expect(actionObj.amount).toBe('100');
@@ -152,7 +153,9 @@ describe('test action parser', function () {
     expect(actionObj.category).toBe('GAS AND OIL');
     expect(actionObj.isValid).toBe(true);
 
-    action = 'spend 100.09 gas and oil';
+    */
+
+    action = 'Spend 100.09 gas and oil';
     actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);
     expect(actionObj.op).toBe('spend');
