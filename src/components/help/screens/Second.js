@@ -1,7 +1,6 @@
 import React from 'react';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
-import 'animate.css/animate.min.css';
 import './helpscreen.css';
 
 const Second = () => {

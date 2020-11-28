@@ -191,6 +191,15 @@ d   ui test clear
 d   ui test group clear
 
 d- support landscape mode
+d- tablet landscape doesn't show full width
+d- drop animated arrow on first help
+
+- iphone5, with toolbar, screen is too short also
+- still broken help rendering on elizabeth's phone
+
+- when first load there is a flash of the
+  welcome screen until the localstorage
+  user is found
 
 - no need for totals by month and year
 
@@ -207,9 +216,6 @@ d- support landscape mode
 - add test of prune action
 
 - fix logo to make transparent outside
-
-- iphone5, with toolbar, screen is too short also
-- still broken help rendering on elizabeth's phone
 
 
 Put info page somewhere like zanshin.dev
