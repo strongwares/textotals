@@ -1,5 +1,4 @@
 .registerform-container {
-  background-color: #444cf755;
   height: var(--welcomeFormContainerHeight);
   min-height: var(--welcomeFormContainerHeight);
   width: 100%;

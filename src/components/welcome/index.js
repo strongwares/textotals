@@ -26,7 +26,7 @@ const WelcomeScreen = ({ isMobileLandscape }) => {
     : { width: 'var(--responsive-inputGroupWidth)' };
 
   return (
-    <div>
+    <div className="welcome-topcontainer">
       <img
         alt={`${C.APP_NAME} Logo`}
         className="p-mr-2"
