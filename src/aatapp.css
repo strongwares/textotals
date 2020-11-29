@@ -6,9 +6,9 @@
   --responsive-overlayWidth: 500px;
   --responsive-overlayMarginLeft: calc(50% - 250px);
   --responsive-tabViewTitlePadding: 1rem;
-  /* --responsive-helpScreenItemHeight: calc(100vh - 17rem); */
-  --responsive-helpScreenItemHeight: 100%;
   --responsive-inputGroupWidth: 300px;
+
+  --responsive-helpScreenItemHeight: calc(100vh - 17rem);
 
   --tabPanelContentHeight: calc(100vh - 7rem);
   --sidebarHeight: calc(100% - 1rem);
@@ -26,13 +26,11 @@
     --responsive-tabViewTitlePadding: 0.5rem;
     --responsive-inputGroupWidth: 240px;
 
-    /* --responsive-helpScreenItemHeight: calc(100vh - 15rem); */
-    --responsive-helpScreenItemHeight: 100%;
+    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
 /* Small mobile */
-/*
 @media screen and (max-device-height: 655px), screen and (max-height: 655px) {
   :root {
     --responsive-helpScreenItemHeight: calc(100vh - 15rem);
@@ -44,27 +42,63 @@
     --responsive-helpScreenItemHeight: calc(100vh - 6.5rem);
   }
 }
-*/
 
 /* ----------- iPhone 4  - 5 ----------- */
-/* Portrait */
+/*
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
   :root {
-    --responsive-helpScreenItemHeight: 100%;
+    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
+*/
 
+/*
+@media only screen and (max-device-width: 568px) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - .6rem);
+  }
+}
+*/
+
+/* Small mobile ??? */
+/*
+@media screen and (max-device-height: 655px), screen and (max-height: 655px) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 6.5rem);
+  }
+}
+*/
+
+/* Landscape only queries: */
 /* Landscape on ipads */
-@media only screen and (min-device-width: 1000px) and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+@media screen and (min-device-width: 1000px) and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
   :root {
     --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
 /* Landscape on other mobile */
-@media only screen and (max-device-width: 720px) and (max-device-width: 720px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
+@media screen and (min-device-width: 640px) and (max-device-width: 640px) and (orientation: landscape) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 7.2rem);
+  }
+}
+
+@media screen and (min-device-width: 720px) and (max-device-width: 720px) and (orientation: landscape) {
   :root {
     --responsive-helpScreenItemHeight: calc(100vh - 7.5rem);
+  }
+}
+
+@media screen and (min-device-width: 750px) and (max-device-width: 750px) and (orientation: landscape) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 8rem);
+  }
+}
+
+@media screen and (min-device-width: 850px) and (max-device-width: 850px) and (orientation: landscape) {
+  :root {
+    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
