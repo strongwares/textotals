@@ -15,6 +15,12 @@ const First = () => {
         </h4>
       </div>
 
+      <div style={{ marginTop: '-15px', textAlign: 'center' }}>
+        <h5 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+          textotals@strongwares.com
+        </h5>
+      </div>
+
       <h4 className="p-mt-0 p-mb-3">
         The Action tab is where you enter an action in the text input field at
         the bottom of the screen.

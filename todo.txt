@@ -194,10 +194,12 @@ d- support landscape mode
 d- tablet landscape doesn't show full width
 d- drop animated arrow on first help
 
-dana
-- when first load there is a flash of the
+d- when first load there is a flash of the
   welcome screen until the localstorage
   user is found
+
+d- add textotals@strongwares.com account
+d- add textotals@strongwares.com to first help screen
 
 - still broken help rendering on elizabeth's phone
 - iphone5, with toolbar, screen is too short also
@@ -206,10 +208,6 @@ dana
   pixel 2 xl (landscape width x height: 823 x 411)
 
 - fix logo to make transparent outside
-
-- add textotals@strongwares.com account
-
-- add textotals@strongwares.com to first help screen
 
 - no need for totals by month and year
 
