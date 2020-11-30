@@ -4,6 +4,7 @@ import { Sidebar } from 'primereact/sidebar';
 import { TabPanel, TabView } from 'primereact/tabview';
 import AccountsContainer from './components/accounts/AccountsContainer';
 import ActionsContainer from './components/actions/ActionsContainer';
+import AppLoading from './AppLoading';
 import AuthContext from './auth/context';
 import authStorage from './auth/storage';
 import MenuBar from './components/menuBar';
@@ -13,18 +14,9 @@ import WelcomeScreen from './components/welcome';
 import { useMediaQuery } from 'react-responsive';
 import './aatapp.css';
 
-/*
-let setIsMobileLandscapeFunc;
-function onMediaQueryChange(matches) {
-  console.log(`onMediaQueryChange: matches: ${matches}`);
-  if (setIsMobileLandscapeFunc) {
-    setIsMobileLandscapeFunc(matches);
-  }
-}
-*/
-
 function App() {
   const [user, setUser] = useState();
+  const [isReady, setIsReady] = useState(false);
   const [sidebarItem, setShowSidebar] = useState(undefined);
   const sidebarItemRef = useRef(sidebarItem);
   const [tabNumber, setTabNumber] = useState(0);
@@ -33,31 +25,21 @@ function App() {
     maxWidth: 767,
     orientation: 'landscape',
   });
-  // undefined,
-  // onMediaQueryChange
-  /*
-  const [isMobileLandscape, setIsMobileLandscape] = useState(
-    initialIsMobileLandscape
-  );
-  console.log(
-    `initial: ${initialIsMobileLandscape},  isMobileLandscape: ${isMobileLandscape}`
-  );
-  */
-  // console.log(`isMobileLandscape: ${isMobileLandscape}`);
 
   useEffect(() => {
     sidebarItemRef.current = sidebarItem;
     tabNumberRef.current = tabNumber;
 
-    if (!user) {
-      const savedUser = authStorage.getUser();
-      if (savedUser) {
-        setUser(savedUser);
-      }
-    }
-
     // authStorage.removeToken();
-  }, [sidebarItem, tabNumber, user]);
+  }, [sidebarItem, tabNumber]);
+  // }, [sidebarItem, tabNumber, user]);
+
+  const restoreUser = () => {
+    const savedUser = authStorage.getUser();
+    if (savedUser) {
+      setUser(savedUser);
+    }
+  };
 
   const onMenuItemClick = (item) => {
     if (!item) {
@@ -73,6 +55,9 @@ function App() {
   const onTabChange = ({ index }) => {
     setTabNumber(index);
   };
+
+  const showWelcome = !user && isReady;
+  const showTabs = !!user && isReady;
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -101,9 +86,15 @@ function App() {
         <Card className="aatapp-appcard p-shadow-5">
           <MenuBar onItemClick={onMenuItemClick} />
 
-          {!user && <WelcomeScreen isMobileLandscape={isMobileLandscape} />}
+          {!isReady && (
+            <AppLoading startFunc={restoreUser} onFinish={setIsReady} />
+          )}
 
-          {!!user && (
+          {showWelcome && (
+            <WelcomeScreen isMobileLandscape={isMobileLandscape} />
+          )}
+
+          {showTabs && (
             <>
               <TabView
                 activeIndex={tabNumber}
