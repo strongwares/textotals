@@ -194,12 +194,22 @@ d- support landscape mode
 d- tablet landscape doesn't show full width
 d- drop animated arrow on first help
 
-- iphone5, with toolbar, screen is too short also
-- still broken help rendering on elizabeth's phone
-
+dana
 - when first load there is a flash of the
   welcome screen until the localstorage
   user is found
+
+- still broken help rendering on elizabeth's phone
+- iphone5, with toolbar, screen is too short also
+- fix landscape:
+  iphone x (landscape width x height: 812 x 375)
+  pixel 2 xl (landscape width x height: 823 x 411)
+
+- fix logo to make transparent outside
+
+- add textotals@strongwares.com account
+
+- add textotals@strongwares.com to first help screen
 
 - no need for totals by month and year
 
@@ -214,9 +224,6 @@ d- drop animated arrow on first help
 - on remove user add are you sure confirm to component
 
 - add test of prune action
-
-- fix logo to make transparent outside
-
 
 Put info page somewhere like zanshin.dev
 

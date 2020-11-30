@@ -17,8 +17,7 @@
 }
 
 /* Smaller tablets and mobile, want to fill whole screen */
-/* @media screen and (max-device-width: 640px), screen and (max-width: 640px) { */
-@media screen and (max-device-width: 700px), screen and (max-width: 700px) {
+@media only screen and (max-device-width: 700px) and (max-width: 700px) {
   :root {
     --responsive-width: calc(100% - 10px);
     --responsive-overlayWidth: calc(100% - 10px);
@@ -30,75 +29,20 @@
   }
 }
 
-/* Small mobile */
-@media screen and (max-device-height: 655px), screen and (max-height: 655px) {
+/* mobile and tablet portrait */
+@media only screen and (max-device-height: 823px) and (max-height: 823px) and (orientation: portrait) {
   :root {
     --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
-@media screen and (max-device-height: 400px), screen and (max-height: 400px) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 6.5rem);
-  }
-}
-
-/* ----------- iPhone 4  - 5 ----------- */
-/*
-@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
-  }
-}
-*/
-
-/*
-@media only screen and (max-device-width: 568px) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - .6rem);
-  }
-}
-*/
-
-/* Small mobile ??? */
-/*
-@media screen and (max-device-height: 655px), screen and (max-height: 655px) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 6.5rem);
-  }
-}
-*/
-
-/* Landscape only queries: */
-/* Landscape on ipads */
-@media screen and (min-device-width: 1000px) and (max-device-width: 1000px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
-  }
-}
-
-/* Landscape on other mobile */
-@media screen and (min-device-width: 640px) and (max-device-width: 640px) and (orientation: landscape) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 7.2rem);
-  }
-}
-
-@media screen and (min-device-width: 720px) and (max-device-width: 720px) and (orientation: landscape) {
+/* mobile and tablet landscape: */
+/* need to fix:  */
+/* iphone x (landscape width x height: 812 x 375) */
+/* pixel 2 xl (landscape width x height: 823 x 411),  */
+@media only screen and (max-device-height: 540px) and (max-height: 540px) and (orientation: landscape) {
   :root {
     --responsive-helpScreenItemHeight: calc(100vh - 7.5rem);
-  }
-}
-
-@media screen and (min-device-width: 750px) and (max-device-width: 750px) and (orientation: landscape) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 8rem);
-  }
-}
-
-@media screen and (min-device-width: 850px) and (max-device-width: 850px) and (orientation: landscape) {
-  :root {
-    --responsive-helpScreenItemHeight: calc(100vh - 15rem);
   }
 }
 
