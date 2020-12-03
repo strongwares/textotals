@@ -207,6 +207,56 @@ d- fix logo to make same color outside
 d- smaller size logos
 d- colored logo for favicon
 
+- add Premium screen items:
+  - All action, account, totals data stored, not just one month's worth.
+  - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
+  - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
+  - Print data screens.
+  - Export of data.
+
+- do lazy load:
+File sizes after gzip:
+  102.25 KB  build/static/js/2.211dabba.chunk.js
+  34.11 KB   build/static/js/main.9f9f385c.chunk.js
+  33.01 KB   build/static/css/2.74ee85e5.chunk.css
+  2.09 KB    build/static/css/main.35de643d.chunk.css
+  775 B      build/static/js/runtime-main.5bc7deac.js
+
+  d- help
+ 98.69 KB (-3.55 KB)  build/static/js/2.ba551ce8.chunk.js
+  33.01 KB             build/static/css/2.74ee85e5.chunk.css
+  30.02 KB (-4.09 KB)  build/static/js/main.5487be93.chunk.js
+  4.69 KB              build/static/js/4.673b8cf1.chunk.js
+  4.26 KB              build/static/js/3.ba56214c.chunk.js
+  1.9 KB (-201 B)      build/static/css/main.760b2897.chunk.css
+  1.49 KB (+746 B)     build/static/js/runtime-main.c770ee77.js
+  522 B                build/static/css/3.62a3b242.chunk.css
+
+
+  d- actions tab
+  d- accounts tab
+  d- totals tab
+
+  67.99 KB (+63.74 KB)  build/static/js/3.766542e4.chunk.js
+  33.01 KB (+32.5 KB)   build/static/css/3.74ee85e5.chunk.css
+  28.51 KB              build/static/js/0.b5f1ad30.chunk.js
+  24.55 KB (-5.47 KB)   build/static/js/main.09ab054b.chunk.js
+  8.22 KB               build/static/js/5.a524a204.chunk.js
+  7.26 KB               build/static/js/8.40d04243.chunk.js
+  4.55 KB (-142 B)      build/static/js/4.310fce8e.chunk.js
+  3.82 KB               build/static/js/6.add0f278.chunk.js
+  1.57 KB (+86 B)       build/static/js/runtime-main.6562eab8.js
+  1.51 KB (-398 B)      build/static/css/main.d40aa914.chunk.css
+  865 B                 build/static/css/4.48923733.chunk.css
+  631 B                 build/static/js/7.d9a988a1.chunk.js
+  559 B                 build/static/css/5.e7833b8e.chunk.css
+  292 B                 build/static/css/6.cd9b9b11.chunk.css
+  291 B                 build/static/css/7.327f2c88.chunk.css
+
+- put strongwares gatsby site
+- put zanshin 
+- put textotals/info as gatsby site
+
 - add ability to print help screens
 
 - still broken help rendering on elizabeth's phone

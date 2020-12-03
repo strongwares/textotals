@@ -1,18 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Card } from 'primereact/card';
 import { Sidebar } from 'primereact/sidebar';
 import { TabPanel, TabView } from 'primereact/tabview';
-import AccountsContainer from './components/accounts/AccountsContainer';
-import ActionsContainer from './components/actions/ActionsContainer';
+// import AccountsContainer from './components/accounts/AccountsContainer';
+// import ActionsContainer from './components/actions/ActionsContainer';
 import AppLoading from './AppLoading';
 import AuthContext from './auth/context';
 import authStorage from './auth/storage';
 import MenuBar from './components/menuBar';
 import Overlay from './components/overlay/Overlay';
-import TotalsContainer from './components/totals/TotalsContainer';
+// import TotalsContainer from './components/totals/TotalsContainer';
 import WelcomeScreen from './components/welcome';
 import { useMediaQuery } from 'react-responsive';
 import './aatapp.css';
+
+const AccountsComponent = React.lazy(() =>
+  import('./components/accounts/AccountsContainer')
+);
+const ActionsComponent = React.lazy(() =>
+  import('./components/actions/ActionsContainer')
+);
+const TotalsComponent = React.lazy(() =>
+  import('./components/totals/TotalsContainer')
+);
 
 function App() {
   const [user, setUser] = useState();
@@ -58,6 +68,16 @@ function App() {
 
   const showWelcome = !user && isReady;
   const showTabs = !!user && isReady;
+
+  /*
+                  <ActionsContainer
+                    isMobileLandscape={isMobileLandscape}
+                    onHelp={() => setShowSidebar('help')}
+                    user={user}
+                  />
+
+
+  */
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
@@ -106,11 +126,13 @@ function App() {
                   header="&nbsp;&nbsp;Action"
                   leftIcon="pi pi-comments"
                 >
-                  <ActionsContainer
-                    isMobileLandscape={isMobileLandscape}
-                    onHelp={() => setShowSidebar('help')}
-                    user={user}
-                  />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <ActionsComponent
+                      isMobileLandscape={isMobileLandscape}
+                      onHelp={() => setShowSidebar('help')}
+                      user={user}
+                    />
+                  </Suspense>
                 </TabPanel>
 
                 <TabPanel
@@ -118,11 +140,13 @@ function App() {
                   header="&nbsp;&nbsp;Accounts"
                   leftIcon="pi pi-folder-open"
                 >
-                  <AccountsContainer
-                    isMobileLandscape={isMobileLandscape}
-                    onHelp={() => setShowSidebar('help')}
-                    user={user}
-                  />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <AccountsComponent
+                      isMobileLandscape={isMobileLandscape}
+                      onHelp={() => setShowSidebar('help')}
+                      user={user}
+                    />
+                  </Suspense>
                 </TabPanel>
 
                 <TabPanel
@@ -130,11 +154,13 @@ function App() {
                   header="&nbsp;&nbsp;Totals"
                   leftIcon="pi pi-tags"
                 >
-                  <TotalsContainer
-                    isMobileLandscape={isMobileLandscape}
-                    onHelp={() => setShowSidebar('help')}
-                    user={user}
-                  />
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <TotalsComponent
+                      isMobileLandscape={isMobileLandscape}
+                      onHelp={() => setShowSidebar('help')}
+                      user={user}
+                    />
+                  </Suspense>
                 </TabPanel>
               </TabView>
             </>

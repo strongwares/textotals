@@ -1,17 +1,23 @@
-import React from 'react';
-import HelpOverlay from '../help/HelpOverlay';
+import React, { Suspense } from 'react';
+// import HelpOverlay from '../help/HelpOverlay';
 import './overlay.css';
+
+const HelpComponent = React.lazy(() => import('../help/HelpOverlay'));
+
+// <TheOverlay isMobileLandscape={isMobileLandscape} />
 
 const Overlay = ({ isMobileLandscape, what }) => {
   let TheOverlay;
 
   if (what === 'help') {
-    TheOverlay = HelpOverlay;
+    TheOverlay = HelpComponent;
   }
 
   return (
     <div className="overlay-container">
-      <TheOverlay isMobileLandscape={isMobileLandscape} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <TheOverlay isMobileLandscape={isMobileLandscape} />
+      </Suspense>
     </div>
   );
 };
