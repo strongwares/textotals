@@ -201,13 +201,19 @@ d- when first load there is a flash of the
 d- add textotals@strongwares.com account
 d- add textotals@strongwares.com to first help screen
 
+d- update help: nothing to download
+
+d- fix logo to make same color outside
+d- smaller size logos
+d- colored logo for favicon
+
+- add ability to print help screens
+
 - still broken help rendering on elizabeth's phone
 - iphone5, with toolbar, screen is too short also
 - fix landscape:
   iphone x (landscape width x height: 812 x 375)
   pixel 2 xl (landscape width x height: 823 x 411)
-
-- fix logo to make transparent outside
 
 - no need for totals by month and year
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import LoginForm from '../login';
-import logo from '../../assets/icons/logo.png';
+import logo from '../../assets/icons/logo-colorbackground.jpg';
 import PremiumForm from '../premium';
 import RegisterForm from '../register';
 import UnRegisterForm from '../unregister';
