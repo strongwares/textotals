@@ -12,7 +12,7 @@ const SetOp = (
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      And use the "set" action to set the starting total for any another account
+      You also use the "set" action to set the starting total for any another account
       you want to keep track of.
     </h4>
 

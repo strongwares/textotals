@@ -25,8 +25,7 @@ const Third = () => {
           className="p-datatable-striped p-datatable-gridlines"
           header="Spending Totals"
           value={[
-            { category: 'GAS', total: '149.04' },
-            { category: 'GROCERIES', total: '366.25' },
+            { category: 'FOOD', total: '20.59' }
           ]}
         >
           <Column field="category" header="Category" sortable></Column>

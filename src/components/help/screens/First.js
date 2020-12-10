@@ -26,17 +26,39 @@ const First = () => {
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">
-        The Action tab is where you enter an action in the text input field at
-        the bottom of the screen.
+        The Action tab is where you start.
+      </h4>
+        
+      
+        <h4 className="p-mt-0 p-mb-3">
+          You enter an action in the text input field at the bottom.
+        </h4>
+      
+
+      <h4 className="p-mt-0 p-mb-3">
+        You can also enter 'help' to display these help screens.
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">
-        You can also enter 'help' to display these help screens again.
+        In the Actions tab, type in an action, then hit the 'enter' key or click the round 'plus'
+        button.
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">
-        Then hit the 'Enter' key or click the round 'plus' button.
+        Actions you would enter are things like:
       </h4>
+
+      <div style={{ marginTop: '-15px', textAlign: 'center' }}>
+        <h5 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+          set 500
+        </h5>
+      </div>
+
+      <div style={{ marginTop: '-15px', textAlign: 'center' }}>
+        <h5 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+          spend 20.59 on food
+        </h5>
+      </div>
 
       <div id="spacer" style={{ flex: 1 }} />
     </div>

@@ -25,8 +25,7 @@ const Second = () => {
           className="p-datatable-striped p-datatable-gridlines"
           header="Account Totals"
           value={[
-            { accountName: 'MAIN', total: '500.00' },
-            { accountName: 'SAVINGS', total: '1000.00' },
+            { accountName: 'MAIN', total: '479.41' }
           ]}
         >
           <Column field="accountName" header="Account" sortable></Column>

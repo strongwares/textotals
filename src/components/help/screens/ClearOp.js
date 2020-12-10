@@ -9,7 +9,7 @@ const ClearOp = (
 
     <h4 className="p-mt-0 p-mb-3">
       Use the "clear" action to tell Textotals that you want to remove all
-      actions, accounts, and totals from one account group;
+      actions, accounts, and totals from one account group.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">Here are examples of "clear" actions:</h4>

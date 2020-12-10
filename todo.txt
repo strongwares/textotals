@@ -207,14 +207,7 @@ d- fix logo to make same color outside
 d- smaller size logos
 d- colored logo for favicon
 
-- add Premium screen items:
-  - All action, account, totals data stored, not just one month's worth.
-  - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
-  - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
-  - Print data screens.
-  - Export of data.
-
-- do lazy load:
+d- do lazy load:
 File sizes after gzip:
   102.25 KB  build/static/js/2.211dabba.chunk.js
   34.11 KB   build/static/js/main.9f9f385c.chunk.js
@@ -253,11 +246,26 @@ File sizes after gzip:
   292 B                 build/static/css/6.cd9b9b11.chunk.css
   291 B                 build/static/css/7.327f2c88.chunk.css
 
+
+dana
+- clearer onboarding help:
+  - animated arrow to help when no users
+  - update first help screen with set and spend examples
+
+
 - put strongwares gatsby site
 - put zanshin 
 - put textotals/info as gatsby site
 
 - add ability to print help screens
+
+- add Premium screen items:
+  - All action, account, totals data stored, not just one month's worth.
+  - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
+  - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
+  - Print data screens.
+  - Export of data.
+
 
 - still broken help rendering on elizabeth's phone
 - iphone5, with toolbar, screen is too short also

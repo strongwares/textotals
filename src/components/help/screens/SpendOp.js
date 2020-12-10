@@ -31,7 +31,7 @@ const SpendOp = (
 
     <div style={{ marginLeft: '20px' }}>
       <div className="action-item-action">spend 409.99 on gas</div>
-      <span>Woops, I entered the wrong spend amount, need to undo it:</span>
+      <span>Hmmmm, I entered the wrong spend amount, need to undo it:</span>
       <div className="action-item-action">spend -409.99 on gas</div>
     </div>
 

@@ -23,22 +23,23 @@ const TheBrain = (
       astyle={{ marginTop: '-10px', marginBottom: '-30px' }}
       className="p-mt-0 p-mb-3"
     >
-      That looks something like this:
+      Those responses look like this in the Action tab:
     </h4>
 
-    <ActionItem
-      action={{
-        actionStr: 'set 500::PERSONAL MAIN 500.00',
-        timestampMs: new Date().getTime() - 100000000,
-      }}
-    />
-
-    <ActionItem
-      action={{
-        actionStr: 'spend 19.95 on gas::PERSONAL MAIN 480.05',
-        timestampMs: new Date().getTime(),
-      }}
-    />
+    <div style={{ marginTop: '-25px', textAlign: 'center' }}>
+      <ActionItem
+        action={{
+          actionStr: 'set 500::PERSONAL MAIN 500.00',
+          timestampMs: new Date().getTime() - 100000000,
+        }}
+      />
+      <ActionItem
+        action={{
+          actionStr: 'spend 20.59 on food::PERSONAL MAIN 479.41',
+          timestampMs: new Date().getTime(),
+        }}
+      />
+    </div>
 
     <div id="spacer" style={{ flex: 1 }} />
   </div>

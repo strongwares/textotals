@@ -16,7 +16,7 @@ const SpendingCategories = (
     </h4>
 
     <div>
-      <div className="action-item-action">spend 50.99 on gas</div>
+      <div className="action-item-action">spend 20.59 on food</div>
       <div className="action-item-action">spend 100 on books from savings</div>
       <div className="action-item-action">
         spend 400.99 on travel from rainy day fund

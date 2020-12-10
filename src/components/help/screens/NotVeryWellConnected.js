@@ -25,8 +25,8 @@ const NotVeryWellConnected = (
 
     <h4 className="p-mt-0 p-mb-3">
       But you can register several user names on this device if you wanted to.
-      The passwords are checked only within Textotals on this device, not sent
-      anywhere else.
+      The passwords are checked only within Textotals on this device,
+      passwords are not sent anywhere else.
     </h4>
 
     <div id="spacer" style={{ flex: 1 }} />

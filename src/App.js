@@ -2,14 +2,11 @@ import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { Card } from 'primereact/card';
 import { Sidebar } from 'primereact/sidebar';
 import { TabPanel, TabView } from 'primereact/tabview';
-// import AccountsContainer from './components/accounts/AccountsContainer';
-// import ActionsContainer from './components/actions/ActionsContainer';
 import AppLoading from './AppLoading';
 import AuthContext from './auth/context';
 import authStorage from './auth/storage';
 import MenuBar from './components/menuBar';
 import Overlay from './components/overlay/Overlay';
-// import TotalsContainer from './components/totals/TotalsContainer';
 import WelcomeScreen from './components/welcome';
 import { useMediaQuery } from 'react-responsive';
 import './aatapp.css';
@@ -39,11 +36,14 @@ function App() {
   useEffect(() => {
     sidebarItemRef.current = sidebarItem;
     tabNumberRef.current = tabNumber;
-
+    // uncomment the following to clear out the
+    // local storage persisted user:
     // authStorage.removeToken();
   }, [sidebarItem, tabNumber]);
-  // }, [sidebarItem, tabNumber, user]);
 
+  // Function used by the AppLoading screen, when it
+  // acquires a persisted user from local storage
+  // then the main tabs are shown.
   const restoreUser = () => {
     const savedUser = authStorage.getUser();
     if (savedUser) {
@@ -62,23 +62,27 @@ function App() {
     }
   };
 
+  // Tab component is a controlled component, the
+  // current tab being displayed is part of local state
+  // just in case we want to do context sensitive help:
   const onTabChange = ({ index }) => {
     setTabNumber(index);
   };
 
+  // Show welcom when no persited user and the ready
+  // state says we've already loaded a persisted user
+  // from local storage:
   const showWelcome = !user && isReady;
+
+  // Show tabs when we've got a logged in user loaded
+  // from local storage;
   const showTabs = !!user && isReady;
 
-  /*
-                  <ActionsContainer
-                    isMobileLandscape={isMobileLandscape}
-                    onHelp={() => setShowSidebar('help')}
-                    user={user}
-                  />
-
-
-  */
-
+  // The sideabar is a complete covering overlay
+  // of the main app.
+  // The main menubar is always rendered even when no
+  // user is logged in, the help button is always
+  // available.
   return (
     <AuthContext.Provider value={{ user, setUser }}>
       <div className="aatapp-container">

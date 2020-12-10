@@ -13,7 +13,7 @@ const AdjustOp = (
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      The "adjust" action adds or subtracts an amount from the specified
+      The adjust action adds or subtracts an amount from the specified
       account.
     </h4>
 
