@@ -91,7 +91,7 @@ function App() {
             onHide={() => setShowSidebar(undefined)}
             position="top"
             style={{
-              borderRadius: '5%',
+              borderRadius: '3%',
               border: '2px solid blue',
               backgrounddColor: '#e5e5f7',
               height: 'var(--sidebarHeight)',

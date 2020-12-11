@@ -81,13 +81,18 @@
 .aatapp-tabview {
   vertical-align: middle;
   width: 100%;
+  border-bottom-right-radius: 3% !important;
+  border-bottom-left-radius: 3% !important;
 }
 
 .aatapp-tabpanel-content {
   height: var(--tabPanelContentHeight);
   font-size: calc(10px + 2vmin);
-  border-radius: 5%;
-  background-color: #e5e5f7;
+  /* border-radius: 3%; */
+  border-bottom-right-radius: 3% !important;
+  border-bottom-left-radius: 3% !important;
+  /* border: 2px solid red; */
+  /* background-color: #e5e5f7; */
   background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -18px 0/
       36px 36px,
     linear-gradient(225deg, #444cf7 25%, transparent 25%) -18px 0/ 36px 36px,
@@ -168,7 +173,7 @@ ul {
 
 .p-card {
   border: 2px solid blue !important;
-  border-radius: 5% !important;
+  border-radius: 3% !important;
 }
 
 .p-sidebar-content {
