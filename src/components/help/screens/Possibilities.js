@@ -55,6 +55,7 @@ const Possibilities = (
       <li>the "MAIN" account in the "POINTS" group starting total is 24 points</li>
       <li>the category name "breakfast" is the breakfast you ate worth 5 points</li>
       <li>the category name "mid day snack" is something you ate worth 3 points</li>
+      <li>the Textotals Accounts tab will show you have 16 left on the "POINTS" group "MAIN" account</li>
       <li>the Textotals Totals tab will show you spent 5 on "breakfast" and 3 on "mid day snack"</li>
       <li>you can use the "points clear" action at any time to start over</li>
     </ul>
