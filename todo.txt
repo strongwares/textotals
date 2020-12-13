@@ -247,17 +247,48 @@ File sizes after gzip:
   291 B                 build/static/css/7.327f2c88.chunk.css
 
 
+d add a clear action:
+- action op
+- parse
+- parse test
+- action handler
+- acction handler test
+- update help
+- help screen
+
+d need customer support:
+d - create textotals@sw.com
+d - put email addr in a first help screen
+
+
+d- clearer onboarding help:
+d  - animated arrow to help when no users
+d  - update first help screen with set and spend examples
+d- note the one month history behavior
+d- note that not connected to any actual bank or other service:
+d    The Textotals brain is not very well connected.
+d    It does not (yet?) actually connect to any actual external services.
+d- add to ww points example to possibilities
+
 dana
-- clearer onboarding help:
-  - animated arrow to help when no users
-  - update first help screen with set and spend examples
+ipfs storage
+- investigate for user mgmt
+- investigate for user's data persistence
+  https://medium.com/@dennisonbertram_32974/application-state-storage-on-ipfs-b23dd17adac
+
+  https://docs.textile.io/tutorials/hub/web-app/
+
+  https://docs.textile.io/threads/
+
+  https://docs.textile.io/tutorials/react-native-buckets/
 
 
-- put strongwares gatsby site
-- put zanshin 
+
+
 - put textotals/info as gatsby site
+- put strongwares gatsby site
+- put zanshin up on web
 
-- add ability to print help screens
 
 - add Premium screen items:
   - All action, account, totals data stored, not just one month's worth.
@@ -266,6 +297,12 @@ dana
   - Print data screens.
   - Export of data.
 
+  - ipfs persistence
+  - enables actions:
+    link, history, export, clear
+  - storage beyond two months
+  - export action or menu option from history
+  
 
 - still broken help rendering on elizabeth's phone
 - iphone5, with toolbar, screen is too short also
@@ -287,37 +324,11 @@ dana
 
 - add test of prune action
 
-Put info page somewhere like zanshin.dev
-
 Don't open source aat.fyi, but make it its own landing page:
   - with the gatsby page like zanshin
   - with ability to run aat.fyi in a popup dialog
 
-
-
-ipfs
-- investigate for user mgmt
-- investigate for user's data persistence
-  https://medium.com/@dennisonbertram_32974/application-state-storage-on-ipfs-b23dd17adac
-
-  https://docs.textile.io/tutorials/hub/web-app/
-
-  https://docs.textile.io/threads/
-
-  https://docs.textile.io/tutorials/react-native-buckets/
-
-
-
 social media logins
-
-help screen additions:
-- note possibility for deficit spending
-- note the two month history behavior
-- note that not connected to any actual bank or other service:
-  The Textotals brain is not very well connected.
-  It does not (yet?) actually connect to any actual external services.
-
-
 
 add history action:
 - container
@@ -329,27 +340,6 @@ add history action:
 - update help
 - help screen
 
-
-add a clear action:
-- action op
-- parse
-- parse test
-- action handler
-- acction handler test
-- update help
-- help screen
-
-
-monetize via incentive of a premium mode:
-- ipfs persistence
-- enables actions:
-  link, history, export, clear
-- storage beyond two months
-- export action or menu option from history
-
-need customer support:
-- create textotals@sw.com
-- put email addr in a final help screen
 
 add trimmed down aat.fyi repo:
 - new repo
