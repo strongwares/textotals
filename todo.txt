@@ -270,25 +270,11 @@ d    The Textotals brain is not very well connected.
 d    It does not (yet?) actually connect to any actual external services.
 d- add to ww points example to possibilities
 
+
 dana
-ipfs storage
-- investigate for user mgmt
-- investigate for user's data persistence
-  https://medium.com/@dennisonbertram_32974/application-state-storage-on-ipfs-b23dd17adac
-
-  https://docs.textile.io/tutorials/hub/web-app/
-
-  https://docs.textile.io/threads/
-
-  https://docs.textile.io/tutorials/react-native-buckets/
-
-
-
-
-- put textotals/info as gatsby site
-- put strongwares gatsby site
-- put zanshin up on web
-
+- mirror to textotals repo
+- mirror to aatapp repo
+- prune aatapp repo
 
 - add Premium screen items:
   - All action, account, totals data stored, not just one month's worth.
@@ -303,6 +289,66 @@ ipfs storage
   - storage beyond two months
   - export action or menu option from history
   
+
+
+
+dana
+ipfs storage
+- investigate for user mgmt
+- investigate for user's data persistence
+
+  https://docs.ipfs.io/concepts/persistence/#pinning-services
+
+  https://medium.com/@dennisonbertram_32974/application-state-storage-on-ipfs-b23dd17adac
+
+  https://docs.textile.io/tutorials/hub/web-app/
+
+  https://docs.textile.io/threads/
+
+  https://docs.textile.io/tutorials/react-native-buckets/
+
+  key-value storage with embedded links on ipfs:
+  https://github.com/mikeal/dkv
+
+  interface to calling apis:
+  https://github.com/infinitered/apisauce
+
+
+  https://blog.ipfs.io/2020-04-28-go-ipfs-0-5-0/
+
+
+user auth ideas:
+  https://www.digitalprimates.net/blog/making-authentication-in-react-apps-easy-with-useauth/
+  https://github.com/fastify/fastify-jwt
+  https://jwt.io/
+  okta dev:
+  https://www.youtube.com/watch?v=996OiexHze0
+
+
+styling:
+detecting system theme:
+https://www.youtube.com/watch?v=etBTVXuif3Y
+
+
+payment ideas:
+  http://thinkapps.com/blog/development/payments-app-definitive-guide/
+  https://woodridgesoftware.com/collect-payment-for-your-app/
+
+
+animations:
+https://lottiefiles.com/
+
+
+graphics:
+https://www.pngwing.com/en/free-png-njpyp/download
+
+
+
+
+- put textotals/info as gatsby site
+- put strongwares gatsby site
+- put zanshin up on web
+
 
 - still broken help rendering on elizabeth's phone
 - iphone5, with toolbar, screen is too short also
@@ -347,3 +393,27 @@ add trimmed down aat.fyi repo:
 - deploy to DigiOcean
 - subdomain on textotals.com
 - add info page like zanshin.dev
+
+react native links:
+https://necolas.github.io/react-native-web/docs/?path=/docs/guides-multi-platform--page
+https://github.com/react-native-device-info/react-native-device-info
+https://flatlogic.com/blog/why-i-don-t-want-to-use-react-native-with-expo/
+https://flatlogic.com/blog/tag/react-native/
+https://flatlogic.com/templates/react-native-starter-free
+https://blog.carbonfive.com/new-to-mobile-app-design-six-things-to-know-for-your-next-mobile-project/
+https://shift.infinite.red/react-native-final-steps-691a01f9d895
+
+
+crypto:
+https://arunrajeevan.medium.com/tokens-gas-and-gas-limit-in-ethereum-f07790f56d8f
+https://media.consensys.net/a-guide-to-gas-12b40d03605d
+https://medium.com/deqode/erc-token-standards-for-dummies-like-me-b6b8ace0f303
+https://reime005.medium.com/i-started-building-a-dapp-these-were-my-architectural-difficulties-a2c7139819cf
+https://medium.com/coinbundle/utility-tokens-978d117290cd
+
+https://medium.com/@deepitag/hashgraph-a-fourth-generation-dlt-f06a97b334f5
+
+
+misc:
+https://github.com/Microsoft/WSL/issues/849
+https://stackoverflow.com/questions/44049070/bash-on-ubuntu-on-windows-not-starting
