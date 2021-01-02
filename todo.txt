@@ -29,44 +29,6 @@ d- finish second step that shows accounts tab
 d- finish third step that shows totals tab
 
 --
-
-deploy to DigitalOcean:
-d- use one vm for textotals.com
-d- setup dns on namecheap
-d- setup domain on DO
-d- setup ngnx proxy
-d- get pki cert:
-  IMPORTANT NOTES:
- - Congratulations! Your certificate and chain have been saved at:
-   /etc/letsencrypt/live/textotals.com/fullchain.pem
-   Your key file has been saved at:
-   /etc/letsencrypt/live/textotals.com/privkey.pem
-   Your cert will expire on 2021-02-21. To obtain a new or tweaked
-   version of this certificate in the future, simply run certbot again
-   with the "certonly" option. To non-interactively renew *all* of
-   your certificates, run "certbot renew"
- - Your account credentials have been saved in your Certbot
-   configuration directory at /etc/letsencrypt. You should make a
-   secure backup of this folder now. This configuration directory will
-   also contain certificates and private keys obtained by Certbot so
-   making regular backups of this folder is ideal.
-
-npm run build
-cd build
-tar -czf ../textotals-build.11-25.2020.tgz *    
-cd ..
-scp textotals-build.11-25.2020.tgz textotals@textotals.com:/tmp
-ssh textotals@textotals.com      
-mv /tmp/textotals-build.11-25.2020.tgz ~/builds/
-cd /var/www/textotals.com/html/
-tar -xzf ~/builds/textotals-build.11-25.2020.tgz 
-sudo systemctl restart nginx
-exit
-
---
-
-
-
 d- set user action to lower case
 d- make sure to remove trailing spaces from user name and email and pwd
 d- tabpanel tabs too wide for iphone7
@@ -274,20 +236,8 @@ d- mirror to textotals repo
 d- mirror to aatapp repo
 d- prune aatapp repo
 
-
 --
-1/2/2021
-deploy to render.com:
-  https://render.com/docs/deploy-create-react-app
-  https://dashboard.render.com/register?i=cra
-
---
-todo:
-prune aatapp src/lib to have just few public example actions
-prune help to remove premium screen
-prune all mention of textotals from aatapp 
-
-- add Premium screen items:
+add Premium help screen items:
   - All action, account, totals data stored, not just one month's worth.
   - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
   - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
@@ -300,9 +250,13 @@ prune all mention of textotals from aatapp
   - storage beyond two months
   - export action or menu option from history
   
+--
+deploy to render.com:
+  https://render.com/docs/deploy-create-react-app
+  https://dashboard.render.com/register?i=cra
 
 
-
+--
 todo:
 ipfs storage
 - investigate for user mgmt
