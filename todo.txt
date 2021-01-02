@@ -271,10 +271,14 @@ d    It does not (yet?) actually connect to any actual external services.
 d- add to ww points example to possibilities
 
 
+d- mirror to textotals repo
+d- mirror to aatapp repo
+d- prune aatapp repo
+
 dana
-- mirror to textotals repo
-- mirror to aatapp repo
-- prune aatapp repo
+prune aatapp src/lib to have just few public example actions
+prune help to remove premium screen
+prune all mention of textotals from aatapp 
 
 - add Premium screen items:
   - All action, account, totals data stored, not just one month's worth.
