@@ -148,7 +148,6 @@ d- add help screen on only local storage
 d- add help screen on not very connected
 d- for local storage, make sure it is under textotals
 
-todo:
 d- change register button to add user
 d- add unregister or remove unregister button on welcome and screen:
   - user name input
@@ -275,7 +274,15 @@ d- mirror to textotals repo
 d- mirror to aatapp repo
 d- prune aatapp repo
 
-dana
+
+--
+1/2/2021
+deploy to render.com:
+  https://render.com/docs/deploy-create-react-app
+  https://dashboard.render.com/register?i=cra
+
+--
+todo:
 prune aatapp src/lib to have just few public example actions
 prune help to remove premium screen
 prune all mention of textotals from aatapp 
@@ -296,7 +303,7 @@ prune all mention of textotals from aatapp
 
 
 
-dana
+todo:
 ipfs storage
 - investigate for user mgmt
 - investigate for user's data persistence
@@ -348,13 +355,7 @@ https://www.pngwing.com/en/free-png-njpyp/download
 
 
 
-
-- put textotals/info as gatsby site
-- put strongwares gatsby site
-- put zanshin up on web
-
-
-- still broken help rendering on elizabeth's phone
+- still broken help rendering on old iphone
 - iphone5, with toolbar, screen is too short also
 - fix landscape:
   iphone x (landscape width x height: 812 x 375)
@@ -374,10 +375,6 @@ https://www.pngwing.com/en/free-png-njpyp/download
 
 - add test of prune action
 
-Don't open source aat.fyi, but make it its own landing page:
-  - with the gatsby page like zanshin
-  - with ability to run aat.fyi in a popup dialog
-
 social media logins
 
 add history action:
@@ -389,35 +386,3 @@ add history action:
 - acction handler test
 - update help
 - help screen
-
-
-add trimmed down aat.fyi repo:
-- new repo
-- keep only set and spend actions
-- deploy to DigiOcean
-- subdomain on textotals.com
-- add info page like zanshin.dev
-
-react native links:
-https://necolas.github.io/react-native-web/docs/?path=/docs/guides-multi-platform--page
-https://github.com/react-native-device-info/react-native-device-info
-https://flatlogic.com/blog/why-i-don-t-want-to-use-react-native-with-expo/
-https://flatlogic.com/blog/tag/react-native/
-https://flatlogic.com/templates/react-native-starter-free
-https://blog.carbonfive.com/new-to-mobile-app-design-six-things-to-know-for-your-next-mobile-project/
-https://shift.infinite.red/react-native-final-steps-691a01f9d895
-
-
-crypto:
-https://arunrajeevan.medium.com/tokens-gas-and-gas-limit-in-ethereum-f07790f56d8f
-https://media.consensys.net/a-guide-to-gas-12b40d03605d
-https://medium.com/deqode/erc-token-standards-for-dummies-like-me-b6b8ace0f303
-https://reime005.medium.com/i-started-building-a-dapp-these-were-my-architectural-difficulties-a2c7139819cf
-https://medium.com/coinbundle/utility-tokens-978d117290cd
-
-https://medium.com/@deepitag/hashgraph-a-fourth-generation-dlt-f06a97b334f5
-
-
-misc:
-https://github.com/Microsoft/WSL/issues/849
-https://stackoverflow.com/questions/44049070/bash-on-ubuntu-on-windows-not-starting
