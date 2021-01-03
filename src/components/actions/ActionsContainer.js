@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import ActionInput from './ActionInput';
@@ -62,6 +63,16 @@ const ActionsContainer = ({ isMobileLandscape, user, onHelp }) => {
       />
     </div>
   );
+};
+
+ActionsContainer.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+  onHelp: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+};
+
+ActionsContainer.defaultProps = {
+  isMobileLandscape: false,
 };
 
 export default ActionsContainer;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Message } from 'primereact/message';
@@ -27,9 +28,6 @@ const LoginForm = ({ isMobileLandscape, onClose }) => {
       }
       return;
     }
-
-    // console.log('login result:');
-    // console.table(response.data);
 
     if (loginError) {
       setLoginError(undefined);
@@ -112,6 +110,15 @@ const LoginForm = ({ isMobileLandscape, onClose }) => {
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+};
+
+LoginForm.defaultProps = {
+  isMobileLandscape: false,
 };
 
 export default LoginForm;

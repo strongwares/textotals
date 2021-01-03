@@ -241,8 +241,9 @@ add Premium help screen items:
   - All action, account, totals data stored, not just one month's worth.
   - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
   - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
-  - Print data screens.
-  - Export of data.
+  - Export your data.
+
+
 
   - ipfs persistence
   - enables actions:
@@ -258,6 +259,8 @@ deploy to render.com:
 
 --
 todo:
+- Ability to print screens
+
 ipfs storage
 - investigate for user mgmt
 - investigate for user's data persistence

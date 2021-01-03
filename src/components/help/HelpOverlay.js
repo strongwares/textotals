@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Carousel } from 'primereact/carousel';
 import helpScreenList from './helpScreenList';
 import helpScreenMap from './helpScreenMap';
@@ -40,6 +41,14 @@ const HelpOverlay = ({ isMobileLandscape }) => {
       />
     </div>
   );
+};
+
+HelpOverlay.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+};
+
+HelpOverlay.defaultProps = {
+  isMobileLandscape: false,
 };
 
 export default HelpOverlay;

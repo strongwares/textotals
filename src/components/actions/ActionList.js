@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ActionItem from './ActionItem';
 import './actions.css';
 
-const ActionList = ({ actions = [], isMobileLandscape }) => {
+const ActionList = ({ actions, isMobileLandscape }) => {
   const listEndRef = useRef(null);
   const scrollToBottom = () => {
     listEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -30,6 +30,16 @@ const ActionList = ({ actions = [], isMobileLandscape }) => {
       <div ref={listEndRef} />
     </div>
   );
+};
+
+ActionList.propTypes = {
+  actions: PropTypes.array,
+  isMobileLandscape: PropTypes.bool,
+};
+
+ActionList.defaultProps = {
+  actions: [],
+  isMobileLandscape: false,
 };
 
 export default ActionList;

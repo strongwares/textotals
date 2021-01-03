@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import './totals.css';
@@ -50,6 +51,11 @@ const CategoryTotalsItem = ({ groupName, item }) => {
       )}
     </div>
   );
+};
+
+CategoryTotalsItem.propTypes = {
+  groupName: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default CategoryTotalsItem;

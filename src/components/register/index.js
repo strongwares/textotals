@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
@@ -26,11 +27,9 @@ const RegisterForm = ({ isMobileLandscape, onClose }) => {
 
     if (!response.ok) {
       if (response.data) {
-        // console.log(`Registration error: ${response.data.error}`);
         setRegisterError(response.data.error);
       } else {
         setRegisterError(`${C.REGISTER_BUTTON_TEXT} error`);
-        // console.log("Registration error response: ", response);
       }
       return;
     }
@@ -42,8 +41,6 @@ const RegisterForm = ({ isMobileLandscape, onClose }) => {
     }
 
     response = await loginUser(userObj.userName, userObj.password);
-    // console.log('register login result:');
-    // console.table(response.data.text);
     onLogin(response.data.text);
   }
 
@@ -145,6 +142,15 @@ const RegisterForm = ({ isMobileLandscape, onClose }) => {
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
+};
+
+RegisterForm.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+};
+
+RegisterForm.defaultProps = {
+  isMobileLandscape: false,
 };
 
 export default RegisterForm;

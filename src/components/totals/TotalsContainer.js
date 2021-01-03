@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import * as dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { getCategories } from '../../lib/action/persistenceUtils';
@@ -7,7 +8,7 @@ import './totals.css';
 
 const utcdayjs = dayjs.extend(utc);
 
-const TotalsContainer = ({ user, onHelp }) => {
+const TotalsContainer = ({ user }) => {
   const [accountGroups, setAccountGroups] = useState({});
   useEffect(() => {
     const theTime = utcdayjs.utc();
@@ -32,6 +33,10 @@ const TotalsContainer = ({ user, onHelp }) => {
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
+};
+
+TotalsContainer.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 export default TotalsContainer;

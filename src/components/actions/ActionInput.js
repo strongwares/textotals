@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import parseAction from '../../lib/action/parseAction';
@@ -84,5 +84,15 @@ function ActionInput({ onHelp = () => {}, onInput = () => {} }) {
     </>
   );
 }
+
+ActionInput.propTypes = {
+  onHelp: PropTypes.func,
+  onInput: PropTypes.func,
+};
+
+ActionInput.defaultProps = {
+  onHelp: () => {},
+  onInput: () => {},
+};
 
 export default ActionInput;

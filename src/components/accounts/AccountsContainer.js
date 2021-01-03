@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { getAccountGroups } from '../../lib/action/persistenceUtils';
 import AccountGroupItem from './AccountGroupItem';
 import './accounts.css';
 
-const AccountsContainer = ({ user, onHelp }) => {
+const AccountsContainer = ({ user }) => {
   const [accounts, setAccounts] = useState({});
   useEffect(() => {
     const accts = getAccountGroups({ userName: user.userName });
@@ -22,6 +23,10 @@ const AccountsContainer = ({ user, onHelp }) => {
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
+};
+
+AccountsContainer.propTypes = {
+  user: PropTypes.object.isRequired,
 };
 
 export default AccountsContainer;

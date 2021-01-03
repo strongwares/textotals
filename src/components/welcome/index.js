@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import LoginForm from '../login';
 import logo from '../../assets/icons/logo-colorbackground.jpg';
@@ -112,6 +113,10 @@ const WelcomeScreen = ({ isMobileLandscape }) => {
       )}
     </div>
   );
+};
+
+WelcomeScreen.propTypes = {
+  isMobileLandscape: PropTypes.bool,
 };
 
 export default WelcomeScreen;

@@ -1,4 +1,5 @@
 import React, { Suspense } from 'react';
+import PropTypes from 'prop-types';
 // import HelpOverlay from '../help/HelpOverlay';
 import './overlay.css';
 
@@ -20,6 +21,16 @@ const Overlay = ({ isMobileLandscape, what }) => {
       </Suspense>
     </div>
   );
+};
+
+Overlay.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+  what: PropTypes.string,
+};
+
+Overlay.defaultProps = {
+  isMobileLandscape: false,
+  what: 'help',
 };
 
 export default Overlay;

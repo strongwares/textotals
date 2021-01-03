@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import './accounts.css';
@@ -27,6 +28,11 @@ const AccountGroupItem = ({ groupName, item }) => {
       </DataTable>
     </div>
   );
+};
+
+AccountGroupItem.propTypes = {
+  groupName: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
 };
 
 export default AccountGroupItem;

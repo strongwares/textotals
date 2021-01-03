@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { Message } from 'primereact/message';
@@ -22,11 +23,9 @@ const UnRegisterForm = ({ isMobileLandscape, onClose }) => {
 
     if (!response.ok) {
       if (response.data) {
-        // console.log(`Registration error: ${response.data.error}`);
         setUnRegisterError(response.data.error);
       } else {
         setUnRegisterError(`${C.UNREGISTER_BUTTON_TEXT} error`);
-        // console.log("Registration error response: ", response);
       }
       return;
     }
@@ -118,6 +117,15 @@ const UnRegisterForm = ({ isMobileLandscape, onClose }) => {
       <div id="bottomSpacer" style={{ flex: 1 }} />
     </div>
   );
+};
+
+UnRegisterForm.propTypes = {
+  isMobileLandscape: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+};
+
+UnRegisterForm.defaultProps = {
+  isMobileLandscape: false,
 };
 
 export default UnRegisterForm;

@@ -1,7 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import * as dayjs from 'dayjs';
-// import defaults from '../../lib/action/defaults';
 import * as C from '../../constants';
 import './actions.css';
 
@@ -9,13 +8,6 @@ import './actions.css';
 // TODO: Only change this if you are changing lib/action/handleAccountAction
 const TOTALS_SEP = '::';
 const ACCOUNT_SEP = ':;:';
-
-/*
-function getActionString(str) {
-  return str.replace(TOTALS_SEP, '\nTotals:\n').replace(ACCOUNT_SEP, '\n');
-}
-// <div className="action-item-actionstr">{getActionString(actionStr)}</div>
-*/
 
 function getResponseString(str) {
   if (str.indexOf(C.APP_NAME) === 0) {
@@ -67,6 +59,10 @@ const ActionItem = ({ action }) => {
       )}
     </div>
   );
+};
+
+ActionItem.propTypes = {
+  action: PropTypes.object.isRequired,
 };
 
 export default ActionItem;
