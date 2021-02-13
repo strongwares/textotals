@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const SpendCategoryStuff = (
@@ -8,11 +9,11 @@ const SpendCategoryStuff = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals puts the amount in every "spend" action into a category.
+      {C.APP_NAME} puts the amount in every "spend" action into a category.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      If your spend action does not include a category, then Textotals will
+      If your spend action does not include a category, then {C.APP_NAME} will
       automatically put the spend amount into a "STUFF" category.
     </h4>
 

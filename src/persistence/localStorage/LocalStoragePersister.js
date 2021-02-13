@@ -177,7 +177,7 @@ class LocalStoragePersister {
       curMonthActions.push(prevMonthActions[i]);
     }
 
-    // Only need to put a Textotals response action if any records were
+    // Only need to put a response action if any records were
     // not actually copied from prev month to this month's list:
     if (copySize !== prevLen) {
       curMonthActions.push({

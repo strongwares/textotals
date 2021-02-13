@@ -231,20 +231,29 @@ d    The Textotals brain is not very well connected.
 d    It does not (yet?) actually connect to any actual external services.
 d- add to ww points example to possibilities
 
+--
+d add Premium screen items:
+d  - All action, account, totals data stored, not just one month's worth.
+d  - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
+d  - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
+x  - The ability to export your data.
+
+--
 
 d- mirror to textotals repo
 d- mirror to aatapp repo
-d- prune aatapp repo
 
+d- deploy textotals to render.com
+
+
+- prune aatapp repo:
+  - ?only actions to support: set spend add
+  - prune help screens
+  - prune lib action parsing
+  - prune lib action parsing test
+  - prune lib action handling
+  - prune lib action handling test
 --
-add Premium help screen items:
-  - All action, account, totals data stored, not just one month's worth.
-  - Your data stored on the IPFS, where you can access it yourself, not siloed and hidden in this app.
-  - Access to a "link" action, that allows two user's accounts to be linked, like a joint checking account
-  - Export your data.
-
-
-
   - ipfs persistence
   - enables actions:
     link, history, export, clear

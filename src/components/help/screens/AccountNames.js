@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const AccountNames = (
@@ -8,7 +9,7 @@ const AccountNames = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals keeps track of an account named "MAIN" for you automatically.
+      {C.APP_NAME} keeps track of an account named "MAIN" for you automatically.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">So this action:</h4>

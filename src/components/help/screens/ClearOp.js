@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const ClearOp = (
@@ -8,7 +9,7 @@ const ClearOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Use the "clear" action to tell Textotals that you want to remove all
+      Use the "clear" action to tell {C.APP_NAME} that you want to remove all
       actions, accounts, and totals from one account group.
     </h4>
 

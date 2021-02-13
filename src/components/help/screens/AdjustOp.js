@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const AdjustOp = (
@@ -8,13 +9,12 @@ const AdjustOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Use the "adjust" action to tell Textotals that you need to adjust the
+      Use the "adjust" action to tell {C.APP_NAME} that you need to adjust the
       total amount that is in one of your accounts.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      The adjust action adds or subtracts an amount from the specified
-      account.
+      The adjust action adds or subtracts an amount from the specified account.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">Here are examples of adjust actions:</h4>

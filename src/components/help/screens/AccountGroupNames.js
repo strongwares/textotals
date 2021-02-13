@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const AccountGroupNames = (
@@ -8,12 +9,12 @@ const AccountGroupNames = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals automatically keeps track of a group that every account belongs
-      to.
+      {C.APP_NAME} automatically keeps track of a group that every account
+      belongs to.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals likes to call that automatic account group name "PERSONAL".
+      {C.APP_NAME} likes to call that automatic account group name "PERSONAL".
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">So the action:</h4>

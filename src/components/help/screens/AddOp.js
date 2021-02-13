@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const AddOp = (
@@ -8,7 +9,7 @@ const AddOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Use the "add" action to tell Textotals to add an amount to one of your
+      Use the "add" action to tell {C.APP_NAME} to add an amount to one of your
       accounts.
     </h4>
 

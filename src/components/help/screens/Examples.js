@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 // style={{ height: '370px', maxHeight: '370px', overflowY: 'auto' }}
@@ -9,7 +10,7 @@ const Examples = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Here are some examples of Textotals actions.
+      Here are some examples of {C.APP_NAME} actions.
     </h4>
 
     <div style={{ marginTop: '-10px' }}>

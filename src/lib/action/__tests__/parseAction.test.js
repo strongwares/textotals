@@ -906,7 +906,7 @@ describe('test action parser', function () {
     // console.log(actionObj);
   });
 
-  it('should parse textotals set actions', function () {
+  it('should parse set actions', function () {
     var action = 'set 100.09 SAVINGS';
     var actionObj = parseAction(action);
     expect(actionObj.accountGroup).toBe(undefined);

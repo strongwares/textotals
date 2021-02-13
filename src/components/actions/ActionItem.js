@@ -13,7 +13,7 @@ function getResponseString(str) {
   if (str.indexOf(C.APP_NAME) === 0) {
     return str.replace(ACCOUNT_SEP, '\n');
   }
-  return `Totals:\n${str.replace(ACCOUNT_SEP, '\n')}`;
+  return `Account Total:\n${str.replace(ACCOUNT_SEP, '\n')}`;
 }
 
 function getDateString(timestampMs) {
