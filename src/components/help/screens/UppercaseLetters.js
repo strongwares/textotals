@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const UppercaseLetters = (
@@ -8,8 +9,8 @@ const UppercaseLetters = (
     </h2>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals likes to keep track of your group, account, and spend category
-      names using
+      {C.APP_NAME} likes to keep track of your group, account, and spend
+      category names using
     </h4>
 
     <h4 style={{ marginLeft: '40px' }} className="p-mt-0 p-mb-3">

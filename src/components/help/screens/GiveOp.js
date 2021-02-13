@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const GiveOp = (
@@ -8,12 +9,12 @@ const GiveOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Use the "give" action to tell Textotals that you've given an amount to a
-      charity.
+      Use the "give" action to tell {C.APP_NAME} that you've given an amount to
+      a charity.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals keeps track of charitable giving separately from other
+      {C.APP_NAME} keeps track of charitable giving separately from other
       categories that you spend on.
     </h4>
 

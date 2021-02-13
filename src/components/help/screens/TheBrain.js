@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionItem from '../../actions/ActionItem';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 // <div className="fake-input-arrow animate__animated animate__bounceInDown" />
@@ -7,12 +8,12 @@ import './helpscreen.css';
 const TheBrain = (
   <div className="helpscreen-item">
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-      Textotals Brain
+      {C.APP_NAME} Brain
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      When you enter an action, Textotals automatically updates each account's
-      total.
+      When you enter an action, {C.APP_NAME} automatically updates each
+      account's total.
     </h4>
 
     <h4 astyle={{ marginTop: '-10px' }} className="p-mt-0 p-mb-3">

@@ -17,31 +17,27 @@ const First = () => {
 
       <div style={{ marginTop: '-15px', textAlign: 'center' }}>
         <h5 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
-          textotals@strongwares.com
+          {C.APP_HELP_EMAIL}
         </h5>
       </div>
 
       <h4 className="p-mt-0 p-mb-3">
-        Textotals only has three tabs: Action, Accounts, Totals.
+        {C.APP_NAME} only has three tabs: Action, Accounts, Totals.
       </h4>
 
+      <h4 className="p-mt-0 p-mb-3">The Action tab is where you start.</h4>
+
       <h4 className="p-mt-0 p-mb-3">
-        The Action tab is where you start.
+        You enter an action in the text input field at the bottom.
       </h4>
-        
-      
-        <h4 className="p-mt-0 p-mb-3">
-          You enter an action in the text input field at the bottom.
-        </h4>
-      
 
       <h4 className="p-mt-0 p-mb-3">
         You can also enter 'help' to display these help screens.
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">
-        In the Actions tab, type in an action, then hit the 'enter' key or click the round 'plus'
-        button.
+        In the Actions tab, type in an action, then hit the 'enter' key or click
+        the round 'plus' button.
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">

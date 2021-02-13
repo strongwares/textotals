@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const ManyAccountGroups = (
@@ -8,7 +9,7 @@ const ManyAccountGroups = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals can keep track of accounts in many different groups.
+      {C.APP_NAME} can keep track of accounts in many different groups.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">

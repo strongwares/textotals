@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import 'animate.css/animate.min.css';
-import './aatapp.css';
+import './app.css';
 
 function doStartFunc(startFunc, onFinish) {
   startFunc();

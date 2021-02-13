@@ -9,7 +9,7 @@ import MenuBar from './components/menuBar';
 import Overlay from './components/overlay/Overlay';
 import WelcomeScreen from './components/welcome';
 import { useMediaQuery } from 'react-responsive';
-import './aatapp.css';
+import './app.css';
 
 const AccountsComponent = React.lazy(() =>
   import('./components/accounts/AccountsContainer')

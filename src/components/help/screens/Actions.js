@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const Actions = (
@@ -6,7 +7,7 @@ const Actions = (
     <h3 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
       Actions
     </h3>
-    <h4 className="p-mt-0 p-mb-3">Textotals handles these actions:</h4>
+    <h4 className="p-mt-0 p-mb-3">{C.APP_NAME} handles these actions:</h4>
 
     <div className="action-li">
       <div className="action-li-name">set:&nbsp;</div>

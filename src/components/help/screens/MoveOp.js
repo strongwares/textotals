@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const MoveOp = (
@@ -8,7 +9,7 @@ const MoveOp = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Use the "move" action to tell Textotals that you want to transfer an
+      Use the "move" action to tell {C.APP_NAME} that you want to transfer an
       amount from one account to another.
     </h4>
 

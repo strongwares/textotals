@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 /*
@@ -16,7 +17,7 @@ const ManyAccountNames = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      Textotals can also remember lots of account names.
+      {C.APP_NAME} can also remember lots of account names.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">

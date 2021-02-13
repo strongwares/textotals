@@ -1,4 +1,5 @@
 import React from 'react';
+import * as C from '../../../constants';
 import './helpscreen.css';
 
 const SpendingCategories = (
@@ -8,7 +9,7 @@ const SpendingCategories = (
     </h3>
 
     <h4 className="p-mt-0 p-mb-3">
-      You can tell Textotals exactly what category you are spending on.
+      You can tell {C.APP_NAME} exactly what category you are spending on.
     </h4>
 
     <h4 className="p-mt-0 p-mb-3">
