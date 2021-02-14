@@ -243,8 +243,29 @@ x  - The ability to export your data.
 d- mirror to textotals repo
 d- mirror to aatapp repo
 
-d- deploy textotals to render.com
+d- deploy textotals to render.com:
+  d - create static deploy
 
+d- don't show the accounts if empty
+d- don't show the totals if empty
+
+- swipe to scroll within a help screen causes switch to next help screen
+
+--
+d deploy to render.com:
+  https://render.com/docs/deploy-create-react-app
+  https://dashboard.render.com/register?i=cra
+
+
+d- setup custom domain on render.com:
+  - on the static deployment dashboard on render, scroll down to the custom domains
+  d- dns:
+  d https://render.com/docs/custom-domains#configuring-dns-to-point-to-render
+  d https://render.com/docs/configure-namecheap-dns
+
+d- setup ssl cert on render.com:
+  d- https://render.com/docs/ssl: says that it should work out of the box
+  d- just took little time for the letsencrypt certbot to kick in
 
 - prune aatapp repo:
   - ?only actions to support: set spend add
@@ -261,14 +282,7 @@ d- deploy textotals to render.com
   - export action or menu option from history
   
 --
-deploy to render.com:
-  https://render.com/docs/deploy-create-react-app
-  https://dashboard.render.com/register?i=cra
-
-
---
-todo:
-- Ability to print screens
+- print screens
 
 ipfs storage
 - investigate for user mgmt
@@ -294,7 +308,7 @@ ipfs storage
   https://blog.ipfs.io/2020-04-28-go-ipfs-0-5-0/
 
 
-user auth ideas:
+user auth:
   https://www.digitalprimates.net/blog/making-authentication-in-react-apps-easy-with-useauth/
   https://github.com/fastify/fastify-jwt
   https://jwt.io/
@@ -307,7 +321,7 @@ detecting system theme:
 https://www.youtube.com/watch?v=etBTVXuif3Y
 
 
-payment ideas:
+payment:
   http://thinkapps.com/blog/development/payments-app-definitive-guide/
   https://woodridgesoftware.com/collect-payment-for-your-app/
 
@@ -321,8 +335,9 @@ https://www.pngwing.com/en/free-png-njpyp/download
 
 
 
-- still broken help rendering on old iphone
-- iphone5, with toolbar, screen is too short also
+- is help screen size rendering off on old iphone?
+  - iphone5, with toolbar, screen is too short also
+
 - fix landscape:
   iphone x (landscape width x height: 812 x 375)
   pixel 2 xl (landscape width x height: 823 x 411)
@@ -341,7 +356,7 @@ https://www.pngwing.com/en/free-png-njpyp/download
 
 - add test of prune action
 
-social media logins
+- social media logins
 
 add history action:
 - container

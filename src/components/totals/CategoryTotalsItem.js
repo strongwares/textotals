@@ -25,6 +25,10 @@ const CategoryTotalsItem = ({ groupName, item }) => {
       return list;
     }, []);
 
+  if (spendingCats.length <= 0 && givingCats.length <= 0) {
+    return null;
+  }
+
   return (
     <div className="categorytotals-item card p-shadow-5">
       <span>{groupName}</span>
