@@ -249,7 +249,8 @@ d- deploy textotals to render.com:
 d- don't show the accounts if empty
 d- don't show the totals if empty
 
-- swipe to scroll within a help screen causes switch to next help screen
+- swipe to scroll content within a too-tall help screen causes switch to next help screen
+  - but not if in horizontal, swipe up does vertical scroll content but doens't change help screens
 
 --
 d deploy to render.com:
