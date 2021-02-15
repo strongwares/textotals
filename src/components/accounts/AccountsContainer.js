@@ -12,6 +12,19 @@ const AccountsContainer = ({ user }) => {
   }, [user]);
 
   const accountList = Object.keys(accounts).map((name) => {
+    const item = accounts[name];
+    let hasAccount = false;
+    let aTotal;
+    Object.keys(item).forEach((accountName) => {
+      aTotal = item[accountName].total;
+      if (typeof aTotal !== 'undefined') {
+        hasAccount = true;
+      }
+    });
+
+    if (!hasAccount) {
+      return null;
+    }
     return (
       <AccountGroupItem key={name} groupName={name} item={accounts[name]} />
     );

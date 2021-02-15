@@ -40,7 +40,7 @@ const Possibilities = (
         the {C.APP_NAME} Totals tab will show you spent 1.5 hours on "1984" and
         3.5 hours on "war and peace"
       </li>
-      <li>you can use the "school clear" action at any time to start over</li>
+      <li>you can type a "school clear" action at any time to start over</li>
     </ul>
 
     <h4 style={{ marginBottom: '0px' }} className="p-mt-0">
@@ -73,7 +73,7 @@ const Possibilities = (
         the Totals tab will show you spent 5 on "breakfast" and 3 on "mid day
         snack"
       </li>
-      <li>you can use the "points clear" action at any time to start over</li>
+      <li>you can type a "points clear" action at any time to start over</li>
     </ul>
 
     <div id="spacer" style={{ flex: 1 }} />
