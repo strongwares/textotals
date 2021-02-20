@@ -5,6 +5,20 @@ import helpScreenList from './helpScreenList';
 import helpScreenMap from './helpScreenMap';
 import './help.css';
 
+// Extening Carousel just to disable the
+// carousel changing pages on swipe since
+// The problem was that some Carousel pages have a
+// vertical scroll bar. When the content was
+// swiped to scroll vertically, then the
+// Carousel would change pages out from
+// under you.
+class MyCarousel extends Carousel {
+  changePageOnTouch(e, diff) {
+    // super.changePageOnTouch(e, diff);
+    // console.log('MyCarousel changePageOnTouch');
+  }
+}
+
 const itemTemplate = (screenNum) => {
   return helpScreenMap[screenNum];
 };
@@ -30,7 +44,7 @@ const HelpOverlay = ({ isMobileLandscape }) => {
 
   return (
     <div className="helpoverlay-container card" ref={parentRef}>
-      <Carousel
+      <MyCarousel
         style={{ margin: '0px' }}
         value={helpScreenList}
         numVisible={1}
