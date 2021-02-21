@@ -269,20 +269,27 @@ d- setup ssl cert on render.com:
   d- https://render.com/docs/ssl: says that it should work out of the box
   d- just took little time for the letsencrypt certbot to kick in
 
+  d- copy latest to aatapp:
+    d - possibilities help screen
+    d- account and totals not showing empty accounts
+    d - HelpOverlay
+
+d- do timeline in totals tab:
+d  - how much was spent in each category per day
+d  - use the primereact timeline component
+d  - how to integrate:
+d    - new icon on header with text: Timeline: pi-clock icon
+d    - on click popup a new vertical timeline overlay
+
+
 - put on product hunt on 2/22:
   https://help.producthunt.com/en/articles/479557-how-to-post-a-product
   https://help.producthunt.com/en/articles/484943-how-can-i-be-added-as-a-maker
   https://help.producthunt.com/en/collections/31079-posting
 
 
-- do timeline in totals tab:
-  how much was spent in each category per day
 
 - prune aatapp repo:
-  - copy latest from textotals:
-    - possibilities help screen
-    - account and totals not showing empty accounts
-    - HelpOverlay
   - ?only actions to support: set spend add
   - prune help screens
   - prune lib action parsing
