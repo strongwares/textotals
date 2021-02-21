@@ -8,7 +8,7 @@ import './totals.css';
 
 const utcdayjs = dayjs.extend(utc);
 
-const TotalsTimeline = ({ group, isMobileLandscape, user, op }) => {
+const TotalsTimeline = ({ group, user, op }) => {
   const [actions, setActions] = useState([]);
   useEffect(() => {
     const theTime = utcdayjs.utc();
@@ -27,7 +27,7 @@ const TotalsTimeline = ({ group, isMobileLandscape, user, op }) => {
   }, [group, user, op]);
 
   let preposition;
-  let what = `Account Group ${group} `;
+  let what = `Account Group ${group}: `;
   if (op === 'spend') {
     what += 'Spending Timeline';
     preposition = 'on';
@@ -36,6 +36,28 @@ const TotalsTimeline = ({ group, isMobileLandscape, user, op }) => {
     preposition = 'to';
   }
 
+  /*
+  const layout = isMobileLandscape ? 'horizontal' : 'vertical';
+  if (isMobileLandscape) {
+    return (
+      <div className="totalstimeline-container totalstimeline-container-horizontal card">
+        <h3>{what}</h3>
+        <Timeline
+          value={actions}
+          align="top"
+          content={(item) => (
+            <small className="p-text-secondary">
+              {`${dayjs(item.timestampMs).format('dddd M/D/YY h:mm a')} ${(
+                +item.amount / 100
+              ).toFixed(2)} ${preposition} ${item.category}`}
+            </small>
+          )}
+          layout="horizontal"
+        />
+      </div>
+    );
+  } else {
+ */
   return (
     <div className="totalstimeline-container card">
       <h3>{what}</h3>
@@ -55,14 +77,9 @@ const TotalsTimeline = ({ group, isMobileLandscape, user, op }) => {
 };
 
 TotalsTimeline.propTypes = {
-  isMobileLandscape: PropTypes.bool,
   group: PropTypes.string.isRequired,
   op: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
-};
-
-TotalsTimeline.defaultProps = {
-  isMobileLandscape: false,
 };
 
 export default TotalsTimeline;
