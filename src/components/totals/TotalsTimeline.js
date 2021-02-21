@@ -16,14 +16,17 @@ const TotalsTimeline = ({ group, user, op }) => {
     const month = theTime.format('MMM');
 
     const filter = { group, op };
-    setActions(
-      getActions({
-        userName: user.userName,
-        month,
-        year,
-        filter,
-      })
-    );
+    const actions = getActions({
+      userName: user.userName,
+      month,
+      year,
+      filter,
+    });
+    const reversedActions = [];
+    for (let i = actions.length - 1; i >= 0; i--) {
+      reversedActions.push(actions[i]);
+    }
+    setActions(reversedActions);
   }, [group, user, op]);
 
   let preposition;

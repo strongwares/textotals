@@ -28,7 +28,7 @@ const First = () => {
       <h4 className="p-mt-0 p-mb-3">The Action tab is where you start.</h4>
 
       <h4 className="p-mt-0 p-mb-3">
-        You enter an action in the text input field at the bottom.
+        In that tab you enter an action in the text input field at the bottom.
       </h4>
 
       <h4 className="p-mt-0 p-mb-3">

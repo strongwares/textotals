@@ -17,7 +17,7 @@ const AccountGroupItem = ({ groupName, item }) => {
 
   return (
     <div className="accountgroup-item card p-shadow-5">
-      <span>{groupName}</span>
+      <span>{`Account Group: ${groupName}`}</span>
       <DataTable
         className="p-datatable-striped p-datatable-gridlines"
         header="Account Totals"
