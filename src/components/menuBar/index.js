@@ -22,27 +22,26 @@ const MenuBar = ({ onItemClick }) => {
       <i
         title="Show Help"
         className="pi pi-question-circle menubar-icon"
-        onClick={() => onItemClick('help')}
+        onClick={() => onItemClick({ type: 'help' })}
       />
       {!user && (
         <div
-              style={{
-                flex: 0,
-                marginRight: '5px',
-              }}
-              className="animate__animated animate__bounceInRight"
-            >
-              <i
-                className="pi pi-arrow-left"
-                style={{
-                  marginTop: '0px',
-                  marginLeft: '10px',
-                  color: '#444cf7',
-                  fontSize: '1.5em',
-                }}
-              ></i>
-            </div>
-          
+          style={{
+            flex: 0,
+            marginRight: '5px',
+          }}
+          className="animate__animated animate__bounceInRight"
+        >
+          <i
+            className="pi pi-arrow-left"
+            style={{
+              marginTop: '0px',
+              marginLeft: '10px',
+              color: '#444cf7',
+              fontSize: '1.5em',
+            }}
+          ></i>
+        </div>
       )}
       <div id="spacer" style={{ flex: 1 }} />
 

@@ -139,7 +139,7 @@ class LocalStoragePersister {
   }
 
   getActions(query) {
-    const { userName, year, month } = query;
+    const { userName, year, month, filter } = query;
 
     const key = `${userName}-${year}-${month}`;
     let rval = [];
@@ -148,6 +148,12 @@ class LocalStoragePersister {
     const userActions = actions[userName];
     if (userActions && userActions[key]) {
       rval = userActions[key].slice();
+      if (filter) {
+        const { group, op } = filter;
+        rval = rval.filter((action) => {
+          return action.accountGroup === group && action.op === op;
+        });
+      }
     }
     return rval;
   }

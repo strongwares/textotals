@@ -1,23 +1,30 @@
 import React, { Suspense } from 'react';
 import PropTypes from 'prop-types';
-// import HelpOverlay from '../help/HelpOverlay';
 import './overlay.css';
 
 const HelpComponent = React.lazy(() => import('../help/HelpOverlay'));
 
-// <TheOverlay isMobileLandscape={isMobileLandscape} />
+const TotalsTimeline = React.lazy(() => import('../totals/TotalsTimeline'));
 
-const Overlay = ({ isMobileLandscape, what }) => {
+const Overlay = ({ isMobileLandscape, item, user }) => {
+  const { type } = item;
   let TheOverlay;
-
-  if (what === 'help') {
+  if (type === 'help') {
     TheOverlay = HelpComponent;
+  } else if (type === 'totalstimeline') {
+    TheOverlay = TotalsTimeline;
+  } else {
+    TheOverlay = () => <div>{`Unsupported overlay: ${type}`}</div>;
   }
 
   return (
     <div className="overlay-container">
       <Suspense fallback={<div>Loading...</div>}>
-        <TheOverlay isMobileLandscape={isMobileLandscape} />
+        <TheOverlay
+          isMobileLandscape={isMobileLandscape}
+          user={user}
+          {...item}
+        />
       </Suspense>
     </div>
   );
@@ -25,12 +32,12 @@ const Overlay = ({ isMobileLandscape, what }) => {
 
 Overlay.propTypes = {
   isMobileLandscape: PropTypes.bool,
-  what: PropTypes.string,
+  item: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 Overlay.defaultProps = {
   isMobileLandscape: false,
-  what: 'help',
 };
 
 export default Overlay;
