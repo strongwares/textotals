@@ -32,18 +32,19 @@ const Third = () => {
         </h4>
       </div>
 
-      <div style={{ marginTop: '-10px' }}>
+      <div style={{ marginTop: '0px' }}>
         <h4 className="p-mt-0 p-mb-3">
-          You can click on the 'Timeline' clock icon to display a timeline
-          showing the exact times an amount was spent.
+          In that tab you can click on the 'Timeline' clock icon to display a
+          timeline showing the exact times an amount was spent from any account
+          in the account group:
         </h4>
       </div>
 
       <div
-        style={{ marginTop: '-5px' }}
+        style={{ marginTop: '0px' }}
         className="mycategorytotals-item card p-shadow-5"
       >
-        <span>PERSONAL</span>
+        <span>Account Group: PERSONAL</span>
         <DataTable
           className="p-datatable-striped p-datatable-gridlines"
           header={renderHeader('Spending Totals', 'Spend')}

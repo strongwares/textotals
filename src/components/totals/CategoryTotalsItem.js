@@ -47,7 +47,7 @@ const CategoryTotalsItem = ({ groupName, item, onTimelineClick }) => {
 
   return (
     <div className="categorytotals-item card p-shadow-5">
-      <span>{groupName}</span>
+      <span>{`Account Group: ${groupName}`}</span>
       {spendingCats.length > 0 && (
         <DataTable
           className="p-datatable-striped p-datatable-gridlines"

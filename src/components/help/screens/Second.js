@@ -21,7 +21,7 @@ const Second = () => {
         style={{ marginTop: '-5px' }}
         className="myaccountgroup-item card p-shadow-5"
       >
-        <span>PERSONAL</span>
+        <span>Account Group: PERSONAL</span>
         <DataTable
           className="p-datatable-striped p-datatable-gridlines"
           header="Account Totals"
