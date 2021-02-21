@@ -4,7 +4,7 @@ const appDefaults = {
   fromAccount: 'MAIN',
   toAccount: 'SAVINGS',
   spendCategory: 'STUFF',
-  giveAccount: 'CHURCH',
+  giveAccount: 'CHARITY',
 };
 
 export default appDefaults;

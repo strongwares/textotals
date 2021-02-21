@@ -56,6 +56,12 @@ const First = () => {
         </h5>
       </div>
 
+      <div style={{ marginTop: '-15px', textAlign: 'center' }}>
+        <h5 style={{ textAlign: 'center' }} className="p-mt-0 p-mb-3">
+          spend 41.22 on gas
+        </h5>
+      </div>
+
       <div id="spacer" style={{ flex: 1 }} />
     </div>
   );

@@ -12,7 +12,8 @@ const Second = () => {
 
       <div style={{ marginTop: '-10px' }}>
         <h4 className="p-mt-0 p-mb-3">
-          The Accounts tab shows the current total amount in each account:
+          The Accounts tab shows the current total amount in each account for a
+          given group of accounts:
         </h4>
       </div>
 
@@ -25,7 +26,8 @@ const Second = () => {
           className="p-datatable-striped p-datatable-gridlines"
           header="Account Totals"
           value={[
-            { accountName: 'MAIN', total: '479.41' }
+            { accountName: 'SAVINGS', total: '1500.00' },
+            { accountName: 'MAIN', total: '438.19' },
           ]}
         >
           <Column field="accountName" header="Account" sortable></Column>

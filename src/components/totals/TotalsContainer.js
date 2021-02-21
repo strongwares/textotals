@@ -8,7 +8,7 @@ import './totals.css';
 
 const utcdayjs = dayjs.extend(utc);
 
-const TotalsContainer = ({ user }) => {
+const TotalsContainer = ({ onTimelineClick, user }) => {
   const [accountGroups, setAccountGroups] = useState({});
   useEffect(() => {
     const theTime = utcdayjs.utc();
@@ -23,6 +23,7 @@ const TotalsContainer = ({ user }) => {
         key={name}
         groupName={name}
         item={accountGroups[name]}
+        onTimelineClick={onTimelineClick}
       />
     );
   });
@@ -36,6 +37,7 @@ const TotalsContainer = ({ user }) => {
 };
 
 TotalsContainer.propTypes = {
+  onTimelineClick: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
 };
 

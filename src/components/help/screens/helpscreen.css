@@ -60,3 +60,13 @@
   text-shadow: -3px 0px 3px yellow, 3px 0px 3px yellow, 6px 0px 6px yellow,
     -6px 0px 6px yellow;
 }
+
+.mycategorytotals-table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mycategorytotals-table-header-icon {
+  cursor: pointer;
+  margin: 3px;
+}

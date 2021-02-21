@@ -4,7 +4,23 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import './totals.css';
 
-const CategoryTotalsItem = ({ groupName, item }) => {
+const CategoryTotalsItem = ({ groupName, item, onTimelineClick }) => {
+  const renderHeader = (group, label, onClick, op) => {
+    return (
+      <div className="categorytotals-table-header">
+        {label}
+        <span>
+          Timeline:&nbsp;&nbsp;
+          <i
+            title={`Show ${op} timeline`}
+            className="pi pi-clock categorytotals-table-header-icon"
+            onClick={() => onClick({ type: 'totalstimeline', group, op })}
+          />
+        </span>
+      </div>
+    );
+  };
+
   const spendingCats = Object.keys(item.spend)
     .sort()
     .reduce((list, category) => {
@@ -35,7 +51,12 @@ const CategoryTotalsItem = ({ groupName, item }) => {
       {spendingCats.length > 0 && (
         <DataTable
           className="p-datatable-striped p-datatable-gridlines"
-          header="Spending Totals"
+          header={renderHeader(
+            groupName,
+            'Spending Totals',
+            onTimelineClick,
+            'spend'
+          )}
           value={spendingCats}
         >
           <Column field="category" header="Category" sortable></Column>
@@ -46,7 +67,12 @@ const CategoryTotalsItem = ({ groupName, item }) => {
         <DataTable
           style={{ marginTop: '10px' }}
           className="p-datatable-striped p-datatable-gridlines"
-          header="Giving Totals"
+          header={renderHeader(
+            groupName,
+            'Giving Totals',
+            onTimelineClick,
+            'give'
+          )}
           value={givingCats}
         >
           <Column field="category" header="Category" sortable></Column>
@@ -60,6 +86,7 @@ const CategoryTotalsItem = ({ groupName, item }) => {
 CategoryTotalsItem.propTypes = {
   groupName: PropTypes.string.isRequired,
   item: PropTypes.object.isRequired,
+  onTimelineClick: PropTypes.func.isRequired,
 };
 
 export default CategoryTotalsItem;

@@ -24,8 +24,8 @@ const TotalsComponent = React.lazy(() =>
 function App() {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
-  const [sidebarItem, setShowSidebar] = useState(undefined);
-  const sidebarItemRef = useRef(sidebarItem);
+  const [overlayItem, setShowOverlay] = useState(undefined);
+  const overlayItemRef = useRef(overlayItem);
   const [tabNumber, setTabNumber] = useState(0);
   const tabNumberRef = useRef(tabNumber);
   const isMobileLandscape = useMediaQuery({
@@ -34,12 +34,12 @@ function App() {
   });
 
   useEffect(() => {
-    sidebarItemRef.current = sidebarItem;
+    overlayItemRef.current = overlayItem;
     tabNumberRef.current = tabNumber;
     // uncomment the following to clear out the
     // local storage persisted user:
     // authStorage.removeToken();
-  }, [sidebarItem, tabNumber]);
+  }, [overlayItem, tabNumber]);
 
   // Function used by the AppLoading screen, when it
   // acquires a persisted user from local storage
@@ -55,12 +55,25 @@ function App() {
     if (!item) {
       return;
     }
-    if (!!sidebarItemRef.current && sidebarItemRef.current === item) {
-      setShowSidebar(undefined);
+    if (!!overlayItemRef.current && overlayItemRef.current === item) {
+      setShowOverlay(undefined);
     } else {
-      setShowSidebar(item);
+      setShowOverlay(item);
     }
   };
+
+  /*
+  const onTotalsTimelineClick = (item) => {
+    if (!group || !what) {
+      return;
+    }
+    if (!!overlayItemRef.current && overlayItemRef.current === item) {
+      setShowOverlay(undefined);
+    } else {
+      setShowOverlay(item);
+    }
+  };
+  */
 
   // Tab component is a controlled component, the
   // current tab being displayed is part of local state
@@ -85,10 +98,10 @@ function App() {
   // available.
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <div className="aatapp-container">
-        {!!sidebarItem && (
+      <div className="textotals-container">
+        {!!overlayItem && (
           <Sidebar
-            onHide={() => setShowSidebar(undefined)}
+            onHide={() => setShowOverlay(undefined)}
             position="top"
             style={{
               borderRadius: '3%',
@@ -101,13 +114,17 @@ function App() {
               justifyContent: 'center',
               marginLeft: 'var(--responsive-overlayMarginLeft)',
             }}
-            visible={!!sidebarItem}
+            visible={!!overlayItem}
           >
-            <Overlay isMobileLandscape={isMobileLandscape} what={sidebarItem} />
+            <Overlay
+              isMobileLandscape={isMobileLandscape}
+              item={overlayItem}
+              user={user}
+            />
           </Sidebar>
         )}
 
-        <Card className="aatapp-appcard p-shadow-5">
+        <Card className="textotals-appcard p-shadow-5">
           <MenuBar onItemClick={onMenuItemClick} />
 
           {!isReady && (
@@ -123,45 +140,44 @@ function App() {
               <TabView
                 activeIndex={tabNumber}
                 onTabChange={onTabChange}
-                className="aatapp-tabview"
+                className="textotals-tabview"
               >
                 <TabPanel
-                  contentClassName="aatapp-tabpanel-content"
+                  contentClassName="textotals-tabpanel-content"
                   header="&nbsp;&nbsp;Action"
                   leftIcon="pi pi-comments"
                 >
                   <Suspense fallback={<div>Loading...</div>}>
                     <ActionsComponent
                       isMobileLandscape={isMobileLandscape}
-                      onHelp={() => setShowSidebar('help')}
+                      onHelp={() => setShowOverlay({ type: 'help' })}
                       user={user}
                     />
                   </Suspense>
                 </TabPanel>
 
                 <TabPanel
-                  contentClassName="aatapp-tabpanel-content"
+                  contentClassName="textotals-tabpanel-content"
                   header="&nbsp;&nbsp;Accounts"
                   leftIcon="pi pi-folder-open"
                 >
                   <Suspense fallback={<div>Loading...</div>}>
                     <AccountsComponent
                       isMobileLandscape={isMobileLandscape}
-                      onHelp={() => setShowSidebar('help')}
                       user={user}
                     />
                   </Suspense>
                 </TabPanel>
 
                 <TabPanel
-                  contentClassName="aatapp-tabpanel-content"
+                  contentClassName="textotals-tabpanel-content"
                   header="&nbsp;&nbsp;Totals"
                   leftIcon="pi pi-tags"
                 >
                   <Suspense fallback={<div>Loading...</div>}>
                     <TotalsComponent
                       isMobileLandscape={isMobileLandscape}
-                      onHelp={() => setShowSidebar('help')}
+                      onTimelineClick={setShowOverlay}
                       user={user}
                     />
                   </Suspense>

@@ -46,7 +46,7 @@
   }
 }
 
-.aatapp-container {
+.textotals-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,7 +69,7 @@
   padding: 10px;
 }
 
-.aatapp-appcard {
+.textotals-appcard {
   margin: 1rem;
   align-items: center;
   text-align: center;
@@ -78,14 +78,14 @@
   min-width: var(--responsive-width);
 }
 
-.aatapp-tabview {
+.textotals-tabview {
   vertical-align: middle;
   width: 100%;
   border-bottom-right-radius: 3% !important;
   border-bottom-left-radius: 3% !important;
 }
 
-.aatapp-tabpanel-content {
+.textotals-tabpanel-content {
   height: var(--tabPanelContentHeight);
   font-size: calc(10px + 2vmin);
   /* border-radius: 3%; */
@@ -100,18 +100,24 @@
     linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 36px 36px;
 }
 
-.aatapp-logo {
+/*
+.textotals-logo {
   height: 20vmin;
   pointer-events: none;
-  /* background-image: url(./assets/icons/logo.png); */
+  
 }
+*/
+/* background-image: url(./assets/icons/logo.png); */
 
+/*
 @media (prefers-reduced-motion: no-preference) {
-  .aatapp-logo {
+  .textotals-logo {
     animation: app-logo-spin infinite 20s linear;
   }
 }
+*/
 
+/*
 @keyframes app-logo-spin {
   from {
     transform: rotate(0deg);
@@ -120,6 +126,7 @@
     transform: rotate(360deg);
   }
 }
+*/
 
 .p-sidebar-content {
   height: var(--sidebarHeight);
