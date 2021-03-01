@@ -100,34 +100,6 @@
     linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 36px 36px;
 }
 
-/*
-.textotals-logo {
-  height: 20vmin;
-  pointer-events: none;
-  
-}
-*/
-/* background-image: url(./assets/icons/logo.png); */
-
-/*
-@media (prefers-reduced-motion: no-preference) {
-  .textotals-logo {
-    animation: app-logo-spin infinite 20s linear;
-  }
-}
-*/
-
-/*
-@keyframes app-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-*/
-
 .p-sidebar-content {
   height: var(--sidebarHeight);
 }

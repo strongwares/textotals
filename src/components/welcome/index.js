@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'primereact/button';
 import LoginForm from '../login';
-import logo from '../../assets/icons/logo-colorbackground.jpg';
+import logo from '../../assets/icons/logo-colorbackground.png';
 import PremiumForm from '../premium';
 import RegisterForm from '../register';
 import UnRegisterForm from '../unregister';
